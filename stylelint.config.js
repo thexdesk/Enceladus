@@ -2,6 +2,7 @@ module.exports = {
   extends: 'stylelint-config-standard',
   rules: {
     'at-rule-no-vendor-prefix': true,
+    'declaration-empty-line-before': null,
     'font-family-name-quotes': 'always-unless-keyword',
     'font-weight-notation': 'numeric',
     linebreaks: 'unix',

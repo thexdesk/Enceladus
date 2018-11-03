@@ -86,7 +86,7 @@ gulp.task('assets', () => {
 
 gulp.task('clean', () => del('dist'));
 
-gulp.task('watch', () => {
+gulp.task('watch', ['build'], () => {
   gulp.watch(`${config.css.src_dir}/**/*.pcss`, ['css']);
   gulp.watch(`${config.html.src_dir}/**/*.html`, ['html']);
   gulp.watch(`${config.js.modules.src_dir}/**/*.js`, ['js:modules']);

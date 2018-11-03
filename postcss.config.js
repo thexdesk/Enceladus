@@ -1,6 +1,7 @@
 module.exports = {
   plugins: [
     require('postcss-import'),
+
     require('postcss-preset-env')({
       stage: 2,
       features: {
@@ -9,6 +10,7 @@ module.exports = {
       },
     }),
 
+    require('postcss-simple-vars'),
     require('postcss-time-machine'),
     require('postcss-short-border-radius'),
     require('postcss-short-overflow'),

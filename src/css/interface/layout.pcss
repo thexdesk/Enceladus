@@ -1,0 +1,49 @@
+:root {
+  font-size: 18px;
+  font-family: 'Inter-UI', sans-serif;
+}
+
+body {
+  margin: 0;
+
+  --theme-color: lch(60 97 48);
+
+  $gap: 24px;
+  $number-columns: 3;
+  $youtube-ratio: 2 / 4;
+
+  height: 100vh;
+  max-height: 100vh;
+  padding: $gap $gap 0;
+
+  color: lch(100 0 0);
+  background-color: lch(0 0 0);
+
+  display: grid;
+  gap: $gap;
+  grid-template:
+    'logo header links' 72px
+    'sections youtube twitter' calc(
+      (100vw - $gap * ($number-columns + 1)) * $youtube-ratio * (9 / 16)
+    )
+    'sections updates twitter' auto
+    / 1fr 2fr 1fr;
+}
+
+.logo,
+.header,
+.links,
+.youtube,
+.sections,
+.updates,
+.twitter {
+  border: 1px solid lch(100 0 0);
+}
+
+.logo { grid-area: logo; }
+.header { grid-area: header; }
+.links { grid-area: links; }
+.youtube { grid-area: youtube; }
+.sections { grid-area: sections; }
+.updates { grid-area: updates; }
+.twitter { grid-area: twitter; }
