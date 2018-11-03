@@ -1,0 +1,56 @@
+module.exports = {
+  extends: 'stylelint-config-standard',
+  rules: {
+    'at-rule-no-vendor-prefix': true,
+    'font-family-name-quotes': 'always-unless-keyword',
+    'font-weight-notation': 'numeric',
+    linebreaks: 'unix',
+    'max-line-length': 80,
+    'media-feature-name-no-vendor-prefix': true,
+    'no-empty-first-line': true,
+    'number-max-precision': 3,
+    'property-no-vendor-prefix': true,
+    'selector-max-universal': 1,
+    'selector-no-vendor-prefix': true,
+    'string-quotes': 'single',
+    'time-min-milliseconds': 100,
+    'value-no-vendor-prefix': true,
+
+    'property-no-unknown': [
+      true,
+      {
+        ignoreProperties: [
+          'depth',
+          'z-order',
+          'corner-radius',
+          'marker-style',
+          'border-top-radius',
+          'border-bottom-radius',
+          'border-left-radius',
+          'border-right-radius',
+        ],
+      },
+    ],
+
+    'selector-type-no-unknown': [
+      true,
+      {
+        ignore: ['custom-elements'],
+      },
+    ],
+
+    'unit-blacklist': [
+      'q',
+      'mm',
+      'cm',
+      'in',
+      'pt',
+      'pc',
+      'cap',
+      'ic',
+      'lh',
+      'rlh',
+      'grad',
+    ],
+  },
+};
