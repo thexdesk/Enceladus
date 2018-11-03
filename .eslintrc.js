@@ -1,3 +1,5 @@
+/* eslint-env node */
+
 module.exports = {
   parser: 'babel-eslint',
   parserOptions: {
@@ -5,7 +7,7 @@ module.exports = {
   },
   plugins: ['babel'],
   env: {
-    node: true,
+    browser: true,
     es6: true,
   },
   globals: {
@@ -96,11 +98,11 @@ module.exports = {
         allowArrayStart: true,
       },
     ],
-    'lines-between-class-members': 'error',
     'max-len': [
       'error',
       {
         ignoreStrings: true,
+        ignoreTemplateLiterals: true,
       },
     ],
     'max-statements-per-line': 'error',
@@ -115,7 +117,6 @@ module.exports = {
     'no-array-constructor': 'error',
     'no-bitwise': 'warn',
     'no-lonely-if': 'error',
-    'no-mixed-operators': 'error',
     'no-multi-assign': 'error',
     'no-multiple-empty-lines': 'error',
     'no-negated-condition': 'error',

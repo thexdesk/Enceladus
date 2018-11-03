@@ -10,7 +10,7 @@ body {
 
   $gap: 24px;
   $number-columns: 3;
-  $youtube-ratio: 2 / 4;
+  $youtube-ratio: calc(2 / 4);
 
   height: 100vh;
   max-height: 100vh;
@@ -31,7 +31,7 @@ body {
 }
 
 .logo,
-.header,
+x-header,
 .links,
 .youtube,
 .sections,
@@ -41,7 +41,7 @@ body {
 }
 
 .logo { grid-area: logo; }
-.header { grid-area: header; }
+x-header { grid-area: header; }
 .links { grid-area: links; }
 .youtube { grid-area: youtube; }
 .sections { grid-area: sections; }
