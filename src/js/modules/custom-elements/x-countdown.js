@@ -1,3 +1,5 @@
+import link_css from '../helpers/link_css';
+
 /**
  * Given a number,
  * return the string containing exactly two digits.
@@ -81,10 +83,7 @@ class Countdown extends HTMLElement {
 
     const shadow = this.attachShadow({ mode: 'closed' });
 
-    const css = document.createElement('link');
-    css.setAttribute('rel', 'stylesheet');
-    css.setAttribute('href', 'x-countdown.bundle.css');
-    shadow.appendChild(css);
+    shadow.appendChild(link_css('x-countdown'));
 
     this.#countdown = document.createElement('div');
     shadow.appendChild(this.#countdown);

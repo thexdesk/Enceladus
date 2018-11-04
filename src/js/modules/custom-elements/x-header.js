@@ -1,4 +1,5 @@
 import './x-countdown';
+import link_css from '../helpers/link_css';
 
 class Header extends HTMLElement {
   #countdown;
@@ -28,10 +29,7 @@ class Header extends HTMLElement {
 
     const shadow = this.attachShadow({ mode: 'closed' });
 
-    const css = document.createElement('link');
-    css.setAttribute('rel', 'stylesheet');
-    css.setAttribute('href', 'x-header.bundle.css');
-    shadow.appendChild(css);
+    shadow.appendChild(link_css('x-header'));
 
     this.#launch_name = document.createElement('div');
     shadow.appendChild(this.#launch_name);
