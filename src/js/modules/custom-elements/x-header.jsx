@@ -1,5 +1,6 @@
-import './x-countdown';
-import link_css from '../helpers/link_css';
+import './x-countdown.jsx';
+import { _ } from 'param.macro';
+import createElement from '../createElement';
 
 class Header extends HTMLElement {
   #countdown;
@@ -29,14 +30,18 @@ class Header extends HTMLElement {
 
     const shadow = this.attachShadow({ mode: 'closed' });
 
-    shadow.appendChild(link_css('x-header'));
+    const css = <link rel='stylesheet' href='x-header.bundle.css'/>;
 
-    this.#launch_name = document.createElement('div');
-    shadow.appendChild(this.#launch_name);
+    this.#launch_name = <div></div>;
 
-    this.#countdown = document.createElement('x-countdown');
+    this.#countdown = <x-countdown></x-countdown>;
     this.#countdown.t0 = null;
-    shadow.appendChild(this.#countdown);
+
+    [
+      css,
+      this.#launch_name,
+      this.#countdown,
+    ].forEach(shadow.appendChild(_));
   }
 }
 

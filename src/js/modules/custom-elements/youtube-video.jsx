@@ -1,4 +1,5 @@
-import link_css from '../helpers/link_css';
+import { _ } from 'param.macro';
+import createElement from '../createElement';
 
 class YouTube extends HTMLElement {
   #id = null;
@@ -32,12 +33,15 @@ class YouTube extends HTMLElement {
 
     const shadow = this.attachShadow({ mode: 'closed' });
 
-    shadow.appendChild(link_css('youtube-video'));
+    const css = <link rel='stylesheet' href='youtube-video.bundle.css'/>;
 
-    this.#video = document.createElement('iframe');
-    this.#video.title = 'YouTube';
+    this.#video = <iframe title='YouTube'></iframe>;
     this._set_display();
-    shadow.appendChild(this.#video);
+
+    [
+      css,
+      this.#video,
+    ].forEach(shadow.appendChild(_));
   }
 }
 

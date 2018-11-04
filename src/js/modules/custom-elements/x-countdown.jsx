@@ -1,4 +1,5 @@
-import link_css from '../helpers/link_css';
+import { _ } from 'param.macro';
+import createElement from '../createElement';
 
 /**
  * Given a number,
@@ -22,6 +23,7 @@ class Countdown extends HTMLElement {
   #seconds = 0;
   #interval = null;
   #countdown;
+  #current_display;
 
   get t0() {
     return this.#t0;
@@ -71,7 +73,11 @@ class Countdown extends HTMLElement {
     this.#minutes = Math.floor(diff % 3600 / 60);
     this.#seconds = diff % 60;
 
-    this.#countdown.innerHTML = this.display_time;
+    const { display_time } = this;
+    if (display_time !== this.#current_display) {
+      this.#countdown.innerHTML = display_time;
+      this.#current_display = display_time;
+    }
   }
 
   /**
@@ -83,10 +89,17 @@ class Countdown extends HTMLElement {
 
     const shadow = this.attachShadow({ mode: 'closed' });
 
-    shadow.appendChild(link_css('x-countdown'));
+    const css = <link rel='stylesheet' href='x-countdown.bundle.css'/>;
+    this.#countdown = <div></div>;
 
-    this.#countdown = document.createElement('div');
-    shadow.appendChild(this.#countdown);
+    [
+      css,
+      this.#countdown,
+    ].forEach(shadow.appendChild(_));
+  }
+
+  disconnectedCallback() {
+    clearInterval(this.#interval);
   }
 }
 

@@ -50,6 +50,12 @@ module.exports = {
     'no-unmodified-loop-condition': 'error',
     'no-unused-expressions': 'off',
     'babel/no-unused-expressions': 'error',
+    'no-unused-vars': [
+      'error',
+      {
+        varsIgnorePattern: 'createElement',
+      },
+    ],
     'no-useless-return': 'error',
     'no-void': 'error',
     'no-with': 'error',

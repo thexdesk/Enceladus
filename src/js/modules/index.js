@@ -1,6 +1,6 @@
 import './custom-elements/x-header';
 import './custom-elements/youtube-video';
-// import './custom-elements/x-twitter';
+// import './custom-elements/x-twitter.jsx';
 
 const header = document.querySelector('x-header');
 header.launch_name = 'CRS-16';
