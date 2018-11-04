@@ -9,7 +9,11 @@ class YouTube extends HTMLElement {
   }
   set id(value) {
     this.#id = value;
-    this.#video.src = `https://youtube.com/embed/${this.#id}?autoplay=0`;
+    if (value === null) {
+      this.#video.src = '';
+    } else {
+      this.#video.src = `https://youtube.com/embed/${this.#id}?autoplay=0`;
+    }
     this._set_display();
   }
 
@@ -32,7 +36,6 @@ class YouTube extends HTMLElement {
 
     this.#video = document.createElement('iframe');
     this.#video.title = 'YouTube';
-    this.#video.src = `https://youtube.com/embed/${this.#id}?autoplay=0`;
     this._set_display();
     shadow.appendChild(this.#video);
   }

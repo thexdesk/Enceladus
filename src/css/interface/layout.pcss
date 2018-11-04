@@ -22,7 +22,7 @@ body {
   display: grid;
   gap: $gap;
   grid-template:
-    'logo header links' 72px
+    'logo header links' 4rem
     'sections youtube twitter' calc(
       (100vw - $gap * ($number-columns + 1)) * $youtube-ratio * (9 / 16)
     )
@@ -30,8 +30,6 @@ body {
     / 1fr 2fr 1fr;
 }
 
-.logo,
-x-header,
 .links,
 .sections,
 .updates,
@@ -39,10 +37,24 @@ x-header,
   border: 1px solid lch(100 0 0);
 }
 
-.logo { grid-area: logo; }
-x-header { grid-area: header; }
+x-header {
+  grid-area: header;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+youtube-video {
+  grid-area: youtube;
+}
+
+.logo {
+  grid-area: logo;
+  background: url('assets/svg/logo.svg') left center / contain no-repeat;
+}
+
 .links { grid-area: links; }
-youtube-video { grid-area: youtube; }
 .sections { grid-area: sections; }
 .updates { grid-area: updates; }
 .twitter { grid-area: twitter; }
