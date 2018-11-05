@@ -17,7 +17,7 @@ class Header extends HTMLElement {
     return this.#launch_name.innerHTML;
   }
   set launch_name(value) {
-    return this.#launch_name.innerHTML = value;
+    this.#launch_name.innerHTML = value;
   }
 
   /**
@@ -30,13 +30,11 @@ class Header extends HTMLElement {
 
     const shadow = this.attachShadow({ mode: 'closed' });
 
-    const css = <link rel='stylesheet' href='x-header.bundle.css'/>;
-
-    this.#launch_name = <div></div>;
-    this.#countdown = <x-countdown></x-countdown>;
+    this.#launch_name = <div/>;
+    this.#countdown = <x-countdown/>;
 
     [
-      css,
+      <link rel='stylesheet' href='x-header.bundle.css'/>,
       this.#launch_name,
       this.#countdown,
     ].forEach(shadow.appendChild(_));

@@ -7,29 +7,24 @@ class Twitter extends HTMLElement {
 
     const shadow = this.attachShadow({ mode: 'closed' });
 
-    const css = <link rel='stylesheet' href='x-twitter.bundle.css'/>;
-
-    const script = <script
-      src='https://platform.twitter.com/widgets.js'
-      charset='utf-8'
-    />;
-
-    const header = <header>TWITTER</header>;
-
-    const twitter = <a
-      class='twitter-timeline'
-      data-link-color='#ff5100'
-      data-dnt='true'
-      data-theme='dark'
-      data-chrome='noheader nofooter noborders noscrollbar transparent'
-      href='https://twitter.com/theZcuber/lists/r-spacex-mission-control'
-    />;
-
     [
-      css,
-      script,
-      header,
-      twitter,
+      <link rel='stylesheet' href='x-twitter.bundle.css'/>,
+
+      <script
+        src='https://platform.twitter.com/widgets.js'
+        charset='utf-8'
+      />,
+
+      <header>TWITTER</header>,
+
+      <a
+        class='twitter-timeline'
+        data-link-color='#ff5100'
+        data-dnt='true'
+        data-theme='dark'
+        data-chrome='noheader nofooter noborders noscrollbar transparent'
+        href='https://twitter.com/theZcuber/lists/r-spacex-mission-control'
+      />,
     ].forEach(shadow.appendChild(_));
   }
 }

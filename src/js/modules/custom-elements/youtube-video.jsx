@@ -33,13 +33,11 @@ class YouTube extends HTMLElement {
 
     const shadow = this.attachShadow({ mode: 'closed' });
 
-    const css = <link rel='stylesheet' href='youtube-video.bundle.css'/>;
-
     this.#video = <iframe title='YouTube'/>;
     this._set_display();
 
     [
-      css,
+      <link rel='stylesheet' href='youtube-video.bundle.css'/>,
       this.#video,
     ].forEach(shadow.appendChild(_));
   }

@@ -9,7 +9,7 @@ module.exports = {
       features: {
         'nesting-rules': true,
         'color-functional-notation': true,
-        logical: { dir: 'ltr' },
+        'logical-properties-and-values': { dir: 'ltr' },
       },
     }),
 

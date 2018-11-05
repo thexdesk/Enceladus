@@ -32,12 +32,11 @@ class Section extends HTMLElement {
 
     const shadow = this.attachShadow({ mode: 'closed' });
 
-    const css = <link rel='stylesheet' href='x-section.bundle.css'/>;
     this.#header = <h1/>;
     this.#body = <div/>;
 
     [
-      css,
+      <link rel='stylesheet' href='x-section.bundle.css'/>,
       this.#header,
       this.#body,
     ].forEach(shadow.appendChild(_));
