@@ -35,7 +35,7 @@ class YouTube extends HTMLElement {
 
     const css = <link rel='stylesheet' href='youtube-video.bundle.css'/>;
 
-    this.#video = <iframe title='YouTube'></iframe>;
+    this.#video = <iframe title='YouTube'/>;
     this._set_display();
 
     [

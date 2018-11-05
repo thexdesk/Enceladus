@@ -1,9 +1,10 @@
 :root {
-  font-size: 18px;
+  font-size: 16px;
   font-family: 'Inter-UI', sans-serif;
 }
 
 body {
+  overflow: hidden;
   margin: 0;
 
   --theme-color: lch(60 97 48);
@@ -20,7 +21,7 @@ body {
   background-color: lch(0 0 0);
 
   display: grid;
-  gap: $gap;
+  gap: 1.5rem;
   grid-template:
     'logo header links' 4rem
     'sections youtube twitter' calc(
@@ -28,13 +29,6 @@ body {
     )
     'sections updates twitter' auto
     / 1fr 2fr 1fr;
-}
-
-.links,
-.sections,
-.updates,
-.twitter {
-  border: 1px solid lch(100 0 0);
 }
 
 x-header {
@@ -54,7 +48,25 @@ youtube-video {
   background: url('assets/svg/logo.svg') left center / contain no-repeat;
 }
 
+.sections {
+  grid-area: sections;
+  overflow-y: scroll;
+}
+
+x-section {
+  margin: logical * * 0.5rem 0.5rem;
+
+  &:not(:first-of-type) {
+    margin-block-start: 0.5rem;
+  }
+}
+
+.links,
+.updates,
+.twitter {
+  border: 1px solid lch(50 0 0);
+}
+
 .links { grid-area: links; }
-.sections { grid-area: sections; }
 .updates { grid-area: updates; }
 .twitter { grid-area: twitter; }

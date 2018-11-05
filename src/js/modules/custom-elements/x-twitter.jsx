@@ -12,7 +12,7 @@ class Twitter extends HTMLElement {
     const script = <script
       src='https://platform.twitter.com/widgets.js'
       charset='utf-8'
-    ></script>;
+    />;
 
     const header = <header>TWITTER</header>;
 
@@ -23,7 +23,7 @@ class Twitter extends HTMLElement {
       data-theme='dark'
       data-chrome='noheader nofooter noborders noscrollbar transparent'
       href='https://twitter.com/theZcuber/lists/r-spacex-mission-control'
-    ></a>;
+    />;
 
     [
       css,

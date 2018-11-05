@@ -8,10 +8,10 @@
     "clean": "gulp clean",
     "build": "gulp build",
     "watch": "gulp watch",
-    "lint:js": "eslint .eslintrc.js *.js src/js/modules/**/*.js --no-ignore",
-    "fmt:js": "eslint --fix .eslintrc.js *.js src/js/modules/**/*.js --no-ignore",
-    "lint:css": "stylelint src/css/**/*.pcss",
-    "fmt:css": "stylelint --fix src/css/**/*.pcss"
+    "lint:js": "eslint .eslintrc.js *.js \"src/js/modules/**/*.js\" --no-ignore",
+    "fmt:js": "eslint --fix .eslintrc.js *.js \"src/js/modules/**/*.js\" --no-ignore",
+    "lint:css": "stylelint \"src/css/**/*.pcss\"",
+    "fmt:css": "stylelint --fix \"src/css/**/*.pcss\""
   },
   "dependencies": {},
   "devDependencies": {
@@ -54,6 +54,7 @@
     "rollup-stream": "^1.24.1",
     "run-sequence": "^2.2.1",
     "stylelint": "^9.7.1",
-    "stylelint-config-standard": "^18.2.0"
+    "stylelint-config-standard": "^18.2.0",
+    "stylelint-use-logical": "^1.1.0"
   }
 }

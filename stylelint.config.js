@@ -2,7 +2,9 @@
 
 module.exports = {
   extends: 'stylelint-config-standard',
+  plugins: ['stylelint-use-logical'],
   rules: {
+    'csstools/use-logical': true,
     'at-rule-no-vendor-prefix': true,
     'declaration-empty-line-before': null,
     'font-family-name-quotes': 'always-unless-keyword',

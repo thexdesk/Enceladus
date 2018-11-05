@@ -33,9 +33,7 @@ class Header extends HTMLElement {
     const css = <link rel='stylesheet' href='x-header.bundle.css'/>;
 
     this.#launch_name = <div></div>;
-
     this.#countdown = <x-countdown></x-countdown>;
-    this.#countdown.t0 = null;
 
     [
       css,

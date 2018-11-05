@@ -90,7 +90,7 @@ class Countdown extends HTMLElement {
     const shadow = this.attachShadow({ mode: 'closed' });
 
     const css = <link rel='stylesheet' href='x-countdown.bundle.css'/>;
-    this.#countdown = <div></div>;
+    this.#countdown = <div/>;
 
     [
       css,

@@ -7,9 +7,9 @@ export default function createElement(tag, attributes, ...children) {
 
   children.forEach(val => root.appendChild(do {
     if (val instanceof Node) {
-      root.appendChild(val);
+      val;
     } else if (typeof val === 'string') {
-      root.appendChild(new Text(val));
+      new Text(val);
     } else {
       // eslint-disable-next-line no-console
       console.error('Unknown element', val);
