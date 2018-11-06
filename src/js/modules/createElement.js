@@ -1,5 +1,11 @@
 export default function createElement(tag, attributes, ...children) {
-  const root = document.createElement(tag);
+  const root = do {
+    if (typeof tag === 'symbol') {
+      new DocumentFragment();
+    } else {
+      document.createElement(tag);
+    }
+  };
 
   Object.entries(attributes ?? {}).forEach(([attribute, value]) => {
     root.setAttribute(attribute, value);

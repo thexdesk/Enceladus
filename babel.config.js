@@ -3,7 +3,13 @@
 module.exports = {
   plugins: [
     'module:param.macro/plugin',
-    ['@babel/plugin-transform-react-jsx', { pragma: 'createElement' }],
+    [
+      '@babel/plugin-transform-react-jsx',
+      {
+        pragma: 'createElement',
+        pragmaFrag: 'Symbol()',
+      },
+    ],
     ['@babel/plugin-proposal-class-properties', { loose: true }],
     '@babel/plugin-proposal-do-expressions',
     '@babel/plugin-proposal-nullish-coalescing-operator',
