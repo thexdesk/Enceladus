@@ -1,4 +1,3 @@
-import { _ } from 'param.macro';
 import createElement from '../createElement';
 
 /** @type {{ [key: number]: Section }} */
@@ -10,8 +9,8 @@ export const sections = Object.create(null);
  */
 
 class Section extends HTMLElement {
-  #header;
-  #body;
+  #header = <h1/>;
+  #body = <div/>;
 
   get header() {
     return this.#header.innerHTML;
@@ -30,16 +29,11 @@ class Section extends HTMLElement {
   constructor() {
     super();
 
-    const shadow = this.attachShadow({ mode: 'closed' });
-
-    this.#header = <h1/>;
-    this.#body = <div/>;
-
-    [
-      <link rel='stylesheet' href='x-section.bundle.css'/>,
-      this.#header,
-      this.#body,
-    ].forEach(shadow.appendChild(_));
+    this.attachShadow({ mode: 'closed' }).appendChild(<>
+      <link rel='stylesheet' href='x-section.bundle.css'/>
+      { this.#header }
+      { this.#body }
+    </>);
   }
 
   connectedCallback() {

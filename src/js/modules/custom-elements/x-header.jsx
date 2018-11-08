@@ -1,10 +1,9 @@
 import './x-countdown.jsx';
-import { _ } from 'param.macro';
 import createElement from '../createElement';
 
 class Header extends HTMLElement {
-  #countdown;
-  #launch_name;
+  #countdown = <x-countdown/>;
+  #launch_name = <div/>;
 
   get t0() {
     return this.#countdown.t0;
@@ -28,16 +27,11 @@ class Header extends HTMLElement {
   constructor() {
     super();
 
-    const shadow = this.attachShadow({ mode: 'closed' });
-
-    this.#launch_name = <div/>;
-    this.#countdown = <x-countdown/>;
-
-    [
-      <link rel='stylesheet' href='x-header.bundle.css'/>,
-      this.#launch_name,
-      this.#countdown,
-    ].forEach(shadow.appendChild(_));
+    this.attachShadow({ mode: 'closed' }).appendChild(<>
+      <link rel='stylesheet' href='x-header.bundle.css'/>
+      { this.#launch_name }
+      { this.#countdown }
+    </>);
   }
 }
 

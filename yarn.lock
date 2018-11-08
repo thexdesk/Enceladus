@@ -514,13 +514,6 @@ babel-plugin-eval-when-possible@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/babel-plugin-eval-when-possible/-/babel-plugin-eval-when-possible-0.1.1.tgz#04808b95473bb3fa815a114e6725efa9faa5ca7b"
 
-babel-plugin-macros@^2.2.2:
-  version "2.4.2"
-  resolved "https://registry.yarnpkg.com/babel-plugin-macros/-/babel-plugin-macros-2.4.2.tgz#21b1a2e82e2130403c5ff785cba6548e9b644b28"
-  dependencies:
-    cosmiconfig "^5.0.5"
-    resolve "^1.8.1"
-
 bail@^1.0.0:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/bail/-/bail-1.0.3.tgz#63cfb9ddbac829b02a3128cd53224be78e6c21a3"
@@ -900,7 +893,7 @@ cosmiconfig@^4.0.0:
     parse-json "^4.0.0"
     require-from-string "^2.0.1"
 
-cosmiconfig@^5.0.0, cosmiconfig@^5.0.5:
+cosmiconfig@^5.0.0:
   version "5.0.6"
   resolved "https://registry.yarnpkg.com/cosmiconfig/-/cosmiconfig-5.0.6.tgz#dca6cf680a0bd03589aff684700858c81abeeb39"
   dependencies:
@@ -3198,12 +3191,6 @@ param-case@2.1.x:
   dependencies:
     no-case "^2.2.0"
 
-param.macro@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/param.macro/-/param.macro-2.1.0.tgz#b99a0b30cb75a788ac148d6e87f9896c69f57ab5"
-  dependencies:
-    babel-plugin-macros "^2.2.2"
-
 parse-entities@^1.0.2, parse-entities@^1.1.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/parse-entities/-/parse-entities-1.2.0.tgz#9deac087661b2e36814153cb78d7e54a4c5fd6f4"
@@ -4231,7 +4218,7 @@ resolve-url@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/resolve-url/-/resolve-url-0.2.1.tgz#2c637fe77c893afd2a663fe21aa9080068e2052a"
 
-resolve@^1.1.6, resolve@^1.1.7, resolve@^1.3.2, resolve@^1.8.1:
+resolve@^1.1.6, resolve@^1.1.7, resolve@^1.3.2:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.8.1.tgz#82f1ec19a423ac1fbd080b0bab06ba36e84a7a26"
   dependencies:

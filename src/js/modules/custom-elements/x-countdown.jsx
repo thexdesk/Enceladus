@@ -1,4 +1,3 @@
-import { _ } from 'param.macro';
 import createElement from '../createElement';
 
 /**
@@ -22,8 +21,8 @@ class Countdown extends HTMLElement {
   #minutes = 0;
   #seconds = 0;
   #interval = null;
-  #countdown;
-  #current_display;
+  #countdown = <div/>;
+  #current_display = '';
 
   get t0() {
     return this.#t0;
@@ -87,14 +86,10 @@ class Countdown extends HTMLElement {
   constructor() {
     super();
 
-    const shadow = this.attachShadow({ mode: 'closed' });
-
-    this.#countdown = <div/>;
-
-    [
-      <link rel='stylesheet' href='x-countdown.bundle.css'/>,
-      this.#countdown,
-    ].forEach(shadow.appendChild(_));
+    this.attachShadow({ mode: 'closed' }).appendChild(<>
+      <link rel='stylesheet' href='x-countdown.bundle.css'/>
+      { this.#countdown }
+    </>);
   }
 
   disconnectedCallback() {

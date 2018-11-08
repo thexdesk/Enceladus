@@ -2,7 +2,6 @@
 
 module.exports = {
   plugins: [
-    'module:param.macro/plugin',
     [
       '@babel/plugin-transform-react-jsx',
       {

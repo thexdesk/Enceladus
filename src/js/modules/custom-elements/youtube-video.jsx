@@ -1,9 +1,8 @@
-import { _ } from 'param.macro';
 import createElement from '../createElement';
 
 class YouTube extends HTMLElement {
   #id = null;
-  #video;
+  #video = <iframe title='YouTube'/>;
 
   get id() {
     return this.#id;
@@ -31,15 +30,12 @@ class YouTube extends HTMLElement {
   constructor() {
     super();
 
-    const shadow = this.attachShadow({ mode: 'closed' });
-
-    this.#video = <iframe title='YouTube'/>;
     this._set_display();
 
-    [
-      <link rel='stylesheet' href='youtube-video.bundle.css'/>,
-      this.#video,
-    ].forEach(shadow.appendChild(_));
+    this.attachShadow({ mode: 'closed' }).appendChild(<>
+      <link rel='stylesheet' href='youtube-video.bundle.css'/>
+      { this.#video }
+    </>);
   }
 }
 

@@ -21,7 +21,7 @@ const config = {
 
     modules: {
       src_dir: 'src/js/modules',
-      src_file: 'src/js/modules/index.js',
+      src_file: 'src/js/modules/index.jsx',
       out_file: 'modules.bundle.js',
     },
 
@@ -61,7 +61,7 @@ gulp.task('js:modules', () => {
     }, {
       format: 'cjs',
     }))
-    .pipe(terser())
+    // .pipe(terser())
     .pipe(rename({ basename: 'modules', extname: '.bundle.js' }))
     .pipe(gulp.dest(config.out_dir));
 });

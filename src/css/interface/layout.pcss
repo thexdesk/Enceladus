@@ -5,7 +5,7 @@
 
 body {
   overflow: hidden;
-  margin: 0;
+  margin: logical 0;
 
   --theme-color: lch(60 97 48);
 
@@ -15,14 +15,14 @@ body {
 
   height: 100vh;
   max-height: 100vh;
-  padding: $gap $gap 0;
+  padding: logical $gap $gap 0;
 
-  color: lch(100 0 0);
-  background-color: lch(0 0 0);
+  color: gray(100);
+  background-color: gray(0);
 
   display: grid;
   gap: $gap;
-  grid-template:
+  grid:
     'logo header links' 4rem
     'sections youtube twitter' calc(
       (100vw - $gap * ($number-columns + 1)) * $youtube-ratio * (9 / 16)
@@ -49,6 +49,7 @@ youtube-video {
 }
 
 .sections {
+  contain: content;
   grid-area: sections;
   overflow-y: scroll;
 }
@@ -61,12 +62,30 @@ x-section {
   }
 }
 
-.links,
-.updates,
-.twitter {
-  border: 1px solid lch(50 0 0);
+.updates {
+  contain: content;
+  grid-area: updates;
+  overflow-y: scroll;
+  padding-inline-end: 0.5rem;
+
+  display: grid;
+  grid: auto-flow min-content / minmax(3rem, auto) minmax(6rem, auto) 1fr;
+  gap: 0.4rem 1rem;
+
+  & div {
+    font-variation-settings: 'wght' 600;
+  }
+
+  & x-event:last-of-type {
+    padding-block-end: 2rem;
+  }
 }
 
-.links { grid-area: links; }
-.updates { grid-area: updates; }
-.twitter { grid-area: twitter; }
+x-twitter {
+  grid-area: twitter;
+}
+
+.links {
+  border: 1px solid lch(50 0 0);
+  grid-area: links;
+}
