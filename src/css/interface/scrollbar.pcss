@@ -1,0 +1,33 @@
+/*
+ * Browsers that don't support CSS Scrollbars level 1
+ * _may_ support ::-webkit-scrollbar syntax.
+ * If they support the standard syntax,
+ * use that below.
+ */
+@supports not (scrollbar-color: red) {
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    corner-radius: 1px;
+    background-color: var(--theme-color);
+  }
+}
+
+/*
+ * Browsers that suppor the syntax defined in CSS Scrollbars level 1.
+ * Spec: https://drafts.csswg.org/css-scrollbars/
+ *
+ * Leaving this inside of a supports query,
+ * as some browsers have partial support that is quite buggy,
+ * and report that they don't support it.
+ * In that case, we should fall back to default scrollbars,
+ * since we _know_ those will work.
+ */
+@supports (scrollbar-color: red) {
+  :root {
+    scrollbar-color: var(--theme-color) transparent;
+    scrollbar-width: 5px;
+  }
+}
