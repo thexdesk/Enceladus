@@ -33,6 +33,8 @@ module.exports = {
           'border-bottom-radius',
           'border-left-radius',
           'border-right-radius',
+          'scrollbar-color',
+          'scrollbar-width',
         ],
       },
     ],

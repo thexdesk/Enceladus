@@ -12,7 +12,7 @@ const preprocess = require('gulp-preprocess');
 const rename = require('gulp-rename');
 const rollup = require('gulp-better-rollup');
 const run_sequence = require('run-sequence');
-const terser = require('gulp-terser');
+const { terser } = require('rollup-plugin-terser');
 
 const sourcemaps = require('gulp-sourcemaps');
 
@@ -62,11 +62,11 @@ gulp.task('js', () => {
           browser: true,
         }),
         commonjs(),
+        terser(),
       ],
     }, {
       format: 'iife',
     }))
-    .pipe(terser())
     .pipe(rename({ basename: 'modules', extname: '.bundle.js' }))
     .pipe(sourcemaps.write('.', { addComment: true }))
     .pipe(gulp.dest(config.out_dir));

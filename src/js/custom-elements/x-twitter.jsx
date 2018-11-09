@@ -1,12 +1,8 @@
 import createElement from '../createElement';
 
 class Twitter extends HTMLElement {
-  constructor() {
-    super();
-
-    this.attachShadow({ mode: 'closed' }).appendChild(<>
-      <link rel='stylesheet' href='x-twitter.bundle.css'/>
-      <script src='https://platform.twitter.com/widgets.js' charset='utf-8'/>
+  connectedCallback() {
+    this.appendChild(<>
       <header>TWITTER</header>
       <a
         class='twitter-timeline'

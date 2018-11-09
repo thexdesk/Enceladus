@@ -1,6 +1,6 @@
 import './custom-elements/x-header.jsx';
 import './custom-elements/youtube-video.jsx';
-// import './custom-elements/x-twitter.jsx';
+import './custom-elements/x-twitter.jsx';
 import './custom-elements/x-section.jsx';
 import './custom-elements/x-event.jsx';
 
@@ -63,8 +63,7 @@ function assign_sections({ sections }) {
   sections
     .filter(({ events }) => events.length === 0)
     .forEach(({ id, name, content }) => {
-      const elem = <x-section/>;
-      fragment.appendChild(elem);
+      const elem = fragment.appendChild(<x-section/>);
       elem.header = name;
       elem.body = content;
 
@@ -86,8 +85,7 @@ function assign_events({ sections }) {
     .flatMap(section => section.events)
     .filter(({ posted }) => posted)
     .forEach(({ id, utc, terminal_count, message }) => {
-      const elem = <x-event/>;
-      fragment.appendChild(elem);
+      const elem = fragment.appendChild(<x-event/>);
       elem.utc = utc;
       elem.terminal_count = terminal_count;
       elem.message = message;
