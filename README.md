@@ -8,9 +8,6 @@
 
 ## Development
 
-_It is not currently necessary to be running the API during development.
-This will change in the future._
-
 To develop locally,
 run the following.
 

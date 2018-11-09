@@ -1,7 +1,7 @@
 export default function createElement(tag, attributes, ...children) {
   const root = do {
     if (typeof tag === 'symbol') {
-      new DocumentFragment();
+      document.createDocumentFragment();
     } else {
       document.createElement(tag);
     }
