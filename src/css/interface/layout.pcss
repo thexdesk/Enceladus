@@ -32,7 +32,7 @@ body {
   grid:
     'logo header links' 4rem
     'sections youtube twitter' calc(
-      ((100vw - $gap * ($number-columns + 1) - 22rem) * 2 / 3) * 9 / 16
+      (100vw - $gap * ($number-columns + 1) - 22rem) * 3 / 8
     )
     'sections updates twitter' auto
     / 1fr 2fr 22rem;
@@ -76,11 +76,16 @@ x-section {
   padding-inline-end: 0.5rem;
 
   display: grid;
-  grid: auto-flow min-content / minmax(3rem, auto) minmax(6rem, auto) 1fr;
+  grid: auto-flow min-content / 3rem 6rem 1fr;
   gap: 0.4rem 1rem;
 
   & div {
     font-variation-settings: 'wght' 600;
+    position: sticky;
+    inset-block-start: 0;
+    padding-block-end: 0.5ex;
+    background-color: gray(0);
+    depth: 1;
   }
 
   & x-event:last-of-type {
