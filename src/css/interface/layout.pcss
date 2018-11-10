@@ -22,13 +22,20 @@ body {
 
   display: grid;
   gap: $gap;
+
+  /*
+   * As soon as the spec is stabilized,
+   * I'm going to implement the aspect ratio under a @supports query.
+   *
+   * It will be something along the lines of `calc(9ar / 16)`
+   */
   grid:
     'logo header links' 4rem
     'sections youtube twitter' calc(
-      (100vw - $gap * ($number-columns + 1)) * $youtube-ratio * (9 / 16)
+      ((100vw - $gap * ($number-columns + 1) - 22rem) * 2 / 3) * 9 / 16
     )
     'sections updates twitter' auto
-    / 1fr 2fr 1fr;
+    / 1fr 2fr 22rem;
 }
 
 x-header {
