@@ -1,0 +1,31 @@
+:host {
+  contain: content;
+
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+a {
+  /* stylelint-disable rule-empty-line-before */
+  display: inline-block;
+  &:not(:first-of-type) {
+    margin-inline-start: 1rem;
+  }
+
+  transition: opacity 150ms;
+  &:not(:hover) {
+    opacity: 0.3;
+  }
+  /* stylelint-enable rule-empty-line-before */
+
+  block-size: 2rem;
+}
+
+.github {
+  content: svg-load('brands/github.svg', fill: gray(100));
+}
+
+.reddit {
+  content: svg-load('brands/reddit.svg', fill: gray(100));
+}

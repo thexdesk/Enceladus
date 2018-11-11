@@ -1227,7 +1227,7 @@ doctrine@^2.1.0:
   dependencies:
     esutils "^2.0.2"
 
-dom-serializer@0:
+dom-serializer@0, dom-serializer@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/dom-serializer/-/dom-serializer-0.1.0.tgz#073c697546ce0780ce23be4a28e293e40bc30c82"
   dependencies:
@@ -2147,7 +2147,7 @@ html-tags@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/html-tags/-/html-tags-2.0.0.tgz#10b30a386085f43cede353cc8fa7cb0deeea668b"
 
-htmlparser2@^3.9.2:
+htmlparser2@^3.9.0, htmlparser2@^3.9.2:
   version "3.10.0"
   resolved "https://registry.yarnpkg.com/htmlparser2/-/htmlparser2-3.10.0.tgz#5f5e422dcf6119c0d983ed36260ce9ded0bee464"
   dependencies:
@@ -3681,6 +3681,16 @@ postcss-initial@^3.0.0:
     lodash.template "^4.2.4"
     postcss "^7.0.2"
 
+postcss-inline-svg-multipath@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/postcss-inline-svg-multipath/-/postcss-inline-svg-multipath-3.1.2.tgz#a54594af2e372582aff8c35bb7809667073bcc5c"
+  dependencies:
+    css-select "^2.0.0"
+    dom-serializer "^0.1.0"
+    htmlparser2 "^3.9.0"
+    postcss "^6.0.21"
+    postcss-value-parser "^3.2.3"
+
 postcss-jsx@^0.35.0:
   version "0.35.0"
   resolved "https://registry.yarnpkg.com/postcss-jsx/-/postcss-jsx-0.35.0.tgz#1d6cb82393994cdc7e9aa421648e3f0f3f98209b"
@@ -4068,15 +4078,6 @@ postcss-styled@>=0.34.0, postcss-styled@^0.34.0:
   version "0.34.0"
   resolved "https://registry.yarnpkg.com/postcss-styled/-/postcss-styled-0.34.0.tgz#07d47bcb13707289782aa058605fd9feaf84391d"
 
-postcss-svg@^2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/postcss-svg/-/postcss-svg-2.4.0.tgz#472321d5fc795556a3d59b090ff3feb3e7ada397"
-  dependencies:
-    postcss "6.x"
-    postcss-value-parser "3.x"
-    svgo "1.x"
-    xmldoc "1.x"
-
 postcss-svgo@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/postcss-svgo/-/postcss-svgo-4.0.1.tgz#5628cdb38f015de6b588ce6d0bf0724b492b581d"
@@ -4106,7 +4107,7 @@ postcss-unique-selectors@^4.0.1:
     postcss "^7.0.0"
     uniqs "^2.0.0"
 
-postcss-value-parser@3.x, postcss-value-parser@^3.0.0, postcss-value-parser@^3.2.3, postcss-value-parser@^3.3.0, postcss-value-parser@^3.3.1:
+postcss-value-parser@^3.0.0, postcss-value-parser@^3.2.3, postcss-value-parser@^3.3.0, postcss-value-parser@^3.3.1:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/postcss-value-parser/-/postcss-value-parser-3.3.1.tgz#9ff822547e2893213cf1c30efa51ac5fd1ba8281"
 
@@ -4118,7 +4119,7 @@ postcss-values-parser@^2.0.0:
     indexes-of "^1.0.1"
     uniq "^1.0.1"
 
-postcss@6.x, postcss@^6.0.1:
+postcss@^6.0.1, postcss@^6.0.21:
   version "6.0.23"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-6.0.23.tgz#61c82cc328ac60e677645f979054eb98bc0e3324"
   dependencies:
@@ -4519,7 +4520,7 @@ safe-regex@^1.1.0:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
 
-sax@^1.2.1, sax@^1.2.4, sax@~1.2.4:
+sax@^1.2.4, sax@~1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
 
@@ -4885,7 +4886,7 @@ svg-tags@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/svg-tags/-/svg-tags-1.0.0.tgz#58f71cee3bd519b59d4b2a843b6c7de64ac04764"
 
-svgo@1.x, svgo@^1.0.0:
+svgo@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/svgo/-/svgo-1.1.1.tgz#12384b03335bcecd85cfa5f4e3375fed671cb985"
   dependencies:
@@ -5285,12 +5286,6 @@ write@^0.2.1:
 x-is-string@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/x-is-string/-/x-is-string-0.1.0.tgz#474b50865af3a49a9c4657f05acd145458f77d82"
-
-xmldoc@1.x:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/xmldoc/-/xmldoc-1.1.2.tgz#6666e029fe25470d599cd30e23ff0d1ed50466d7"
-  dependencies:
-    sax "^1.2.1"
 
 xregexp@3.1.0:
   version "3.1.0"

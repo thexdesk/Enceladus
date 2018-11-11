@@ -3,12 +3,14 @@ import './custom-elements/youtube-video.jsx';
 import './custom-elements/x-twitter.jsx';
 import './custom-elements/x-section.jsx';
 import './custom-elements/x-event.jsx';
+import './custom-elements/x-links.jsx';
 
 import createElement from './createElement';
 import fetchival from 'fetchival';
 
 const header_elem = document.querySelector('x-header');
 const youtube_elem = document.querySelector('youtube-video');
+const links_elem = document.querySelector('x-links');
 const sections_elem = document.querySelector('section.sections');
 const events_elem = document.querySelector('section.updates');
 
@@ -42,6 +44,7 @@ fetchival(`http://localhost:3000/v1/thread/${thread_id}?with=events`)
   .then(thread => {
     assign_header(thread);
     assign_youtube(thread);
+    assign_reddit_id(thread);
     assign_sections(thread);
     assign_events(thread);
   });
@@ -54,6 +57,10 @@ function assign_header({ launch_name, t0 }) {
 
 function assign_youtube({ youtube_id }) {
   youtube_elem.id = youtube_id;
+}
+
+function assign_reddit_id({ post_id }) {
+  links_elem.reddit_id = post_id;
 }
 
 function assign_sections({ sections }) {

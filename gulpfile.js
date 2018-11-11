@@ -99,7 +99,7 @@ gulp.task('clean', () => del('dist'));
 gulp.task('watch', ['build'], () => {
   gulp.watch(`${config.css.src_dir}/**/*.pcss`, ['css']);
   gulp.watch(`${config.html.src_dir}/**/*.html`, ['html']);
-  gulp.watch(`${config.js.src_dir}/**/*.js`, ['js']);
+  gulp.watch(`${config.js.src_dir}/**/*.jsx?`, ['js']);
   gulp.watch(`${config.assets.src_dir}/**/*`, ['assets']);
 });
 

@@ -20,12 +20,12 @@ module.exports = {
     require('postcss-short-size'),
     require('postcss-short-spacing'),
     require('postcss-calc'),
-    require('postcss-svg')({
-      dirs: [
+    require('postcss-inline-svg-multipath')({
+      paths: [
         'src/assets/svg',
-        'node_modules/@fortawesome/fontawesome-free/sprites',
+        'node_modules/@fortawesome/fontawesome-free/svgs',
       ],
-      svgo: { plugins: [{ cleanupAttrs: true }]},
     }),
+    require('postcss-svgo'),
   ],
 };
