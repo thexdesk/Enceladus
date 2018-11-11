@@ -20,5 +20,9 @@ module.exports = {
     require('postcss-short-size'),
     require('postcss-short-spacing'),
     require('postcss-calc'),
+    require('postcss-svg')({
+      dirs: ['src/assets/svg'],
+      svgo: { plugins: [{ cleanupAttrs: true }]},
+    }),
   ],
 };
