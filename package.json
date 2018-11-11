@@ -27,6 +27,7 @@
     "@babel/plugin-proposal-optional-catch-binding": "^7.0.0",
     "@babel/plugin-proposal-optional-chaining": "^7.0.0",
     "@babel/plugin-transform-react-jsx": "^7.0.0",
+    "@fortawesome/fontawesome-free": "^5.5.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.4",
     "babel-plugin-eval-when-possible": "^0.1.1",
