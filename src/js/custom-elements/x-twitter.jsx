@@ -1,6 +1,13 @@
 import createElement from '../createElement';
 
 class Twitter extends HTMLElement {
+  /**
+   * Add the Twitter widget underneath a header.
+   *
+   * Should not be in a constructor,
+   * as Twitter's embed code doesn't work
+   * with a shadow DOM.
+   */
   connectedCallback() {
     this.appendChild(<>
       <header>TWITTER</header>

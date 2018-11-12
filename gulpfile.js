@@ -23,7 +23,7 @@ const config = {
 
   js: {
     src_dir: 'src/js',
-    src_file: 'src/js/index.jsx',
+    src_file: 'src/js/index.js',
     out_file: 'modules.bundle.js',
   },
 

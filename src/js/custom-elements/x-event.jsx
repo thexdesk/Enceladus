@@ -7,27 +7,42 @@ class Event extends HTMLElement {
   #terminal_count = <div class='tnum'/>;
   #message = <div/>;
 
+  /** @type {string} */
   get utc() {
     return this.#utc.innerHTML;
   }
+
+  /** @param {string} value */
   set utc(value) {
     this.#utc.innerHTML = value;
   }
 
+  /** @type {string} */
   get terminal_count() {
     return this.#terminal_count.innerHTML;
   }
+
+  /** @param {string} value */
   set terminal_count(value) {
     this.#terminal_count.innerHTML = value;
   }
 
+  /** @type {string} */
   get messsage() {
     return this.#message.innerHTML;
   }
+
+  /** @param {string} value */
   set message(value) {
     this.#message.innerHTML = value;
   }
 
+  /**
+   * Add the relevant CSS,
+   * the UTC time,
+   * the terminal count,
+   * and the message.
+   */
   constructor() {
     super();
 

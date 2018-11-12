@@ -24,10 +24,17 @@ class Countdown extends HTMLElement {
   #countdown = <div/>;
   #current_display = '';
 
+  /**
+   * @type {number | null}
+   */
   get t0() {
     return this.#t0;
   }
 
+  /**
+   * @type {number | null}
+   * @param {number | null} value
+   */
   set t0(value) {
     this.#t0 = value;
 
@@ -43,6 +50,8 @@ class Countdown extends HTMLElement {
 
   /**
    * Time to be displayed on the countdown, if any.
+   *
+   * @type {string}
    */
   get display_time() {
     if (this.#t0 === null) {
@@ -80,8 +89,7 @@ class Countdown extends HTMLElement {
   }
 
   /**
-   * Called when the element is created.
-   * Creates a shadow DOM containing the timer and the relevant CSS.
+   * Add the relevant CSS and a countdown timer.
    */
   constructor() {
     super();
@@ -92,6 +100,9 @@ class Countdown extends HTMLElement {
     </>);
   }
 
+  /**
+   * Clean up when the element is removed.
+   */
   disconnectedCallback() {
     clearInterval(this.#interval);
   }

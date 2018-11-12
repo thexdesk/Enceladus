@@ -4,9 +4,12 @@ class YouTube extends HTMLElement {
   #id = null;
   #video = <iframe title='YouTube'/>;
 
+  /** @type {string | null} */
   get id() {
     return this.#id;
   }
+
+  /** @param {string | null} id */
   set id(value) {
     this.#id = value;
     if (value === null) {
@@ -17,16 +20,22 @@ class YouTube extends HTMLElement {
     this._set_display();
   }
 
+  /**
+   * Set the display property of the YouTube embed.
+   *
+   * @private
+   */
   _set_display() {
-    this.#video.style.display = do {
-      if (this.#id === null) {
-        'none';
-      } else {
-        'block';
-      }
-    };
+    if (this.#id === null) {
+      this.#video.style.display = 'none';
+    } else {
+      this.#video.style.removeProperty('display');
+    }
   }
 
+  /**
+   * Add the relevant CSS and the YouTube embed.
+   */
   constructor() {
     super();
 

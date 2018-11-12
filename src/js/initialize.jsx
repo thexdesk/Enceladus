@@ -1,10 +1,3 @@
-import './custom-elements/x-header.jsx';
-import './custom-elements/youtube-video.jsx';
-import './custom-elements/x-twitter.jsx';
-import './custom-elements/x-section.jsx';
-import './custom-elements/x-event.jsx';
-import './custom-elements/x-links.jsx';
-
 import createElement from './createElement';
 import fetchival from 'fetchival';
 
@@ -20,7 +13,7 @@ const events_elem = document.querySelector('section.updates');
  * @typedef {{ [key: number]: HTMLElement }} NumberToHTMLElement
  * @type {{ sections: NumberToHTMLElement, events: NumberToHTMLElement }}
  */
-const cache = {
+export const cache = {
   sections: {},
   events: {},
 };
@@ -30,7 +23,7 @@ const cache = {
  *
  * @type {{ sections: number[], events: number[] }}
  */
-const order = {
+export const order = {
   sections: [],
   events: [],
 };

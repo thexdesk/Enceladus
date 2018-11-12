@@ -5,24 +5,30 @@ class Header extends HTMLElement {
   #countdown = <x-countdown/>;
   #launch_name = <div/>;
 
+  /** @type {number | null} */
   get t0() {
     return this.#countdown.t0;
   }
+
+  /** @param {number | null} value */
   set t0(value) {
     this.#countdown.t0 = value;
   }
 
+  /** @type {string} */
   get launch_name() {
     return this.#launch_name.innerHTML;
   }
+
+  /** @param {string} value */
   set launch_name(value) {
     this.#launch_name.innerHTML = value;
   }
 
   /**
-   * Called when the element is created.
-   * Creates a shadow DOM containing the launch name and a countdown clock,
-   * along with the relevant CSS.
+   * Add the relevant CSS,
+   * the launch name,
+   * and a countdown.
    */
   constructor() {
     super();

@@ -6,9 +6,12 @@ class Links extends HTMLElement {
 
   #reddit_id = null;
 
+  /** @type {string | null} */
   get reddit_id() {
     return this.#reddit_id;
   }
+
+  /** @param {string | null} value */
   set reddit_id(value) {
     this.#reddit_id = value;
 
@@ -20,6 +23,10 @@ class Links extends HTMLElement {
     }
   }
 
+  /**
+   * Add the relevant CSS
+   * along with icons for reddit and GitHub.
+   */
   constructor() {
     super();
 
