@@ -1,11 +1,11 @@
 import createElement from './createElement';
 import fetchival from 'fetchival';
 
-const header_elem = document.querySelector('x-header');
-const youtube_elem = document.querySelector('youtube-video');
-const links_elem = document.querySelector('x-links');
-const sections_elem = document.querySelector('section.sections');
-const events_elem = document.querySelector('section.updates');
+export const header_elem = document.querySelector('x-header');
+export const youtube_elem = document.querySelector('youtube-video');
+export const links_elem = document.querySelector('x-links');
+export const sections_elem = document.querySelector('section.sections');
+export const events_elem = document.querySelector('section.updates');
 
 /**
  * Map from section/event IDs to their respective elements.
@@ -31,7 +31,7 @@ export const order = {
 // Fetch data from API, insert into DOM
 
 // TODO enforce requirement to have ?thread_id=xxx present
-const [, thread_id] = /thread_id=(\d*)/.exec(location.search);
+export const [, thread_id] = /thread_id=(\d*)/.exec(location.search);
 fetchival(`http://localhost:3000/v1/thread/${thread_id}?with=events`)
   .get()
   .then(thread => {

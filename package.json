@@ -14,7 +14,8 @@
     "fmt:css": "stylelint --fix \"src/css/**/*.pcss\""
   },
   "dependencies": {
-    "fetchival": "^0.3.3"
+    "fetchival": "^0.3.3",
+    "sockette": "^2.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",

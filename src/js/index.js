@@ -6,3 +6,4 @@ import './custom-elements/x-event.jsx';
 import './custom-elements/x-links.jsx';
 
 import './initialize.jsx';
+import './sockets.jsx';
