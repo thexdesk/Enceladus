@@ -1,8 +1,19 @@
 import createElement from '../createElement';
 
 class Links extends HTMLElement {
-  #github = <a class='github' target='_blank' href='https://github.com/r-spacex/Enceladus-LTI'/>;
-  #reddit = <a class='reddit' target='_blank' style='display: none'/>;
+  #github = <a
+    class='github'
+    target='_blank'
+    href='https://github.com/r-spacex/Enceladus-LTI'
+    aria-description='reddit thread'
+  />;
+  #reddit = <a
+    class='reddit'
+    target='_blank'
+    style='display: none'
+    aria-hidden='true'
+    aria-description='source code'
+  />;
 
   #reddit_id = null;
 
@@ -17,9 +28,11 @@ class Links extends HTMLElement {
 
     if (value === null) {
       this.#reddit.style.display = 'none';
+      this.#reddit.setAttribute('aria-hidden', 'true');
     } else {
       this.#reddit.href = `https://reddit.com/${value}`;
       this.#reddit.style.removeProperty('display');
+      this.#reddit.removeAttribute('aria-hidden');
     }
   }
 
@@ -35,6 +48,12 @@ class Links extends HTMLElement {
       { this.#reddit }
       { this.#github }
     </>);
+  }
+
+  connectedCallback() {
+    if (!this.hasAttribute('role')) {
+      this.setAttribute('role', 'navigation');
+    }
   }
 }
 

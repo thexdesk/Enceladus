@@ -46,6 +46,12 @@ class YouTube extends HTMLElement {
       { this.#video }
     </>);
   }
+
+  connectedCallback() {
+    if (!this.hasAttribute('role')) {
+      this.setAttribute('role', 'region');
+    }
+  }
 }
 
 customElements.define('youtube-video', YouTube);

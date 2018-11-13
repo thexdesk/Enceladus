@@ -42,6 +42,12 @@ class Section extends HTMLElement {
       { this.#body }
     </>);
   }
+
+  connectedCallback() {
+    if (!this.hasAttribute('role')) {
+      this.setAttribute('role', 'article');
+    }
+  }
 }
 
 customElements.define('x-section', Section);

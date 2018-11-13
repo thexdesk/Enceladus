@@ -19,18 +19,17 @@
 </head>
 <body>
 
-  <section class='logo'></section>
+  <section class='logo' role='img'></section>
   <x-header></x-header>
-  <!-- <section class='links'></section> -->
-  <x-links class='links'></x-links>
+  <x-links></x-links>
   <youtube-video></youtube-video>
-  <section class='sections'></section>
-  <section class='updates'>
-    <div>UTC</div>
-    <div>Countdown</div>
-    <div>Update</div>
+  <section class='sections' role='region'></section>
+  <section class='updates' role='table region' aria-live='polite'>
+    <div role='columnheader'>UTC</div>
+    <div role='columnheader'>Countdown</div>
+    <div role='columnheader'>Update</div>
   </section>
-  <x-twitter></x-twitter>
+  <x-twitter role='complementary region'></x-twitter>
 
 </body>
 </html>

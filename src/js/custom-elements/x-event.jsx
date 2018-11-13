@@ -3,9 +3,9 @@ import createElement from '../createElement';
 class Event extends HTMLElement {
   posted = false;
 
-  #utc = <div class='tnum'/>;
-  #terminal_count = <div class='tnum'/>;
-  #message = <div/>;
+  #utc = <div class='tnum' role='cell'/>;
+  #terminal_count = <div class='tnum' role='cell'/>;
+  #message = <div role='cell'/>;
 
   /** @type {string} */
   get utc() {
@@ -52,6 +52,12 @@ class Event extends HTMLElement {
       { this.#terminal_count }
       { this.#message }
     </>);
+  }
+
+  connectedCallback() {
+    if (!this.hasAttribute('role')) {
+      this.setAttribute('role', 'row');
+    }
   }
 }
 

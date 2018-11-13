@@ -20,6 +20,10 @@ class Twitter extends HTMLElement {
         href='https://twitter.com/theZcuber/lists/r-spacex-mission-control'
       />
     </>);
+
+    if (!this.hasAttribute('role')) {
+      this.setAttribute('role', 'region');
+    }
   }
 }
 

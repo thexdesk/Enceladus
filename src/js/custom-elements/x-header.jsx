@@ -3,7 +3,7 @@ import createElement from '../createElement';
 
 class Header extends HTMLElement {
   #countdown = <x-countdown/>;
-  #launch_name = <div/>;
+  #launch_name = <div role='header' aria-description='launch name'/>;
 
   /** @type {number | null} */
   get t0() {
@@ -38,6 +38,12 @@ class Header extends HTMLElement {
       { this.#launch_name }
       { this.#countdown }
     </>);
+  }
+
+  connectedCallback() {
+    if (!this.hasAttribute('role')) {
+      this.setAttribute('role', 'region');
+    }
   }
 }
 

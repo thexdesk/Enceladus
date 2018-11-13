@@ -85,6 +85,12 @@ class Countdown extends HTMLElement {
     if (display_time !== this.#current_display) {
       this.#countdown.innerHTML = display_time;
       this.#current_display = display_time;
+
+      if (display_time.length === 0) {
+        this.#countdown.setAttribute('aria-hidden', 'true');
+      } else {
+        this.#countdown.removeAttribute('aria-hidden');
+      }
     }
   }
 
@@ -98,6 +104,16 @@ class Countdown extends HTMLElement {
       <link rel='stylesheet' href='x-countdown.bundle.css'/>
       { this.#countdown }
     </>);
+  }
+
+  connectedCallback() {
+    if (!this.hasAttribute('role')) {
+      this.setAttribute('role', 'timer');
+    }
+
+    if (!this.hasAttribute('aria-description')) {
+      this.setAttribute('aria-description', 'countdown clock');
+    }
   }
 
   /**
