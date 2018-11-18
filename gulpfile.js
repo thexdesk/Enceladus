@@ -62,7 +62,7 @@ gulp.task('js', () => {
           browser: true,
         }),
         commonjs(),
-        terser(),
+        // terser(),
       ],
     }, {
       format: 'iife',
