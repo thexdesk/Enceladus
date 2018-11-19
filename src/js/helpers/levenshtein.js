@@ -2,34 +2,17 @@
  * @template T
  * @param {T[]} top
  * @param {T[]} side
- * @returns {number[][]}
+ * @returns {[number[][], T[], T[]]}
  */
 export function levenshtein_matrix(top, side) {
-  /**
-   * TODO
-   * How much of a performance gain is there by using u16 bit arrays?
-   * If not significant, it may be worth it to use regular arrays.
-   * Adding typed-matrix as a dependency adds 1.1 kB to the size of the bundle,
-   * and will inherently cause slower parsing and JITting.
-   */
-  // const matrix = new Uint16Matrix(top.length + 1, side.length + 1);
   const matrix = new Array(side.length + 1);
-  for (let y = 0; y < side.length + 1; ++y) {
-    matrix[y] = new Array(top.length + 1);
-  }
-
-  // initialize first column
-  for (let y = 0; y <= side.length; ++y) {
-    matrix[y][0] = y;
-  }
-
-  // initialize first row
-  for (let x = 1; x <= top.length; ++x) {
-    matrix[0][x] = x;
-  }
+  matrix[0] = [...Array(top.length + 1).keys()];
 
   // Fill in the rest of the matrix
   for (let y = 1; y <= side.length; ++y) {
+    matrix[y] = new Array(top.length + 1);
+    matrix[y][0] = y;
+
     for (let x = 1; x <= top.length; ++x) {
       matrix[y][x] = Math.min(
         matrix[y - 1][x - 1] + (top[x - 1] !== side[y - 1]), // replacement
@@ -39,7 +22,7 @@ export function levenshtein_matrix(top, side) {
     }
   }
 
-  return matrix;
+  return [matrix, top, side];
 }
 
 /**
@@ -50,7 +33,7 @@ export function levenshtein_matrix(top, side) {
  * @param {T[]} side
  * @returns {{ op: operation<_>, loc: [number, number], val: T }}
  */
-export function operations(matrix, top, side) {
+export function matrix_to_diff(matrix, top, side) {
   const current = Object.seal({
     row: side.length - 1,
     col: top.length - 1,
@@ -122,7 +105,7 @@ export function operations(matrix, top, side) {
 
 const top = ['C', 'B', 'Z', 'G', 'C', 'T', 'A', 'G'];
 const side = ['D', 'Z', 'U', 'X', 'G', 'A', 'T', 'G'];
-const matrix = levenshtein_matrix(top, side);
 
-console.log(matrix.toString());
-console.log(operations(matrix, top, side));
+console.log(
+  matrix_to_diff(...levenshtein_matrix(top, side))
+);
