@@ -1,40 +1,19 @@
-import { Countdown } from './x-countdown';
-import createElement from '../createElement'; createElement;
-import { customElement, defaultAttribute, sealed } from '../helpers/decorators';
+import './x-countdown';
+import { LitElement, html, customElement, property } from '@polymer/lit-element';
+import { sealed } from '../helpers/decorators';
 
 @sealed
-@customElement('x-header')
-@defaultAttribute('role', 'region')
-export class Header extends HTMLElement {
-  private _countdown: Countdown = <x-countdown/>;
-  private _launch_name: HTMLDivElement = <div role='header' aria-description='launch name'/>;
-
-  get t0(): number | null {
-    return this._countdown.t0;
-  }
-  set t0(value) {
-    this._countdown.t0 = value;
+@customElement('x-header' as any)
+export class Header extends LitElement {
+  render() {
+    return html`
+      <link rel='stylesheet' href='x-header.bundle.css'>
+      <div role='header' aria-description='launch name'>${this.launch_name}</div>
+      <x-countdown .t0='${this.t0}'></x-countdown>
+    `;
   }
 
-  get launch_name(): string {
-    return this._launch_name.innerHTML;
-  }
-  set launch_name(value) {
-    this._launch_name.innerHTML = value;
-  }
-
-  /**
-   * Add the relevant CSS,
-   * the launch name,
-   * and a countdown.
-   */
-  constructor() {
-    super();
-
-    this.attachShadow({ mode: 'closed' }).appendChild(<>
-      <link rel='stylesheet' href='x-header.bundle.css'/>
-      { this._launch_name }
-      { this._countdown }
-    </>);
-  }
+  @property({ attribute: false }) launch_name = '';
+  @property({ attribute: false }) t0: Nullable<number> = null;
+  @property({ reflect: true }) role = 'region';
 }

@@ -4,7 +4,6 @@ import { Links as LinksElement } from './custom-elements/x-links';
 import { Event as EventElement } from './custom-elements/x-event';
 import { Section as SectionElement } from './custom-elements/x-section';
 
-import createElement from './createElement'; createElement;
 import fetchival from 'fetchival';
 
 export const header_elem = document.querySelector('x-header') as HeaderElement;
@@ -67,7 +66,7 @@ function assign_sections({ sections }: { sections: APISection<true>[] }) {
   sections
     .filter(({ events }) => events.length === 0)
     .forEach(({ id, name, content }) => {
-      const elem: SectionElement = fragment.appendChild(<x-section/>);
+      const elem = fragment.appendChild(document.createElement('x-section')) as SectionElement;
       elem.header = name;
       elem.body = content;
 
@@ -88,11 +87,12 @@ function assign_events({ sections }: { sections: APISection<true>[] }) {
   sections
     .flatMap(section => section.events)
     .filter(({ posted }) => posted)
-    .forEach(({ id, utc, terminal_count, message }) => {
-      const elem: EventElement = fragment.appendChild(<x-event/>);
+    .forEach(({ id, utc, terminal_count, message, posted }) => {
+      const elem = fragment.appendChild(document.createElement('x-event')) as EventElement;
       elem.utc = utc;
       elem.terminal_count = terminal_count;
       elem.message = message;
+      elem.posted = posted;
 
       // cache so we can fetch it later, without attributes or query selectors
       cache.events[id] = elem;

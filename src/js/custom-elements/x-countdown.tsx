@@ -1,5 +1,5 @@
-import createElement from '../createElement'; createElement;
-import { customElement, defaultAttribute, sealed } from '../helpers/decorators';
+import { LitElement, html, customElement, property } from '@polymer/lit-element';
+import { sealed } from '../helpers/decorators';
 
 /**
  * Given a number,
@@ -13,18 +13,14 @@ function pad(n: number) {
 }
 
 @sealed
-@customElement('x-countdown')
-@defaultAttribute('role', 'timer')
-@defaultAttribute('aria-description', 'countdown clock')
-export class Countdown extends HTMLElement {
+@customElement('x-countdown' as any)
+export class Countdown extends LitElement {
   private _t0: Nullable<number> = null;
-  private _sign = '-';
+  private _sign: '+' | '-' = '-';
   private _hours = 0;
   private _minutes = 0;
   private _seconds = 0;
   private _interval: Nullable<NodeJS.Timer> = null;
-  private _countdown: HTMLDivElement = <div/>;
-  private _current_display = '';
 
   get t0() {
     return this._t0;
@@ -59,48 +55,37 @@ export class Countdown extends HTMLElement {
    * Update the countdown clock.
    */
   private _update_clock() {
+    if (this._t0 === null) {
+      return;
+    }
+
     this._sign =
-      this._t0! < Date.now() / 1000
+      this._t0 < Date.now() / 1000
       ? '+'
       : '-';
 
-    const diff = Math.floor(Math.abs(this._t0! - Date.now() / 1000));
+    const diff = Math.floor(Math.abs(this._t0 - Date.now() / 1000));
 
     this._hours = Math.floor(diff / 3600);
     this._minutes = Math.floor(diff % 3600 / 60);
     this._seconds = diff % 60;
 
-    const { display_time } = this;
-    if (display_time !== this._current_display) {
-      this._countdown.innerHTML = display_time;
-      this._current_display = display_time;
-
-      if (display_time.length === 0) {
-        this._countdown.setAttribute('aria-hidden', 'true');
-      } else {
-        this._countdown.removeAttribute('aria-hidden');
-      }
-    }
+    this.requestUpdate();
   }
 
-  /**
-   * Add the relevant CSS and a countdown timer.
-   */
-  constructor() {
-    super();
-
-    this.attachShadow({ mode: 'closed' }).appendChild(<>
-      <link rel='stylesheet' href='x-countdown.bundle.css'/>
-      { this._countdown }
-    </>);
+  render() {
+    return html`
+      <link rel='stylesheet' href='x-countdown.bundle.css'>
+      ${this.display_time}
+    `;
   }
 
-  /**
-   * Clean up when the element is removed.
-   */
   disconnectedCallback() {
     if (this._interval !== null) {
       clearInterval(this._interval);
     }
   }
+
+  @property({ reflect: true }) role = 'timer';
+  @property({ reflect: true }) ['aria-description'] = 'countdown clock';
 }

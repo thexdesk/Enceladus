@@ -8,5 +8,3 @@ import './custom-elements/x-links';
 
 import './initialize';
 import './sockets';
-
-import './helpers/levenshtein';

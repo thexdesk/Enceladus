@@ -15,6 +15,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
+    "@polymer/lit-element": "^0.6.3",
     "fetchival": "^0.3.3",
     "sockette": "^2.0.1"
   },

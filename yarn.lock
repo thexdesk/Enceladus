@@ -190,6 +190,12 @@
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
 
+"@polymer/lit-element@^0.6.3":
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/@polymer/lit-element/-/lit-element-0.6.3.tgz#8ac2b82ae24f6306b5df0f2fa0b6deddd3cc4794"
+  dependencies:
+    lit-html "^0.13.0"
+
 "@types/estree@0.0.39":
   version "0.0.39"
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.39.tgz#e177e699ee1b8c22d23174caaa7422644389509f"
@@ -2551,6 +2557,10 @@ liftoff@^2.1.0:
     object.map "^1.0.0"
     rechoir "^0.6.2"
     resolve "^1.1.7"
+
+lit-html@^0.13.0:
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-0.13.0.tgz#d05e7fe8ade572432120339c451c614669788adf"
 
 load-json-file@^4.0.0:
   version "4.0.0"
