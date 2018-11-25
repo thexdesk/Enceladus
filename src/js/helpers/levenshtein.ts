@@ -1,11 +1,5 @@
-/**
- * @template T
- * @param {T[]} top
- * @param {T[]} side
- * @returns {[number[][], T[], T[]]}
- */
-export function levenshtein_matrix(top, side) {
-  const matrix = new Array(side.length + 1);
+export function levenshtein_matrix<T>(top: T[], side: T[]): [number[][], T[], T[]] {
+  const matrix: number[][] = new Array(side.length + 1);
   matrix[0] = [...Array(top.length + 1).keys()];
 
   // Fill in the rest of the matrix
@@ -15,7 +9,7 @@ export function levenshtein_matrix(top, side) {
 
     for (let x = 1; x <= top.length; ++x) {
       matrix[y][x] = Math.min(
-        matrix[y - 1][x - 1] + (top[x - 1] !== side[y - 1]), // replacement
+        matrix[y - 1][x - 1] + +(top[x - 1] !== side[y - 1]), // replacement
         matrix[y][x - 1] + 1, // deletion
         matrix[y - 1][x] + 1, // insertion
       );
@@ -25,15 +19,13 @@ export function levenshtein_matrix(top, side) {
   return [matrix, top, side];
 }
 
-/**
- * @typedef {'insert' | 'delete' | 'replace'} operation
- * @template T
- * @param {number[][]} matrix
- * @param {T[]} top
- * @param {T[]} side
- * @returns {{ op: operation<_>, loc: [number, number], val: T }}
- */
-export function matrix_to_diff(matrix, top, side) {
+type operation<T> = {
+  op: 'insert' | 'delete' | 'replace';
+  loc: [number, number];
+  val: T;
+};
+
+export function matrix_to_diff<T>(matrix: number[][], top: T[], side: T[]): operation<T>[] {
   const current = Object.seal({
     row: side.length - 1,
     col: top.length - 1,
@@ -42,7 +34,7 @@ export function matrix_to_diff(matrix, top, side) {
     },
   });
 
-  const ops = [];
+  const ops: operation<T>[] = [];
 
   while (current.cell !== 0) {
     // we've reached an edge,
@@ -102,10 +94,7 @@ export function matrix_to_diff(matrix, top, side) {
   return ops;
 }
 
-
 const top = ['C', 'B', 'Z', 'G', 'C', 'T', 'A', 'G'];
 const side = ['D', 'Z', 'U', 'X', 'G', 'A', 'T', 'G'];
 
-console.log(
-  matrix_to_diff(...levenshtein_matrix(top, side))
-);
+console.log(matrix_to_diff(...levenshtein_matrix(top, side)));

@@ -13,6 +13,7 @@ const rename = require('gulp-rename');
 const rollup = require('gulp-better-rollup');
 const run_sequence = require('run-sequence');
 const { terser } = require('rollup-plugin-terser');
+const typescript = require('rollup-plugin-typescript');
 
 const sourcemaps = require('gulp-sourcemaps');
 
@@ -23,7 +24,7 @@ const config = {
 
   js: {
     src_dir: 'src/js',
-    src_file: 'src/js/index.js',
+    src_file: 'src/js/index.ts',
     out_file: 'modules.bundle.js',
   },
 
@@ -54,15 +55,32 @@ gulp.task('js', () => {
     .pipe(sourcemaps.init())
     .pipe(rollup({
       plugins: [
-        babel(),
+        typescript(),
+        babel({
+          babelrc: false,
+          plugins: [
+            [
+              '@babel/plugin-transform-react-jsx',
+              {
+                pragma: 'createElement',
+                pragmaFrag: 'Symbol()',
+              },
+            ],
+            'eval-when-possible',
+          ],
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        }),
         json(),
         node_resolve({
           jsnext: true,
           preferBuiltins: true,
           browser: true,
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
         }),
-        commonjs(),
-        // terser(),
+        commonjs({
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        }),
+        terser(),
       ],
     }, {
       format: 'iife',

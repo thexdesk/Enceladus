@@ -1,6 +1,10 @@
-import createElement from '../createElement';
+import createElement from '../createElement'; createElement;
+import { customElement, defaultAttribute, sealed } from '../helpers/decorators';
 
-class Twitter extends HTMLElement {
+@sealed
+@customElement('x-twitter')
+@defaultAttribute('role', 'region')
+export class Twitter extends HTMLElement {
   /**
    * Add the Twitter widget underneath a header.
    *
@@ -20,11 +24,5 @@ class Twitter extends HTMLElement {
         href='https://twitter.com/theZcuber/lists/r-spacex-mission-control'
       />
     </>);
-
-    if (!this.hasAttribute('role')) {
-      this.setAttribute('role', 'region');
-    }
   }
 }
-
-customElements.define('x-twitter', Twitter);
