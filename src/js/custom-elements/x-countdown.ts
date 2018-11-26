@@ -1,11 +1,12 @@
 import { LitElement, html, customElement, property } from '@polymer/lit-element';
 import { sealed, role } from '../helpers/decorators';
+import { TemplateResult } from 'lit-html';
 
 /**
  * Given a number,
  * return the string containing exactly two digits.
  */
-function pad(n: number) {
+function pad(n: number): string {
   if (n < 10) {
     return `0${n}`;
   }
@@ -21,19 +22,19 @@ export class Countdown extends LitElement {
   private _hours = 0;
   private _minutes = 0;
   private _seconds = 0;
-  private _interval: Nullable<NodeJS.Timer> = null;
+  private _interval: Nullable<number> = null;
 
-  get t0() {
+  get t0(): Nullable<number> {
     return this._t0;
   }
-  set t0(value) {
+  set t0(value: Nullable<number>) {
     this._t0 = value;
 
     if (value === null) {
       clearInterval(this._interval!);
       this._interval = null;
     } else if (this._interval === null) {
-      this._interval = setInterval(this._update_clock.bind(this), 1_000);
+      this._interval = setInterval(this._update_clock.bind(this) as Function, 1_000);
     }
 
     this._update_clock();
@@ -42,7 +43,7 @@ export class Countdown extends LitElement {
   /**
    * Time to be displayed on the countdown, if any.
    */
-  get display_time() {
+  get display_time(): string {
     if (this._t0 === null) {
       return '';
     }
@@ -55,7 +56,7 @@ export class Countdown extends LitElement {
   /**
    * Update the countdown clock.
    */
-  private _update_clock() {
+  private _update_clock(): void {
     if (this._t0 === null) {
       return;
     }
@@ -71,21 +72,21 @@ export class Countdown extends LitElement {
     this._minutes = Math.floor(diff % 3600 / 60);
     this._seconds = diff % 60;
 
-    this.requestUpdate();
+    this.requestUpdate(); // tslint:disable-line no-floating-promises
   }
 
-  render() {
+  public render(): TemplateResult {
     return html`
       <link rel='stylesheet' href='x-countdown.bundle.css'>
       ${this.display_time}
     `;
   }
 
-  disconnectedCallback() {
+  public disconnectedCallback(): void {
     if (this._interval !== null) {
       clearInterval(this._interval);
     }
   }
 
-  @property({ reflect: true }) ['aria-description'] = 'countdown clock';
+  @property({ reflect: true }) public ['aria-description'] = 'countdown clock';
 }

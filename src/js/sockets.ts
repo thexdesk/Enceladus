@@ -1,10 +1,4 @@
-import {
-  cache,
-  header_elem,
-  thread_id,
-  youtube_elem,
-  // order,
-} from './initialize';
+import { cache, header_elem, thread_id, youtube_elem } from './initialize';
 import Sockette from 'sockette';
 
 export const ws = new Sockette('ws://localhost:3000', {
@@ -13,15 +7,15 @@ export const ws = new Sockette('ws://localhost:3000', {
   onreconnect: onopen,
 });
 
-export function join_rooms(...rooms: string[]) {
+export function join_rooms(...rooms: string[]): void {
   ws.json({ join: rooms.join(',') });
 }
 
-function onopen() {
+function onopen(): void {
   join_rooms(`thread_${thread_id}`);
 }
 
-function onmessage(event: MessageEvent) {
+function onmessage(event: MessageEvent): void {
   const {
     room,
     action,
@@ -31,8 +25,8 @@ function onmessage(event: MessageEvent) {
     room: string;
     action: 'create' | 'update' | 'delete';
     data_type: 'thread' | 'section' | 'event';
-    data: CUD<any>;
-  } = JSON.parse(event.data);
+    data: CUD<unknown>;
+  } = JSON.parse(event.data); // tslint:disable-line no-unsafe-any
 
   if (room !== `thread_${thread_id}`) {
     // we should never reach this state
@@ -42,17 +36,17 @@ function onmessage(event: MessageEvent) {
   data.action = action;
 
   if (data_type === 'thread') {
-    thread_handler(data);
+    thread_handler(data as CUD<APIThread>);
   } else if (data_type === 'section') {
-    section_handler(data);
+    section_handler(data as CUD<APISection>);
   } else if (data_type === 'event') {
-    event_handler(data);
+    event_handler(data as CUD<APIEvent>);
   }
   // other options are `user` and `preset_event`,
   // neither of which we care about here
 }
 
-function thread_handler(data: CUD<APIThread>) {
+function thread_handler(data: CUD<APIThread>): void {
   if (data.action === 'delete') {
     // TODO ???
   } else if (data.action === 'update') {
@@ -68,20 +62,20 @@ function thread_handler(data: CUD<APIThread>) {
   }
 }
 
-function section_handler(data: CUD<APISection>) {
+function section_handler(data: CUD<APISection>): void {
   if (data.action === 'delete') {
     cache.sections[data.id].remove();
     delete cache.sections[data.id];
   } else if (data.action === 'update') {
     const section = cache.sections[data.id];
 
-    if (data.name) {
+    if (data.name !== undefined) {
       section.header = data.name;
     }
-    if (data.content) {
+    if (data.content !== undefined) {
       section.body = data.content;
     }
-    if (data.events_id) {
+    if (data.events_id !== undefined) {
       // TODO ???
       // this block may by unnecessary if `Event::utc` is required
     }
@@ -90,23 +84,23 @@ function section_handler(data: CUD<APISection>) {
   }
 }
 
-function event_handler(data: CUD<APIEvent>) {
+function event_handler(data: CUD<APIEvent>): void {
   if (data.action === 'delete') {
     cache.events[data.id].remove();
     delete cache.events[data.id];
   } else if (data.action === 'update') {
     const event = cache.events[data.id];
 
-    if (data.message) {
+    if (data.message !== undefined) {
       event.message = data.message;
     }
-    if (data.terminal_count) {
+    if (data.terminal_count !== undefined) {
       event.terminal_count = data.terminal_count;
     }
-    if (data.utc) {
+    if (data.utc !== undefined) {
       event.utc = data.utc;
     }
-    if (data.posted) {
+    if (data.posted !== undefined) {
       // TODO
     }
   } else if (data.action === 'create') {

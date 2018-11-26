@@ -1,8 +1,10 @@
 # Enceladus LTI
 
+![Build]
 ![License]
 ![FOSSA Status]
 
+[build]: https://img.shields.io/travis/r-spacex/Enceladus-LTI.svg?style=flat-square
 [fossa status]: https://app.fossa.io/api/projects/git%2Bgithub.com%2Fr-spacex%2FEnceladus-LTI.svg?type=shield
 [license]: https://img.shields.io/github/license/r-spacex/Enceladus-LTI.svg?style=flat-square
 

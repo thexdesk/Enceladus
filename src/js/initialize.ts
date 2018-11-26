@@ -35,6 +35,8 @@ export const thread_id = /thread_id=(\d+)/.exec(location.search);
 if (thread_id === null) {
   console.error('Querystring `thread_id` must be set');
 } else {
+  // disable lint until we get a type declaration for fetchival
+  // tslint:disable-next-line no-unsafe-any
   fetchival(`http://localhost:3000/v1/thread/${thread_id[1]}?with=events`)
     .get()
     .then((thread: APIThread<true>) => {
@@ -46,20 +48,20 @@ if (thread_id === null) {
     });
 }
 
-function assign_header({ launch_name, t0 }: APIThread<boolean>) {
+function assign_header({ launch_name, t0 }: APIThread<boolean>): void {
   header_elem.launch_name = launch_name;
   header_elem.t0 = t0;
 }
 
-function assign_youtube({ youtube_id }: APIThread<boolean>) {
+function assign_youtube({ youtube_id }: APIThread<boolean>): void {
   youtube_elem.video_id = youtube_id;
 }
 
-function assign_reddit_id({ post_id }: APIThread<boolean>) {
+function assign_reddit_id({ post_id }: APIThread<boolean>): void {
   links_elem.reddit_id = post_id;
 }
 
-function assign_sections({ sections }: { sections: APISection<true>[] }) {
+function assign_sections({ sections }: { sections: APISection<true>[] }): void {
   const fragment = document.createDocumentFragment();
 
   // create x-section elements for all sections without events
@@ -81,7 +83,7 @@ function assign_sections({ sections }: { sections: APISection<true>[] }) {
   sections_elem.appendChild(fragment);
 }
 
-function assign_events({ sections }: { sections: APISection<true>[] }) {
+function assign_events({ sections }: { sections: APISection<true>[] }): void {
   const fragment = document.createDocumentFragment();
 
   sections

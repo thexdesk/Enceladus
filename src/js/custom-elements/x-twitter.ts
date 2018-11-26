@@ -12,7 +12,7 @@ export class Twitter extends HTMLElement {
    * with a shadow DOM.
    * That's also why we're not using LitElement.
    */
-  connectedCallback() {
+  public connectedCallback(): void {
     const fragment = document.createDocumentFragment();
 
     const header = fragment.appendChild(document.createElement('header'));

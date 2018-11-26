@@ -1,11 +1,12 @@
 import { LitElement, html, customElement, property } from '@polymer/lit-element';
 import { sealed, role } from '../helpers/decorators';
+import { TemplateResult } from 'lit-html';
 
 @sealed
 @customElement('x-event' as any)
 @role('row')
 export class Event extends LitElement {
-  render() {
+  public render(): TemplateResult {
     return this.posted
     ? html`
       <link rel='stylesheet' href='x-event.bundle.css'>
@@ -18,8 +19,8 @@ export class Event extends LitElement {
     `;
   }
 
-  @property({ attribute: false }) posted = false;
-  @property({ attribute: false }) utc = -1;
-  @property({ attribute: false }) terminal_count = '';
-  @property({ attribute: false }) message = '';
+  @property({ attribute: false }) public posted = false;
+  @property({ attribute: false }) public utc = -1;
+  @property({ attribute: false }) public terminal_count = '';
+  @property({ attribute: false }) public message = '';
 }

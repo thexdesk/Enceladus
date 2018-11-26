@@ -1,11 +1,12 @@
 import { LitElement, html, customElement, property } from '@polymer/lit-element';
 import { sealed, role } from '../helpers/decorators';
+import { TemplateResult } from 'lit-html';
 
 @sealed
 @customElement('x-links' as any)
 @role('navigation')
 export class Links extends LitElement {
-  render() {
+  public render(): TemplateResult {
     return html`
       <link rel='stylesheet' href='x-links.bundle.css'>
       <a
@@ -24,5 +25,5 @@ export class Links extends LitElement {
     `;
   }
 
-  @property({ attribute: false }) reddit_id: Nullable<string> = null;
+  @property({ attribute: false }) public reddit_id: Nullable<string> = null;
 }

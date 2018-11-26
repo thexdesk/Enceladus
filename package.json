@@ -8,8 +8,8 @@
     "clean": "gulp clean",
     "build": "gulp build",
     "watch": "gulp watch",
-    "lint:js": "eslint .eslintrc.js *.js \"src/js/**/*.js\" --no-ignore",
-    "fmt:js": "eslint --fix .eslintrc.js *.js \"src/js/**/*.js\" --no-ignore",
+    "lint:ts": "tslint -p . \"src/**/*.ts\"",
+    "fmt:ts": "tslint -p . --fix \"src/**/*.ts\"",
     "lint:css": "stylelint \"src/css/**/*.pcss\"",
     "fmt:css": "stylelint --fix \"src/css/**/*.pcss\"",
     "typecheck": "tsc -p tsconfig.json --noEmit"
@@ -17,6 +17,7 @@
   "dependencies": {
     "@polymer/lit-element": "^0.6.3",
     "fetchival": "^0.3.3",
+    "lit-html": "^0.13.0",
     "sockette": "^2.0.1"
   },
   "devDependencies": {
@@ -52,6 +53,7 @@
     "stylelint": "^9.7.1",
     "stylelint-config-standard": "^18.2.0",
     "stylelint-use-logical": "^1.1.0",
+    "tslint": "^5.11.0",
     "typescript": "^3.1.6"
   }
 }
