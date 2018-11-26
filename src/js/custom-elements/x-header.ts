@@ -1,9 +1,10 @@
 import './x-countdown';
 import { LitElement, html, customElement, property } from '@polymer/lit-element';
-import { sealed } from '../helpers/decorators';
+import { sealed, role } from '../helpers/decorators';
 
 @sealed
 @customElement('x-header' as any)
+@role('region')
 export class Header extends LitElement {
   render() {
     return html`
@@ -15,5 +16,4 @@ export class Header extends LitElement {
 
   @property({ attribute: false }) launch_name = '';
   @property({ attribute: false }) t0: Nullable<number> = null;
-  @property({ reflect: true }) role = 'region';
 }

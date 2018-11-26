@@ -1,8 +1,9 @@
 import { LitElement, html, customElement, property } from '@polymer/lit-element';
-import { sealed } from '../helpers/decorators';
+import { sealed, role } from '../helpers/decorators';
 
 @sealed
 @customElement('youtube-video' as any)
+@role('region')
 export class YouTube extends LitElement {
   render() {
     return html`
@@ -19,5 +20,4 @@ export class YouTube extends LitElement {
   }
 
   @property({ attribute: false }) video_id: Nullable<string> = null;
-  @property({ reflect: true }) role = 'region';
 }

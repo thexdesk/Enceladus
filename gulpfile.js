@@ -1,21 +1,17 @@
 /* eslint-env node */
 
-const babel = require('rollup-plugin-babel');
 const commonjs = require('rollup-plugin-commonjs');
 const del = require('del');
 const gulp = require('gulp');
 const html_minifier = require('gulp-htmlmin');
-const json = require('rollup-plugin-json');
 const node_resolve = require('rollup-plugin-node-resolve');
 const postcss = require('gulp-postcss');
-const preprocess = require('gulp-preprocess');
 const rename = require('gulp-rename');
 const rollup = require('gulp-better-rollup');
 const run_sequence = require('run-sequence');
+const sourcemaps = require('gulp-sourcemaps');
 const { terser } = require('rollup-plugin-terser');
 const typescript = require('rollup-plugin-typescript');
-
-const sourcemaps = require('gulp-sourcemaps');
 
 const config = {
   css: {
@@ -56,21 +52,6 @@ gulp.task('js', () => {
     .pipe(rollup({
       plugins: [
         typescript(),
-        babel({
-          babelrc: false,
-          plugins: [
-            [
-              '@babel/plugin-transform-react-jsx',
-              {
-                pragma: 'createElement',
-                pragmaFrag: 'Symbol()',
-              },
-            ],
-            'eval-when-possible',
-          ],
-          extensions: ['.js', '.jsx', '.ts', '.tsx'],
-        }),
-        json(),
         node_resolve({
           jsnext: true,
           preferBuiltins: true,
@@ -80,7 +61,17 @@ gulp.task('js', () => {
         commonjs({
           extensions: ['.js', '.jsx', '.ts', '.tsx'],
         }),
-        terser(),
+        terser({
+          compress: {
+            booleans_as_integers: true,
+            hoist_funs: true,
+            keep_fargs: false,
+            module: true,
+            passes: 2,
+            pure_getters: true,
+            warnings: true,
+          }
+        }),
       ],
     }, {
       format: 'iife',
@@ -93,7 +84,6 @@ gulp.task('js', () => {
 gulp.task('html', () => {
   return gulp
     .src(`${config.html.src_dir}/*.html`)
-    .pipe(preprocess())
     .pipe(html_minifier({
       collapseWhitespace: true,
       decodeEntities: true,
@@ -117,7 +107,7 @@ gulp.task('clean', () => del('dist'));
 gulp.task('watch', ['build'], () => {
   gulp.watch(`${config.css.src_dir}/**/*.pcss`, ['css']);
   gulp.watch(`${config.html.src_dir}/**/*.html`, ['html']);
-  gulp.watch(`${config.js.src_dir}/**/*.jsx?`, ['js']);
+  gulp.watch(`${config.js.src_dir}/**/*.(j|t)sx?`, ['js']);
   gulp.watch(`${config.assets.src_dir}/**/*`, ['assets']);
 });
 

@@ -1,9 +1,10 @@
 import { LitElement, html, customElement, property } from '@polymer/lit-element';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html';
-import { sealed } from '../helpers/decorators';
+import { sealed, role } from '../helpers/decorators';
 
 @sealed
 @customElement('x-section' as any)
+@role('article')
 export class Section extends LitElement {
   render() {
     return html`
@@ -15,5 +16,4 @@ export class Section extends LitElement {
 
   @property({ attribute: false }) header = '';
   @property({ attribute: false }) body = '';
-  @property({ reflect: true }) role = 'article';
 }

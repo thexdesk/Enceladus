@@ -60,7 +60,7 @@ function assign_reddit_id({ post_id }: APIThread<boolean>) {
 }
 
 function assign_sections({ sections }: { sections: APISection<true>[] }) {
-  const fragment: DocumentFragment = <></>;
+  const fragment = document.createDocumentFragment();
 
   // create x-section elements for all sections without events
   sections
@@ -82,7 +82,7 @@ function assign_sections({ sections }: { sections: APISection<true>[] }) {
 }
 
 function assign_events({ sections }: { sections: APISection<true>[] }) {
-  const fragment: DocumentFragment = <></>;
+  const fragment = document.createDocumentFragment();
 
   sections
     .flatMap(section => section.events)

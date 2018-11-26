@@ -1,8 +1,9 @@
 import { LitElement, html, customElement, property } from '@polymer/lit-element';
-import { sealed } from '../helpers/decorators';
+import { sealed, role } from '../helpers/decorators';
 
 @sealed
 @customElement('x-event' as any)
+@role('row')
 export class Event extends LitElement {
   render() {
     return this.posted
@@ -21,5 +22,4 @@ export class Event extends LitElement {
   @property({ attribute: false }) utc = -1;
   @property({ attribute: false }) terminal_count = '';
   @property({ attribute: false }) message = '';
-  @property({ reflect: true }) role = 'row';
 }

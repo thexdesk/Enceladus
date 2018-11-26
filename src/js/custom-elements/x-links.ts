@@ -1,8 +1,9 @@
 import { LitElement, html, customElement, property } from '@polymer/lit-element';
-import { sealed } from '../helpers/decorators';
+import { sealed, role } from '../helpers/decorators';
 
 @sealed
 @customElement('x-links' as any)
+@role('navigation')
 export class Links extends LitElement {
   render() {
     return html`
@@ -24,5 +25,4 @@ export class Links extends LitElement {
   }
 
   @property({ attribute: false }) reddit_id: Nullable<string> = null;
-  @property({ reflect: true }) role = 'navigation';
 }
