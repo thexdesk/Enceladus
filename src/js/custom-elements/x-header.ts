@@ -1,6 +1,6 @@
 import './x-countdown';
-import { LitElement, html, customElement, property } from '@polymer/lit-element';
-import { sealed, role } from '../helpers/decorators';
+import { LitElement, html } from '@polymer/lit-element';
+import { sealed, role, property, customElement } from '../helpers/decorators';
 import { TemplateResult } from 'lit-html';
 
 @sealed
@@ -15,6 +15,6 @@ export class Header extends LitElement {
     `;
   }
 
-  @property({ attribute: false }) public launch_name = '';
-  @property({ attribute: false }) public t0: Nullable<number> = null;
+  @property public launch_name = '';
+  @property public t0: Nullable<number> = null;
 }

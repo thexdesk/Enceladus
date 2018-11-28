@@ -10,7 +10,7 @@ cache:
 script:
   - yarn lint:ts
   - yarn lint:css
-  - yarn typecheck
+  - yarn build
 
 notifications:
   email:

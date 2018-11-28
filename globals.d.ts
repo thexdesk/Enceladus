@@ -65,28 +65,3 @@ type APIUser = {
   spacex__is_mod: boolean;
   spacex__is_slack_member: boolean;
 };
-
-declare namespace JSX {
-  interface IntrinsicElements {
-    section: Partial<HTMLElement & IntrinsicAttributes>;
-    link: Partial<HTMLLinkElement & IntrinsicAttributes>;
-    div: Partial<HTMLDivElement & IntrinsicAttributes>;
-    h1: Partial<HTMLHeadingElement & IntrinsicAttributes>;
-    a: Partial<HTMLAnchorElement & IntrinsicAttributes>;
-    header: Partial<HTMLElement & IntrinsicAttributes>;
-    iframe: Partial<HTMLIFrameElement & IntrinsicAttributes>;
-
-    'x-countdown': Partial<HTMLElement & IntrinsicAttributes>;
-    'x-event': Partial<HTMLElement & IntrinsicAttributes>;
-    'x-header': Partial<HTMLElement & IntrinsicAttributes>;
-    'x-links': Partial<HTMLElement & IntrinsicAttributes>;
-    'x-section': Partial<HTMLElement & IntrinsicAttributes>;
-    'x-twitter': Partial<HTMLElement & IntrinsicAttributes>;
-    'youtube-video': Partial<HTMLElement & IntrinsicAttributes>;
-  }
-
-  interface IntrinsicAttributes {
-    class?: string;
-    role?: string;
-  }
-}

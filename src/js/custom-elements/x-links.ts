@@ -1,5 +1,5 @@
-import { LitElement, html, customElement, property } from '@polymer/lit-element';
-import { sealed, role } from '../helpers/decorators';
+import { LitElement, html } from '@polymer/lit-element';
+import { sealed, role, property, customElement } from '../helpers/decorators';
 import { TemplateResult } from 'lit-html';
 
 @sealed
@@ -25,5 +25,5 @@ export class Links extends LitElement {
     `;
   }
 
-  @property({ attribute: false }) public reddit_id: Nullable<string> = null;
+  @property public reddit_id: Nullable<string> = null;
 }

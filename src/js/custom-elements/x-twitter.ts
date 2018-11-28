@@ -1,5 +1,4 @@
-import { customElement } from '@polymer/lit-element';
-import { sealed } from '../helpers/decorators';
+import { sealed, customElement } from '../helpers/decorators';
 
 @sealed
 @customElement('x-twitter' as any)

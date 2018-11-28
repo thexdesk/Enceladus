@@ -1,6 +1,6 @@
-import { LitElement, html, customElement, property } from '@polymer/lit-element';
+import { LitElement, html } from '@polymer/lit-element';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html';
-import { sealed, role } from '../helpers/decorators';
+import { sealed, role, property, customElement } from '../helpers/decorators';
 import { TemplateResult } from 'lit-html';
 
 @sealed
@@ -15,6 +15,6 @@ export class Section extends LitElement {
     `;
   }
 
-  @property({ attribute: false }) public header = '';
-  @property({ attribute: false }) public body = '';
+  @property public header = '';
+  @property public body = '';
 }

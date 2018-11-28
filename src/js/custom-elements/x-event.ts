@@ -1,5 +1,5 @@
-import { LitElement, html, customElement, property } from '@polymer/lit-element';
-import { sealed, role } from '../helpers/decorators';
+import { LitElement, html } from '@polymer/lit-element';
+import { sealed, role, property, customElement } from '../helpers/decorators';
 import { TemplateResult } from 'lit-html';
 
 @sealed
@@ -19,8 +19,8 @@ export class Event extends LitElement {
     `;
   }
 
-  @property({ attribute: false }) public posted = false;
-  @property({ attribute: false }) public utc = -1;
-  @property({ attribute: false }) public terminal_count = '';
-  @property({ attribute: false }) public message = '';
+  @property public posted = false;
+  @property public utc = -1;
+  @property public terminal_count = '';
+  @property public message = '';
 }

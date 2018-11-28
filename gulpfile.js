@@ -40,7 +40,6 @@ gulp.task('css', () => {
   return gulp
     .src(`${config.css.src_dir}/*.pcss`)
     .pipe(postcss())
-    .pipe(postcss([require('cssnano')]))
     .pipe(rename({ extname: '.bundle.css' }))
     .pipe(gulp.dest(config.out_dir));
 });
@@ -56,10 +55,10 @@ gulp.task('js', () => {
           jsnext: true,
           preferBuiltins: true,
           browser: true,
-          extensions: ['.js', '.jsx', '.ts', '.tsx'],
+          extensions: ['.js', '.ts'],
         }),
         commonjs({
-          extensions: ['.js', '.jsx', '.ts', '.tsx'],
+          extensions: ['.js', '.ts'],
         }),
         terser({
           compress: {

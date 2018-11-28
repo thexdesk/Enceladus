@@ -1,17 +1,22 @@
-import { property } from '@polymer/lit-element';
+import { property as orig_property, Constructor, LitElement } from '@polymer/lit-element';
+export { customElement } from '@polymer/lit-element';
 
-// tslint:disable-next-line ban-types
-export function sealed(constructor: Function): void {
-  Object.seal(constructor);
+export function sealed(constructor: Constructor<HTMLElement>): any {
+  Object.seal<typeof constructor>(constructor);
   Object.seal(Object.getPrototypeOf(constructor));
+  return constructor;
 }
 
-// tslint:disable-next-line typedef
-export function role(_role: string) {
-  return <T extends { new(...args: any[]): {}}>(constructor: T) => {
+export const attribute = orig_property({ reflect: true });
+export const property = orig_property({ attribute: false });
+
+export function role(
+  _role: string,
+): (constructor: Constructor<LitElement>) => any {
+  return (constructor: Constructor<LitElement>) => {
     // TypeScript doesn't let us return this immediately
     class Extended extends constructor {
-      @property({ reflect: true }) public role = _role;
+      @attribute public role = _role;
     }
     return Extended;
   };

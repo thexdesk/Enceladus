@@ -1667,15 +1667,6 @@ gulp-sourcemaps@^2.6.4:
     strip-bom-string "1.X"
     through2 "2.X"
 
-gulp-terser@^1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/gulp-terser/-/gulp-terser-1.1.5.tgz#7cf3c890ab6757f6aedf8e6b8923295f6b8676e5"
-  dependencies:
-    plugin-error "^1.0.1"
-    terser "^3.8.2"
-    through2 "^2.0.3"
-    vinyl-sourcemaps-apply "^0.2.1"
-
 gulp-util@^3.0.0:
   version "3.0.8"
   resolved "https://registry.yarnpkg.com/gulp-util/-/gulp-util-3.0.8.tgz#0054e1e744502e27c04c187c3ecc505dd54bbb4f"

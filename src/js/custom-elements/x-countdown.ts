@@ -1,5 +1,5 @@
-import { LitElement, html, customElement, property } from '@polymer/lit-element';
-import { sealed, role } from '../helpers/decorators';
+import { LitElement, html } from '@polymer/lit-element';
+import { sealed, role, attribute, customElement } from '../helpers/decorators';
 import { TemplateResult } from 'lit-html';
 
 /**
@@ -88,5 +88,5 @@ export class Countdown extends LitElement {
     }
   }
 
-  @property({ reflect: true }) public ['aria-description'] = 'countdown clock';
+  @attribute public ['aria-description'] = 'countdown clock';
 }

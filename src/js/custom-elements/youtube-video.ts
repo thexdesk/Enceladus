@@ -1,5 +1,5 @@
-import { LitElement, html, customElement, property } from '@polymer/lit-element';
-import { sealed, role } from '../helpers/decorators';
+import { LitElement, html } from '@polymer/lit-element';
+import { sealed, role, property, customElement } from '../helpers/decorators';
 import { TemplateResult } from 'lit-html';
 
 @sealed
@@ -20,5 +20,5 @@ export class YouTube extends LitElement {
     `;
   }
 
-  @property({ attribute: false }) public video_id: Nullable<string> = null;
+  @property public video_id: Nullable<string> = null;
 }
