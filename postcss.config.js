@@ -27,6 +27,5 @@ module.exports = {
       ],
     }),
     require('postcss-svgo'),
-    require('cssnano'),
   ],
 };

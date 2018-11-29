@@ -7,16 +7,18 @@ export function sealed(constructor: Constructor<HTMLElement>): any {
   return constructor;
 }
 
-export const attribute = orig_property({ reflect: true });
 export const property = orig_property({ attribute: false });
 
-export function role(
-  _role: string,
+export function attribute(
+  _attr: string,
+  value: string,
 ): (constructor: Constructor<LitElement>) => any {
   return (constructor: Constructor<LitElement>) => {
     // TypeScript doesn't let us return this immediately
+    // tslint:disable-next-line max-classes-per-file
     class Extended extends constructor {
-      @attribute public role = _role;
+      // @ts-ignore Not sure why this is throwing an error, it's absolutely correct.
+      @orig_property({ reflect: true }) public [_attr] = value;
     }
     return Extended;
   };

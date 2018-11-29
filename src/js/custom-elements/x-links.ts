@@ -1,10 +1,10 @@
 import { LitElement, html } from '@polymer/lit-element';
-import { sealed, role, property, customElement } from '../helpers/decorators';
+import { sealed, property, attribute, customElement } from '../helpers/decorators';
 import { TemplateResult } from 'lit-html';
 
 @sealed
 @customElement('x-links' as any)
-@role('navigation')
+@attribute('role', 'navigation')
 export class Links extends LitElement {
   public render(): TemplateResult {
     return html`

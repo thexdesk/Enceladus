@@ -1,5 +1,5 @@
 import { LitElement, html } from '@polymer/lit-element';
-import { sealed, role, attribute, customElement } from '../helpers/decorators';
+import { sealed, customElement, attribute } from '../helpers/decorators';
 import { TemplateResult } from 'lit-html';
 
 /**
@@ -15,7 +15,8 @@ function pad(n: number): string {
 
 @sealed
 @customElement('x-countdown' as any)
-@role('timer')
+@attribute('role', 'timer')
+@attribute('aria-description', 'countdown clock')
 export class Countdown extends LitElement {
   private _t0: Nullable<number> = null;
   private _sign: '+' | '-' = '-';
@@ -87,6 +88,4 @@ export class Countdown extends LitElement {
       clearInterval(this._interval);
     }
   }
-
-  @attribute public ['aria-description'] = 'countdown clock';
 }

@@ -1,10 +1,10 @@
 import { LitElement, html } from '@polymer/lit-element';
-import { sealed, role, property, customElement } from '../helpers/decorators';
+import { sealed, property, attribute, customElement } from '../helpers/decorators';
 import { TemplateResult } from 'lit-html';
 
 @sealed
 @customElement('youtube-video' as any)
-@role('region')
+@attribute('role', 'region')
 export class YouTube extends LitElement {
   public render(): TemplateResult {
     return html`

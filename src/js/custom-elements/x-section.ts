@@ -1,11 +1,11 @@
 import { LitElement, html } from '@polymer/lit-element';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html';
-import { sealed, role, property, customElement } from '../helpers/decorators';
+import { sealed, property, attribute, customElement } from '../helpers/decorators';
 import { TemplateResult } from 'lit-html';
 
 @sealed
 @customElement('x-section' as any)
-@role('article')
+@attribute('role', 'article')
 export class Section extends LitElement {
   public render(): TemplateResult {
     return html`
