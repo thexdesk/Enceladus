@@ -1,4 +1,4 @@
-import { cache, header_elem, thread_id, youtube_elem } from './initialize';
+import { cache, header_elem, thread_id, youtube_elem, links_elem } from './initialize';
 import Sockette from 'sockette';
 
 export const ws = new Sockette('ws://localhost:3000', {
@@ -25,7 +25,7 @@ function onmessage(event: MessageEvent): void {
     room: string;
     action: 'create' | 'update' | 'delete';
     data_type: 'thread' | 'section' | 'event';
-    data: CUD<unknown>;
+    data: APIData;
   } = JSON.parse(event.data); // tslint:disable-line no-unsafe-any
 
   if (room !== `thread_${thread_id}`) {
@@ -36,20 +36,26 @@ function onmessage(event: MessageEvent): void {
   data.action = action;
 
   if (data_type === 'thread') {
-    thread_handler(data as CUD<APIThread>);
+    thread_handler(data as APIData<APIThreadData>);
   } else if (data_type === 'section') {
-    section_handler(data as CUD<APISection>);
+    section_handler(data as APIData<APISectionData>);
   } else if (data_type === 'event') {
-    event_handler(data as CUD<APIEvent>);
+    event_handler(data as APIData<APIEventData>);
   }
   // other options are `user` and `preset_event`,
   // neither of which we care about here
 }
 
-function thread_handler(data: CUD<APIThread>): void {
+function thread_handler(data: APIData<APIThreadData>): void {
   if (data.action === 'delete') {
     // TODO ???
   } else if (data.action === 'update') {
+    if (data.launch_name !== undefined) {
+      header_elem.launch_name = data.launch_name;
+    }
+    if (data.post_id !== undefined) {
+      links_elem.reddit_id = data.post_id;
+    }
     if (data.t0 !== undefined) {
       header_elem.t0 = data.t0;
     }
@@ -62,7 +68,7 @@ function thread_handler(data: CUD<APIThread>): void {
   }
 }
 
-function section_handler(data: CUD<APISection>): void {
+function section_handler(data: APIData<APISectionData>): void {
   if (data.action === 'delete') {
     cache.sections[data.id].remove();
     delete cache.sections[data.id];
@@ -84,7 +90,7 @@ function section_handler(data: CUD<APISection>): void {
   }
 }
 
-function event_handler(data: CUD<APIEvent>): void {
+function event_handler(data: APIData<APIEventData>): void {
   if (data.action === 'delete') {
     cache.events[data.id].remove();
     delete cache.events[data.id];
