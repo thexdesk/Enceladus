@@ -1,4 +1,4 @@
-import { cache, header_elem, thread_id, youtube_elem, links_elem } from './initialize';
+import { header_elem, thread_id, youtube_elem, links_elem } from './initialize';
 import Sockette from 'sockette';
 
 export const ws = new Sockette('ws://localhost:3000', {
@@ -93,6 +93,7 @@ function section_handler(data: APIData<APISectionData>): void {
 }
 
 function event_handler(data: APIData<APIEventData>): void {
+  /*
   if (data.action === 'delete') {
     cache.events[data.id].remove();
     delete cache.events[data.id];
@@ -114,4 +115,5 @@ function event_handler(data: APIData<APIEventData>): void {
   } else if (data.action === 'create') {
     // TODO
   }
+  */
 }

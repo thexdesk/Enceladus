@@ -1,32 +1,16 @@
 import { Header as HeaderElement } from './custom-elements/x-header';
 import { YouTube as YouTubeElement } from './custom-elements/youtube-video';
 import { Links as LinksElement } from './custom-elements/x-links';
-import { Event as EventElement } from './custom-elements/x-event';
+import { Events as EventsElement } from './custom-elements/x-events';
 import { Sections as SectionsElement } from './custom-elements/x-sections';
 
 import fetchival from 'fetchival';
-import marked from 'marked'; // may want to move this to a Worker at some point
 
-export const header_elem = document.querySelector('x-header') as HeaderElement;
-export const youtube_elem = document.querySelector('youtube-video') as YouTubeElement;
-export const links_elem = document.querySelector('x-links') as LinksElement;
-export const sections_elem = document.querySelector('x-sections') as SectionsElement;
-export const events_elem = document.querySelector('section.updates') as HTMLElement;
-
-/**
- * Map from section/event IDs to their respective elements.
- */
-export const cache = Object.seal({
-  events: {} as { [key: number]: EventElement },
-});
-
-/**
- * Order of currently displayed sections/events.
- */
-export const order = Object.seal({
-  sections: [] as number[],
-  events: [] as number[],
-});
+export const header_elem = document.querySelector<HeaderElement>('x-header')!;
+export const youtube_elem = document.querySelector<YouTubeElement>('youtube-video')!;
+export const links_elem = document.querySelector<LinksElement>('x-links')!;
+export const sections_elem = document.querySelector<SectionsElement>('x-sections')!;
+export const events_elem = document.querySelector<EventsElement>('x-events')!;
 
 // Fetch data from API, insert into DOM
 
@@ -61,34 +45,19 @@ function assign_reddit_id({ post_id }: APIThreadData<boolean>): void {
   links_elem.reddit_id = post_id;
 }
 
-function assign_sections({ sections }: { sections: APISectionData<true>[] }): void {
+function assign_sections({ sections }: APIThreadData<true>): void {
   sections
     .filter(({ events }) => events.length === 0)
-    .forEach(({ id, name, content }) => {
-      sections_elem.add({ id, name, content });
-    });
+    .forEach(data => sections_elem.add(data, false));
+  sections_elem.requestUpdate(); // tslint:disable-line no-floating-promises
 }
 
-function assign_events({ sections }: { sections: APISectionData<true>[] }): void {
-  const fragment = document.createDocumentFragment();
+function assign_events({ sections }: APIThreadData<true>): void {
+  const events_section = sections.find(section => section.events.length !== 0);
+  if (events_section === undefined) {
+    return;
+  }
 
-  sections
-    .flatMap(section => section.events)
-    .filter(({ posted }) => posted)
-    .forEach(({ id, utc, terminal_count, message, posted }) => {
-      const elem = fragment.appendChild(document.createElement('x-event')) as EventElement;
-      elem.utc = utc;
-      elem.terminal_count = terminal_count;
-      elem.message = marked(message);
-      elem.posted = posted;
-
-      // cache so we can fetch it later, without attributes or query selectors
-      cache.events[id] = elem;
-
-      // store the order of events
-      order.events.push(id);
-    });
-
-  // add to DOM
-  events_elem.appendChild(fragment);
+  events_section.events.forEach(data => events_elem.add(data, false));
+  events_elem.requestUpdate(); // tslint:disable-line no-floating-promises
 }

@@ -1,0 +1,41 @@
+:host {
+  contain: content;
+
+  display: grid;
+  grid: auto-flow min-content / 3rem 6rem 1fr;
+  gap: 0.4rem 1rem;
+}
+
+[role='row'] {
+  grid-column: 1 / -1;
+
+  display: grid;
+  grid-template-columns: inherit;
+  gap: inherit;
+
+  &:first-of-type {
+    font-variation-settings: 'wght' 600;
+    position: sticky;
+    inset-block-start: 0;
+    padding-block-end: 0.5ex;
+    background-color: gray(0);
+    depth: 1;
+  }
+
+  &:last-of-type {
+    padding-block-end: 2rem;
+  }
+}
+
+.tnum {
+  font-feature-settings: 'tnum';
+}
+
+p {
+  line-height: 1.3;
+  margin: 0;
+
+  &:not(:first-of-type) {
+    margin-block-start: 0.6rem;
+  }
+}

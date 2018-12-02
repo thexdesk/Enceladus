@@ -8,17 +8,20 @@ declare module 'marked' {
 type Option<T> = T | undefined;
 type Nullable<T> = T | null;
 
+type ID = {
+  id: number;
+};
+
 type APIData<T = unknown> =
   // 'create' does not exist on type APIThread
   | (T extends APIThreadData ? never : Create<T> & { action: 'create' })
   | Update<T> & { action: 'update' }
   | Delete<T> & { action: 'delete' };
 type Create<T> = T;
-type Update<T> = Partial<T> & { id: number };
-type Delete<T> = { id: number };
+type Update<T> = Partial<T> & ID;
+type Delete<T> = ID;
 
-type APIEventData<joins extends boolean = false> = {
-  id: number;
+type APIEventData<joins extends boolean = false> = ID & {
   posted: boolean;
   message: string;
   terminal_count: string;
@@ -27,15 +30,13 @@ type APIEventData<joins extends boolean = false> = {
   in_section: joins extends true ? APISectionData<joins> : undefined;
 };
 
-type APIPresetEventData = {
-  id: number;
+type APIPresetEventData = ID & {
   holds_clock: boolean;
   message: string;
   name: string;
 };
 
-type APISectionData<joins extends boolean = false> = {
-  id: number;
+type APISectionData<joins extends boolean = false> = ID & {
   content: string;
   name: string;
   lock_held_by_user_id: joins extends false ? Nullable<number> : undefined;
@@ -46,8 +47,7 @@ type APISectionData<joins extends boolean = false> = {
   events: joins extends true ? APIEventData<joins>[] : undefined;
 };
 
-type APIThreadData<joins extends boolean = false> = {
-  id: number;
+type APIThreadData<joins extends boolean = false> = ID & {
   thread_name: string;
   launch_name: string;
   post_id: Nullable<string>;
@@ -62,8 +62,7 @@ type APIThreadData<joins extends boolean = false> = {
   sections: joins extends true ? APISectionData<joins>[] : undefined;
 };
 
-type APIUserData = {
-  id: number;
+type APIUserData = ID & {
   reddit_username: string;
   lang: string;
   is_global_admin: boolean;

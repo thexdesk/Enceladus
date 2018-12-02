@@ -25,10 +25,16 @@ export class Sections extends LitElement {
     `;
   }
 
-  public add({ id, name, content }: { id: number; name: string; content: string }): void {
+  public add(
+    { id, name, content }: { id: number; name: string; content: string },
+    update: boolean = true,
+  ): void {
     this.sections[id] = { name, content };
     this.ids.push(id);
-    this.requestUpdate(); // tslint:disable-line no-floating-promises
+
+    if (update) {
+      this.requestUpdate(); // tslint:disable-line no-floating-promises
+    }
   }
 
   @property public ids: number[] = [];
