@@ -1,4 +1,11 @@
-import { header_elem, thread_id, youtube_elem, links_elem } from './initialize';
+import {
+  events_elem,
+  header_elem,
+  links_elem,
+  sections_elem,
+  thread_id,
+  youtube_elem,
+} from './initialize';
 import Sockette from 'sockette';
 
 export const ws = new Sockette('ws://localhost:3000', {
@@ -47,9 +54,7 @@ function onmessage(event: MessageEvent): void {
 }
 
 function thread_handler(data: APIData<APIThreadData>): void {
-  if (data.action === 'delete') {
-    // TODO ???
-  } else if (data.action === 'update') {
+  if (data.action === 'update') {
     if (data.launch_name !== undefined) {
       header_elem.launch_name = data.launch_name;
     }
@@ -63,9 +68,10 @@ function thread_handler(data: APIData<APIThreadData>): void {
       youtube_elem.video_id = data.youtube_id;
     }
     if (data.sections_id !== undefined) {
-      // TODO
+      sections_elem.ids = data.sections_id;
     }
   }
+  // TODO what if `data.action === 'delete'`?
 }
 
 function section_handler(data: APIData<APISectionData>): void {
