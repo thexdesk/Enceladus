@@ -25,10 +25,7 @@ export class Sections extends LitElement {
     `;
   }
 
-  public add(
-    { id, name, content }: { id: number; name: string; content: string },
-    update: boolean = true,
-  ): void {
+  public add({ id, name, content }: Section & ID, update: boolean = true): void {
     this.sections[id] = { name, content };
     this.ids.push(id);
 
