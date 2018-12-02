@@ -34,6 +34,11 @@ export class Sections extends LitElement {
     }
   }
 
+  public delete(id: number): void {
+    this.ids = this.ids.filter($ => $ !== id);
+    delete this.sections[id];
+  }
+
   @property public ids: number[] = [];
   @property public sections: { [key: number]: Section } = {};
 }

@@ -75,10 +75,9 @@ function thread_handler(data: APIData<APIThreadData>): void {
 }
 
 function section_handler(data: APIData<APISectionData>): void {
-  /* if (data.action === 'delete') {
-    cache.sections[data.id].remove();
-    delete cache.sections[data.id];
-  } else if (data.action === 'update') {
+  if (data.action === 'delete') {
+    sections_elem.delete(data.id);
+  } /* else if (data.action === 'update') {
     const section = cache.sections[data.id];
 
     if (data.name !== undefined) {
@@ -91,17 +90,15 @@ function section_handler(data: APIData<APISectionData>): void {
       // TODO ???
       // this block may by unnecessary if `Event::utc` is required
     }
-  } else */ if (data.action === 'create') {
+  } */ else if (data.action === 'create') {
     sections_elem.add(data);
   }
 }
 
 function event_handler(data: APIData<APIEventData>): void {
-  /*
   if (data.action === 'delete') {
-    cache.events[data.id].remove();
-    delete cache.events[data.id];
-  } else if (data.action === 'update') {
+    events_elem.delete(data.id);
+  } /* else if (data.action === 'update') {
     const event = cache.events[data.id];
 
     if (data.message !== undefined) {
@@ -116,7 +113,7 @@ function event_handler(data: APIData<APIEventData>): void {
     if (data.posted !== undefined) {
       // TODO
     }
-  } else */ if (data.action === 'create') {
+  } */ else if (data.action === 'create') {
     events_elem.add(data);
   }
 }

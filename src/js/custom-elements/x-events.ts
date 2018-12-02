@@ -50,6 +50,11 @@ export class Events extends LitElement {
     }
   }
 
+  public delete(id: number): void {
+    this.ids = this.ids.filter($ => $ !== id);
+    delete this.events[id];
+  }
+
   @property public ids: number[] = [];
   @property public events: { [key: number]: Event } = {};
 }
