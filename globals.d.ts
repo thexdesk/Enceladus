@@ -1,5 +1,10 @@
 declare module 'fetchival'; // pending @types/fetchival
 
+// @types/marked is out of date and inaccurate
+declare module 'marked' {
+  export default function marked(src: string): string;
+}
+
 type Option<T> = T | undefined;
 type Nullable<T> = T | null;
 

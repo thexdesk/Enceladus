@@ -55,18 +55,9 @@ youtube-video {
   background: svg-load('logo.svg') left center / contain no-repeat;
 }
 
-.sections {
-  contain: content;
+x-sections {
   grid-area: sections;
   overflow-y: scroll;
-}
-
-x-section {
-  margin: logical * * 0.5rem 0.5rem;
-
-  &:not(:first-of-type) {
-    margin-block-start: 0.5rem;
-  }
 }
 
 .updates {

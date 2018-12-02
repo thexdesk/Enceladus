@@ -2,21 +2,21 @@ import { Header as HeaderElement } from './custom-elements/x-header';
 import { YouTube as YouTubeElement } from './custom-elements/youtube-video';
 import { Links as LinksElement } from './custom-elements/x-links';
 import { Event as EventElement } from './custom-elements/x-event';
-import { Section as SectionElement } from './custom-elements/x-section';
+import { Sections as SectionsElement } from './custom-elements/x-sections';
 
 import fetchival from 'fetchival';
+import marked from 'marked'; // may want to move this to a Worker at some point
 
 export const header_elem = document.querySelector('x-header') as HeaderElement;
 export const youtube_elem = document.querySelector('youtube-video') as YouTubeElement;
 export const links_elem = document.querySelector('x-links') as LinksElement;
-export const sections_elem = document.querySelector('section.sections') as HTMLElement;
+export const sections_elem = document.querySelector('x-sections') as SectionsElement;
 export const events_elem = document.querySelector('section.updates') as HTMLElement;
 
 /**
  * Map from section/event IDs to their respective elements.
  */
 export const cache = Object.seal({
-  sections: {} as { [key: number]: SectionElement },
   events: {} as { [key: number]: EventElement },
 });
 
@@ -62,25 +62,11 @@ function assign_reddit_id({ post_id }: APIThreadData<boolean>): void {
 }
 
 function assign_sections({ sections }: { sections: APISectionData<true>[] }): void {
-  const fragment = document.createDocumentFragment();
-
-  // create x-section elements for all sections without events
   sections
     .filter(({ events }) => events.length === 0)
     .forEach(({ id, name, content }) => {
-      const elem = fragment.appendChild(document.createElement('x-section')) as SectionElement;
-      elem.header = name;
-      elem.body = content;
-
-      // cache so we can fetch it later without attributes and query selectors
-      cache.sections[id] = elem;
-
-      // store the order of visible sections
-      order.sections.push(id);
+      sections_elem.add({ id, name, content });
     });
-
-  // add to DOM
-  sections_elem.appendChild(fragment);
 }
 
 function assign_events({ sections }: { sections: APISectionData<true>[] }): void {
@@ -93,7 +79,7 @@ function assign_events({ sections }: { sections: APISectionData<true>[] }): void
       const elem = fragment.appendChild(document.createElement('x-event')) as EventElement;
       elem.utc = utc;
       elem.terminal_count = terminal_count;
-      elem.message = message;
+      elem.message = marked(message);
       elem.posted = posted;
 
       // cache so we can fetch it later, without attributes or query selectors

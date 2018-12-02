@@ -1,4 +1,5 @@
 import { LitElement, html } from '@polymer/lit-element';
+import { unsafeHTML } from '../helpers/directives';
 import { sealed, property, attribute, customElement } from '../helpers/decorators';
 import { TemplateResult } from 'lit-html';
 
@@ -7,15 +8,15 @@ import { TemplateResult } from 'lit-html';
 @attribute('role', 'row')
 export class Event extends LitElement {
   public render(): TemplateResult {
-    return this.posted
-    ? html`
+    return html`
       <link rel='stylesheet' href='x-event.bundle.css'>
-      <div class='tnum' role='cell'>${this.utc}</div>
-      <div class='tnum' role='cell'>${this.terminal_count}</div>
-      <div role='cell'>${this.message}</div>
-    `
-    : html`
-      <link rel='stylesheet' href='x-event.bundle.css'>
+      ${
+        this.posted ? html`
+          <div class='tnum' role='cell'>${this.utc}</div>
+          <div class='tnum' role='cell'>${this.terminal_count}</div>
+          <div role='cell'>${unsafeHTML(this.message)}</div>
+        ` : html``
+      }
     `;
   }
 

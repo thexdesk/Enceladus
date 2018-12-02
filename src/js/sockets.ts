@@ -69,6 +69,7 @@ function thread_handler(data: APIData<APIThreadData>): void {
 }
 
 function section_handler(data: APIData<APISectionData>): void {
+  /*
   if (data.action === 'delete') {
     cache.sections[data.id].remove();
     delete cache.sections[data.id];
@@ -88,6 +89,7 @@ function section_handler(data: APIData<APISectionData>): void {
   } else if (data.action === 'create') {
     // TODO
   }
+  */
 }
 
 function event_handler(data: APIData<APIEventData>): void {
