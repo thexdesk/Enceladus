@@ -77,20 +77,9 @@ function thread_handler(data: APIData<APIThreadData>): void {
 function section_handler(data: APIData<APISectionData>): void {
   if (data.action === 'delete') {
     sections_elem.delete(data.id);
-  } /* else if (data.action === 'update') {
-    const section = cache.sections[data.id];
-
-    if (data.name !== undefined) {
-      section.header = data.name;
-    }
-    if (data.content !== undefined) {
-      section.body = data.content;
-    }
-    if (data.events_id !== undefined) {
-      // TODO ???
-      // this block may by unnecessary if `Event::utc` is required
-    }
-  } */ else if (data.action === 'create') {
+  } else if (data.action === 'update') {
+    sections_elem.modify(data);
+  } else if (data.action === 'create') {
     sections_elem.add(data);
   }
 }
@@ -98,22 +87,9 @@ function section_handler(data: APIData<APISectionData>): void {
 function event_handler(data: APIData<APIEventData>): void {
   if (data.action === 'delete') {
     events_elem.delete(data.id);
-  } /* else if (data.action === 'update') {
-    const event = cache.events[data.id];
-
-    if (data.message !== undefined) {
-      event.message = data.message;
-    }
-    if (data.terminal_count !== undefined) {
-      event.terminal_count = data.terminal_count;
-    }
-    if (data.utc !== undefined) {
-      event.utc = data.utc;
-    }
-    if (data.posted !== undefined) {
-      // TODO
-    }
-  } */ else if (data.action === 'create') {
+  } else if (data.action === 'update') {
+    events_elem.modify(data);
+  } else if (data.action === 'create') {
     events_elem.add(data);
   }
 }

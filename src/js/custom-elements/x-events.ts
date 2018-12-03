@@ -45,6 +45,19 @@ export class Events extends LitElement {
     }
   }
 
+  // cannot be named `update` due to conflict with LitElement
+  public modify({ id, posted, utc, terminal_count, message }: Partial<Event> & ID): void {
+    Object
+      .entries({ posted, utc, terminal_count, message })
+      .forEach(([key, value]) => {
+        if (value !== undefined) {
+          this.events[id][key as keyof Event] = value;
+        }
+      });
+
+    this.requestUpdate(); // tslint:disable-line no-floating-promises
+  }
+
   public delete(id: number): void {
     this.ids = this.ids.filter($ => $ !== id);
     delete this.events[id];

@@ -4,7 +4,9 @@ import { sealed, property, attribute, customElement } from '../helpers/decorator
 import { TemplateResult } from 'lit-html';
 import marked from 'marked';
 
-type Section = Pick<APISectionData, 'name' | 'content'>;
+type Section =
+  | Pick<APISectionData, 'name' | 'content' | 'events_id'>
+  | (Pick<APISectionData<true>, 'name' | 'content'> & { events_id: undefined });
 
 @sealed
 @customElement('x-sections' as any)
@@ -22,13 +24,26 @@ export class Sections extends LitElement {
     `;
   }
 
-  public add({ id, name, content }: Section & ID, update: boolean = true): void {
-    this.sections[id] = { name, content };
+  public add({ id, name, content, events_id = [] }: Section & ID, update: boolean = true): void {
+    this.sections[id] = { name, content, events_id };
     this.ids.push(id);
 
     if (update) {
       this.requestUpdate(); // tslint:disable-line no-floating-promises
     }
+  }
+
+  // cannot be named `update` due to conflict with LitElement
+  public modify({ id, name, content, events_id }: Partial<Section> & ID): void {
+    Object
+      .entries({ name, content, events_id })
+      .forEach(([key, value]) => {
+        if (value !== undefined) {
+          this.sections[id][key as keyof Section] = value;
+        }
+      });
+
+    this.requestUpdate(); // tslint:disable-line no-floating-promises
   }
 
   public delete(id: number): void {
