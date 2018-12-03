@@ -10,6 +10,7 @@ const rename = require('gulp-rename');
 const rollup = require('gulp-better-rollup');
 const run_sequence = require('run-sequence');
 const sourcemaps = require('gulp-sourcemaps');
+const sw_precache = require('sw-precache');
 const { terser } = require('rollup-plugin-terser');
 const typescript = require('rollup-plugin-typescript');
 
@@ -81,6 +82,13 @@ gulp.task('js', () => {
     .pipe(gulp.dest(config.out_dir));
 });
 
+gulp.task('sw', () => {
+  return sw_precache.write(`${config.out_dir}/sw.js`, {
+    staticFileGlobs: [`${config.out_dir}/**/*.{js,css,html,ttf}`],
+    stripPrefix: config.out_dir,
+  });
+});
+
 gulp.task('html', () => {
   return gulp
     .src(`${config.html.src_dir}/*.html`)
@@ -107,17 +115,21 @@ gulp.task('clean', () => del('dist'));
 gulp.task('watch', ['build'], () => {
   gulp.watch(`${config.css.src_dir}/**/*.pcss`, ['css']);
   gulp.watch(`${config.html.src_dir}/**/*.html`, ['html']);
-  gulp.watch(`${config.js.src_dir}/**/*.(j|t)sx?`, ['js']);
+  gulp.watch(`${config.js.src_dir}/**/*.(j|t)s`, ['js']);
   gulp.watch(`${config.assets.src_dir}/**/*`, ['assets']);
 });
 
 gulp.task('build', () => {
-  return run_sequence('clean', [
-    'html',
-    'js',
-    'css',
-    'assets',
-  ]);
+  return run_sequence(
+    'clean',
+    [
+      'html',
+      'js',
+      'css',
+      'assets',
+    ],
+    'sw',
+  );
 });
 
 gulp.task('default', ['build']);
