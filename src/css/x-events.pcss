@@ -1,8 +1,15 @@
 :host {
-  contain: content;
+  /*
+  https://bugzilla.mozilla.org/show_bug.cgi?id=1511757
+
+  temporary changed to `contain: layout style`.
+  when the bug is fixed,
+  this should be reverted to `contain: content`.
+  */
+  contain: layout style;
 
   display: grid;
-  grid: auto-flow min-content / 3rem 6rem 1fr;
+  grid: auto-flow min-content / 3rem 4rem 1fr;
   gap: 0.4rem 1rem;
 }
 
@@ -22,7 +29,7 @@
     depth: 1;
   }
 
-  &:last-of-type {
+  &:not(:first-of-type):last-of-type {
     padding-block-end: 2rem;
   }
 }

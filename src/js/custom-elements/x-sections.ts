@@ -4,10 +4,7 @@ import { sealed, property, attribute, customElement } from '../helpers/decorator
 import { TemplateResult } from 'lit-html';
 import marked from 'marked';
 
-interface Section {
-  name: string;
-  content: string;
-}
+type Section = Pick<APISectionData, 'name' | 'content'>;
 
 @sealed
 @customElement('x-sections' as any)

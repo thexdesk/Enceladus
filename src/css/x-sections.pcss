@@ -1,5 +1,12 @@
 :host {
-  contain: content;
+  /*
+  https://bugzilla.mozilla.org/show_bug.cgi?id=1511757
+
+  temporary changed to `contain: layout style`.
+  when the bug is fixed,
+  this should be reverted to `contain: content`.
+  */
+  contain: layout style;
   display: block;
 }
 

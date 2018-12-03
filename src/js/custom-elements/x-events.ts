@@ -3,12 +3,7 @@ import { unsafeHTML, repeat } from '../helpers/directives';
 import { sealed, property, attribute, customElement } from '../helpers/decorators';
 import { TemplateResult } from 'lit-html';
 
-type Event = {
-  posted: boolean;
-  utc: number;
-  terminal_count: string;
-  message: string;
-};
+type Event = Pick<APIEventData, 'posted' | 'utc' | 'terminal_count' | 'message'>;
 
 @sealed
 @customElement('x-events' as any)
@@ -20,7 +15,7 @@ export class Events extends LitElement {
       <link rel='stylesheet' href='x-events.bundle.css'>
       <div role='row'>
         <div role='columnheader'>UTC</div>
-        <div role='columnheader'>Countdown</div>
+        <div role='columnheader'>Count</div>
         <div role='columnheader'>Update</div>
       </div>
 
