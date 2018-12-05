@@ -51,7 +51,10 @@ export class Countdown extends LitElement {
     if (this._hours >= 48) {
       return `T${this._sign}${Math.floor(this._hours / 24)}d ${this._hours % 24}h`;
     }
-    return `T${this._sign}${this._hours}:${pad(this._minutes)}:${pad(this._seconds)}`;
+    if (this._hours >= 1) {
+      return `T${this._sign}${this._hours}:${pad(this._minutes)}:${pad(this._seconds)}`;
+    }
+    return `T${this._sign}${pad(this._minutes)}:${pad(this._seconds)}`;
   }
 
   /**

@@ -49,8 +49,6 @@ function onmessage(event: MessageEvent): void {
   } else if (data_type === 'event') {
     event_handler(data as APIData<APIEventData>);
   }
-  // other options are `user` and `preset_event`,
-  // neither of which we care about here
 }
 
 function thread_handler(data: APIData<APIThreadData>): void {

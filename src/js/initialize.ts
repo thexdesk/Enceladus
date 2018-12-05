@@ -1,7 +1,9 @@
 import { Header, YouTube, Links, Events, Sections } from './custom-elements';
 import fetchival from 'fetchival';
 
-navigator.serviceWorker.register('sw.js'); // tslint:disable-line no-floating-promises
+if (window.isSecureContext) {
+  navigator.serviceWorker.register('sw.js'); // tslint:disable-line no-floating-promises
+}
 
 export const header_elem = document.querySelector<Header>('x-header')!;
 export const youtube_elem = document.querySelector<YouTube>('youtube-video')!;

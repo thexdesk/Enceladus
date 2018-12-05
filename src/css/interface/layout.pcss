@@ -30,7 +30,7 @@ body {
    * It will be something along the lines of `calc(9ar / 16)`
    */
   grid:
-    'logo header links' 4rem
+    'logo . links' 4rem
     'sections youtube twitter' calc(
       (100vw - $gap * ($number-columns + 1) - 22rem) * 3 / 8
     )
@@ -39,7 +39,11 @@ body {
 }
 
 x-header {
-  grid-area: header;
+  /*
+   * we want the header to be _actually_ centered,
+   * not centerd within its column
+   */
+  grid-area: 1 / 1 / 1 / -1;
   display: flex;
   align-items: center;
   justify-content: space-evenly;

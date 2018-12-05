@@ -12,13 +12,16 @@ export class Links extends LitElement {
       <a
         class='reddit'
         target='_blank'
+        rel='noopener'
         aria-hidden='${this.reddit_id === null}'
         aria-description='reddit thread'
         href='${this.reddit_id === null ? '' : `https://reddit.com/${this.reddit_id}`}'
       ></a>
+
       <a
         class='github'
         target='_blank'
+        rel='noopener'
         aria-description='source code'
         href='https://github.com/r-spacex/Enceladus-LTI'
       ></a>
