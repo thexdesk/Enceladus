@@ -15,6 +15,7 @@ export class Sections extends LitElement {
   public render(): TemplateResult {
     return html`
       <link rel='stylesheet' href='x-sections.bundle.css'>
+      <header>LAUNCH INFORMATION</header>
       ${repeat(this.ids, id => html`
         <div>
           <h1>${this.sections[id].name}</h1>

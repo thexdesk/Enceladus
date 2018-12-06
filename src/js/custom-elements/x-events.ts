@@ -13,11 +13,15 @@ export class Events extends LitElement {
   public render(): TemplateResult {
     return html`
       <link rel='stylesheet' href='x-events.bundle.css'>
-      <div role='row'>
-        <div role='columnheader'>UTC</div>
-        <div role='columnheader'>Count</div>
-        <div role='columnheader'>Update</div>
-      </div>
+      <header>
+        <h1>LIVE UPDATES</h1>
+
+        <div role='row'>
+          <div role='columnheader'>UTC</div>
+          <div role='columnheader'>Count</div>
+          <div role='columnheader'>Update</div>
+        </div>
+      </header>
 
       ${repeat(this.ids, id => {
         const event = this.events[id];

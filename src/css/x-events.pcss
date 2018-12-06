@@ -1,3 +1,7 @@
+/**
+ * TODO rewrite the entire layout parts when subgrid is released
+ */
+
 :host {
   /*
   https://bugzilla.mozilla.org/show_bug.cgi?id=1511757
@@ -13,6 +17,46 @@
   gap: 0.4rem 1rem;
 }
 
+header {
+  grid-column: 1 / -1;
+
+  position: sticky;
+  inset-block-start: 0;
+  background-color: gray(0);
+
+  /* not used here, pass this through to the header row */
+  grid-template-columns: inherit;
+  gap: inherit;
+}
+
+h1 {
+  font-size: 1.7rem;
+  letter-spacing: +0.15ch;
+  padding-block-end: 0.3ex;
+  margin: 0;
+
+  &::after {
+    content: '';
+    display: inline-block;
+    vertical-align: text-middle;
+
+    /* needs to be shifted up slightly to actually center it */
+    position: relative;
+    inset-block-start: -3px;
+
+    size: 0.5rem;
+    corner-radius: 50%;
+
+    background-color: var(--theme-color);
+    animation: pulse 800ms ease-in-out infinite alternate;
+    margin-inline-start: 0.8ch;
+
+    @media (prefers-reduced-motion) {
+      display: none;
+    }
+  }
+}
+
 [role='row'] {
   grid-column: 1 / -1;
 
@@ -20,13 +64,9 @@
   grid-template-columns: inherit;
   gap: inherit;
 
-  &:first-of-type {
+  @nest header & {
     font-variation-settings: 'wght' 600;
-    position: sticky;
-    inset-block-start: 0;
     padding-block-end: 0.5ex;
-    background-color: gray(0);
-    depth: 1;
   }
 
   &:not(:first-of-type):last-of-type {
@@ -44,5 +84,15 @@ p {
 
   &:not(:first-of-type) {
     margin-block-start: 0.6rem;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
   }
 }
