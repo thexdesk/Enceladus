@@ -1,46 +1,65 @@
-import { Header, YouTube, Links, Events, Sections } from './custom-elements';
+import {
+  header_elem,
+  youtube_elem,
+  links_elem,
+  events_elem,
+  sections_elem,
+  modal_elem,
+} from './elements';
 import fetchival from 'fetchival';
+import { init_socket } from './sockets';
 
 if (window.isSecureContext) {
   navigator.serviceWorker.register('sw.js'); // tslint:disable-line no-floating-promises
 }
 
-export const header_elem = document.querySelector<Header>('x-header')!;
-export const youtube_elem = document.querySelector<YouTube>('youtube-video')!;
-export const links_elem = document.querySelector<Links>('x-links')!;
-export const sections_elem = document.querySelector<Sections>('x-sections')!;
-export const events_elem = document.querySelector<Events>('x-events')!;
-
-// TODO show user error if ?thread_id=xxx is not present
-export const thread_id = /thread_id=(\d+)/.exec(location.search);
-if (thread_id === null) {
-  throw new Error('Querystring `thread_id` must be set');
+export function get_thread_data(id: string | number): Promise<APIThreadData<true>> {
+  // tslint:disable-next-line newline-per-chained-call
+  return fetchival(`http://localhost:3000/v1/thread/${id}?with=events`).get();
 }
 
-// disable lint until we get a type declaration for fetchival
-// tslint:disable-next-line no-unsafe-any
-fetchival(`http://localhost:3000/v1/thread/${thread_id[1]}?with=events`)
-  .get()
-  .then(({ launch_name, t0, youtube_id, post_id, sections }: APIThreadData<true>) => {
-    // assign header data
-    header_elem.launch_name = launch_name;
-    header_elem.t0 = t0;
+export async function initialize({
+  id,
+  launch_name,
+  t0,
+  youtube_id,
+  post_id,
+  sections,
+}: APIThreadData<true>): Promise<number> {
+  const promises: Promise<unknown>[] = [];
 
-    // assign YouTube data
-    youtube_elem.video_id = youtube_id;
+  // assign header data
+  header_elem.launch_name = launch_name;
+  header_elem.t0 = t0;
 
-    // assign links data
-    links_elem.reddit_id = post_id;
+  // assign YouTube data
+  youtube_elem.video_id = youtube_id;
 
-    // assign sections data
-    sections
-      .filter(({ events }) => events.length === 0)
-      .forEach(data => sections_elem.add(data, false));
-    sections_elem.requestUpdate(); // tslint:disable-line no-floating-promises
+  // assign links data
+  links_elem.reddit_id = post_id;
 
-    // assign events data
-    const events_section = sections.find(section => section.events.length !== 0);
-    if (events_section === undefined) { return; }
+  // assign sections data
+  sections
+    .filter(({ events }) => events.length === 0)
+    .forEach(data => sections_elem.add(data, false));
+  promises.push(sections_elem.requestUpdate());
+
+  // assign events data
+  const events_section = sections.find(section => section.events.length !== 0);
+  if (events_section !== undefined) {
     events_section.events.forEach(data => events_elem.add(data, false));
-    events_elem.requestUpdate(); // tslint:disable-line no-floating-promises
-  });
+    promises.push(events_elem.requestUpdate());
+  }
+
+  await Promise.all(promises);
+  return id;
+}
+
+const thread_id = new URL(window.location.href).searchParams.get('thread_id');
+if (thread_id !== null) {
+  // tslint:disable-next-line no-floating-promises
+  get_thread_data(thread_id)
+    .then(initialize)
+    .then(init_socket)
+    .then(() => modal_elem.remove());
+}

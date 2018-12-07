@@ -16,6 +16,7 @@ export class YouTube extends LitElement {
           ? ''
           : `https://youtube.com/embed/${this.video_id}?autoplay=0`
         }'
+        ?hidden=${this.video_id === null}
       ></iframe>
     `;
   }

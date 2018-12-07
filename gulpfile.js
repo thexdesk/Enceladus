@@ -41,7 +41,6 @@ gulp.task('css', () => {
   return gulp
     .src(`${config.css.src_dir}/*.pcss`)
     .pipe(postcss())
-    .pipe(postcss([ require('cssnano') ]))
     .pipe(rename({ extname: '.bundle.css' }))
     .pipe(gulp.dest(config.out_dir));
 });

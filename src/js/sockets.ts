@@ -3,26 +3,31 @@ import {
   header_elem,
   links_elem,
   sections_elem,
-  thread_id,
   youtube_elem,
-} from './initialize';
+} from './elements';
 import Sockette from 'sockette';
 
-export const ws = new Sockette('ws://localhost:3000', {
-  onopen,
-  onmessage,
-  onreconnect: onopen,
-});
+let ws: Nullable<Sockette> = null;
+export function init_socket(thread_id: number): Promise<unknown> {
+  ws = new Sockette('ws://localhost:3000', {
+    onopen: onopen.bind({ thread_id }) as () => void,
+    onmessage: onmessage.bind({ thread_id }) as (event: MessageEvent) => void,
+    onreconnect: onopen.bind({ thread_id }) as () => void,
+  });
+  return Promise.resolve();
+}
 
 export function join_rooms(...rooms: string[]): void {
-  ws.json({ join: rooms.join(',') });
+  if (ws !== null) {
+    ws.json({ join: rooms.join(',') });
+  }
 }
 
-function onopen(): void {
-  join_rooms(`thread_${thread_id}`);
+function onopen(this: { thread_id: number }): void {
+  join_rooms(`thread_${this.thread_id}`);
 }
 
-function onmessage(event: MessageEvent): void {
+function onmessage(this: { thread_id: number }, event: MessageEvent): void {
   const {
     room,
     action,
@@ -35,7 +40,7 @@ function onmessage(event: MessageEvent): void {
     data: APIData;
   } = JSON.parse(event.data); // tslint:disable-line no-unsafe-any
 
-  if (room !== `thread_${thread_id}`) {
+  if (room !== `thread_${this.thread_id}`) {
     // we should never reach this state
     return;
   }
