@@ -1,11 +1,6 @@
 import { property as orig_property, Constructor, LitElement } from '@polymer/lit-element';
 export { customElement } from '@polymer/lit-element';
-
-export function sealed(constructor: Constructor<HTMLElement>): any {
-  Object.seal<typeof constructor>(constructor);
-  Object.seal(Object.getPrototypeOf(constructor));
-  return constructor;
-}
+export { sealed, frozen } from '@jhpratt/decorators';
 
 export const property = orig_property({ attribute: false });
 

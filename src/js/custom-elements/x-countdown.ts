@@ -35,7 +35,7 @@ export class Countdown extends LitElement {
       clearInterval(this._interval!);
       this._interval = null;
     } else if (this._interval === null) {
-      this._interval = setInterval(this._update_clock.bind(this) as Function, 1_000);
+      this._interval = window.setInterval(this._update_clock.bind(this), 1_000);
     }
 
     this._update_clock();
@@ -54,7 +54,7 @@ export class Countdown extends LitElement {
     if (this._hours >= 1) {
       return `T${this._sign}${this._hours}:${pad(this._minutes)}:${pad(this._seconds)}`;
     }
-    return `T${this._sign}${pad(this._minutes)}:${pad(this._seconds)}`;
+    return `T${this._sign}${this._minutes}:${pad(this._seconds)}`;
   }
 
   /**
@@ -89,6 +89,7 @@ export class Countdown extends LitElement {
   public disconnectedCallback(): void {
     if (this._interval !== null) {
       clearInterval(this._interval);
+      this._interval = null;
     }
   }
 }

@@ -3,6 +3,7 @@ import { unsafeHTML, repeat } from '../helpers/directives';
 import { sealed, property, attribute, customElement } from '../helpers/decorators';
 import { TemplateResult } from 'lit-html';
 import marked from 'marked';
+import { assign_defined } from '@jhpratt/assign-defined';
 
 type Section =
   | Pick<APISectionData, 'name' | 'content' | 'events_id'>
@@ -36,14 +37,7 @@ export class Sections extends LitElement {
 
   // cannot be named `update` due to conflict with LitElement
   public modify({ id, name, content, events_id }: Partial<Section> & ID): void {
-    Object
-      .entries({ name, content, events_id })
-      .forEach(([key, value]) => {
-        if (value !== undefined) {
-          this.sections[id][key as keyof Section] = value;
-        }
-      });
-
+    assign_defined(this.sections[id], { id, name, content, events_id });
     this.requestUpdate(); // tslint:disable-line no-floating-promises
   }
 

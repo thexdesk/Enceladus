@@ -2,6 +2,7 @@ import { LitElement, html } from '@polymer/lit-element';
 import { unsafeHTML, repeat } from '../helpers/directives';
 import { sealed, property, attribute, customElement } from '../helpers/decorators';
 import { TemplateResult } from 'lit-html';
+import { assign_defined } from '@jhpratt/assign-defined';
 
 type Event = Pick<APIEventData, 'posted' | 'utc' | 'terminal_count' | 'message'>;
 
@@ -51,14 +52,7 @@ export class Events extends LitElement {
 
   // cannot be named `update` due to conflict with LitElement
   public modify({ id, posted, utc, terminal_count, message }: Partial<Event> & ID): void {
-    Object
-      .entries({ posted, utc, terminal_count, message })
-      .forEach(([key, value]) => {
-        if (value !== undefined) {
-          this.events[id][key as keyof Event] = value;
-        }
-      });
-
+    assign_defined(this.events[id], { posted, utc, terminal_count, message });
     this.requestUpdate(); // tslint:disable-line no-floating-promises
   }
 
