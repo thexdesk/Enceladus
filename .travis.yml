@@ -3,14 +3,13 @@ node_js:
   - 10
 
 cache:
-  yarn: true
   directories:
     - node_modules
 
 script:
-  - yarn lint:ts
-  - yarn lint:css
-  - yarn build
+  - npm run lint:ts
+  - npm run lint:css
+  - npm run build
 
 notifications:
   email:
