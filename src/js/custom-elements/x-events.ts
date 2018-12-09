@@ -39,26 +39,27 @@ export class Events extends LitElement {
   }
 
   public add(
-    { id, posted, utc, terminal_count, message }: Event & ID,
+    { id, posted, utc, terminal_count, message }: Create<Event>,
     update: boolean = true,
-  ): void {
+  ): Promise<unknown> | void {
     this.events[id] = { posted, utc, terminal_count, message };
     this.ids.push(id);
 
     if (update) {
-      this.requestUpdate(); // tslint:disable-line no-floating-promises
+      return this.requestUpdate();
     }
   }
 
   // cannot be named `update` due to conflict with LitElement
-  public modify({ id, posted, utc, terminal_count, message }: Partial<Event> & ID): void {
+  public modify({ id, posted, utc, terminal_count, message }: Update<Event>): Promise<unknown> {
     assign_defined(this.events[id], { posted, utc, terminal_count, message });
-    this.requestUpdate(); // tslint:disable-line no-floating-promises
+    return this.requestUpdate();
   }
 
-  public delete(id: number): void {
+  public delete(id: number): Promise<unknown> {
     this.ids = this.ids.filter($ => $ !== id);
     delete this.events[id];
+    return this.updateComplete;
   }
 
   @property public ids: number[] = [];

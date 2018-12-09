@@ -1,20 +1,14 @@
-import {
-  events_elem,
-  header_elem,
-  links_elem,
-  sections_elem,
-  youtube_elem,
-} from './elements';
+import { events_elem, header_elem, links_elem, sections_elem, youtube_elem } from './elements';
 import Sockette from 'sockette';
+import { assign_defined } from '@jhpratt/assign-defined';
 
 let ws: Nullable<Sockette> = null;
-export function init_socket(thread_id: number): Promise<unknown> {
+export function init_socket(thread_id: number): void {
   ws = new Sockette('ws://localhost:3000', {
     onopen: onopen.bind({ thread_id }) as () => void,
     onmessage: onmessage.bind({ thread_id }) as (event: MessageEvent) => void,
     onreconnect: onopen.bind({ thread_id }) as () => void,
   });
-  return Promise.resolve();
 }
 
 export function join_rooms(...rooms: string[]): void {
@@ -56,43 +50,38 @@ function onmessage(this: { thread_id: number }, event: MessageEvent): void {
   }
 }
 
-function thread_handler(data: APIData<APIThreadData>): void {
-  if (data.action === 'update') {
-    if (data.launch_name !== undefined) {
-      header_elem.launch_name = data.launch_name;
-    }
-    if (data.post_id !== undefined) {
-      links_elem.reddit_id = data.post_id;
-    }
-    if (data.t0 !== undefined) {
-      header_elem.t0 = data.t0;
-    }
-    if (data.youtube_id !== undefined) {
-      youtube_elem.video_id = data.youtube_id;
-    }
-    if (data.sections_id !== undefined) {
-      sections_elem.ids = data.sections_id;
-    }
-  }
-  // TODO what if `data.action === 'delete'`?
-}
-
-function section_handler(data: APIData<APISectionData>): void {
-  if (data.action === 'delete') {
-    sections_elem.delete(data.id);
-  } else if (data.action === 'update') {
-    sections_elem.modify(data);
-  } else if (data.action === 'create') {
-    sections_elem.add(data);
+function thread_handler({
+  action,
+  launch_name,
+  t0,
+  post_id: reddit_id,
+  youtube_id: video_id,
+  sections_id: ids,
+}: APIData<APIThreadData>): void {
+  if (action === 'update') {
+    assign_defined(header_elem, { launch_name, t0 });
+    assign_defined(links_elem, { reddit_id });
+    assign_defined(youtube_elem, { video_id });
+    assign_defined(sections_elem, { ids });
   }
 }
 
-function event_handler(data: APIData<APIEventData>): void {
+function section_handler(data: APIData<APISectionData>): Promise<unknown> | void {
   if (data.action === 'delete') {
-    events_elem.delete(data.id);
+    return sections_elem.delete(data.id);
   } else if (data.action === 'update') {
-    events_elem.modify(data);
+    return sections_elem.modify(data);
   } else if (data.action === 'create') {
-    events_elem.add(data);
+    return sections_elem.add(data);
+  }
+}
+
+function event_handler(data: APIData<APIEventData>): Promise<unknown> | void {
+  if (data.action === 'delete') {
+    return events_elem.delete(data.id);
+  } else if (data.action === 'update') {
+    return events_elem.modify(data);
+  } else if (data.action === 'create') {
+    return events_elem.add(data);
   }
 }

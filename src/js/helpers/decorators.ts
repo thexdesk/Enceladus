@@ -10,7 +10,6 @@ export function attribute(
 ): (constructor: Constructor<LitElement>) => any {
   return (constructor: Constructor<LitElement>) => {
     // TypeScript doesn't let us return this immediately
-    // tslint:disable-next-line max-classes-per-file
     class Extended extends constructor {
       // @ts-ignore Not sure why this is throwing an error, it's absolutely correct.
       @orig_property({ reflect: true }) public [_attr] = value;

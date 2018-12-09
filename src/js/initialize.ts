@@ -6,7 +6,7 @@ import {
   sections_elem,
   modal_elem,
 } from './elements';
-import fetchival from 'fetchival';
+import esfetch from 'esfetch';
 import { init_socket } from './sockets';
 
 if (window.isSecureContext) {
@@ -15,7 +15,7 @@ if (window.isSecureContext) {
 
 export function get_thread_data(id: string | number): Promise<APIThreadData<true>> {
   // tslint:disable-next-line newline-per-chained-call
-  return fetchival(`http://localhost:3000/v1/thread/${id}?with=events`).get();
+  return esfetch(`http://localhost:3000/v1/thread/${id}?with=events`).get();
 }
 
 export async function initialize({
@@ -40,12 +40,12 @@ export async function initialize({
 
   // assign sections data
   sections
-    .filter(({ events }) => events.length === 0)
+    .filter(({ events: { length }}) => length === 0)
     .forEach(data => sections_elem.add(data, false));
   promises.push(sections_elem.requestUpdate());
 
   // assign events data
-  const events_section = sections.find(section => section.events.length !== 0);
+  const events_section = sections.find(({ events: { length }}) => length !== 0);
   if (events_section !== undefined) {
     events_section.events.forEach(data => events_elem.add(data, false));
     promises.push(events_elem.requestUpdate());

@@ -21,11 +21,10 @@ export class Modal extends LitElement {
     `;
   }
 
-  private submit_if_enter(e: KeyboardEvent): Promise<void> {
+  private submit_if_enter(e: KeyboardEvent): Promise<void> | void {
     if (e.key === 'Enter') {
       return this.submit();
     }
-    return Promise.resolve();
   }
 
   private async get_thread_data(): Promise<APIThreadData<true>> {
@@ -46,10 +45,9 @@ export class Modal extends LitElement {
 
   private async submit(): Promise<void> {
     return this.get_thread_data()
-      .then(async data => {
-        await initialize(data);
-
-        window.history.replaceState(undefined, '', `?thread_id=${data.id}`);
+      .then(initialize)
+      .then(id => {
+        window.history.replaceState(undefined, '', `?thread_id=${id}`);
         this.remove();
       });
   }

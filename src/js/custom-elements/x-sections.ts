@@ -26,24 +26,28 @@ export class Sections extends LitElement {
     `;
   }
 
-  public add({ id, name, content, events_id = [] }: Section & ID, update: boolean = true): void {
+  public add(
+    { id, name, content, events_id = [] }: Section & ID,
+    update: boolean = true,
+  ): Promise<unknown> | void {
     this.sections[id] = { name, content, events_id };
     this.ids.push(id);
 
     if (update) {
-      this.requestUpdate(); // tslint:disable-line no-floating-promises
+      return this.requestUpdate();
     }
   }
 
   // cannot be named `update` due to conflict with LitElement
-  public modify({ id, name, content, events_id }: Partial<Section> & ID): void {
+  public modify({ id, name, content, events_id }: Partial<Section> & ID): Promise<unknown> {
     assign_defined(this.sections[id], { id, name, content, events_id });
-    this.requestUpdate(); // tslint:disable-line no-floating-promises
+    return this.requestUpdate();
   }
 
-  public delete(id: number): void {
+  public delete(id: number): Promise<unknown> {
     this.ids = this.ids.filter($ => $ !== id);
     delete this.sections[id];
+    return this.updateComplete;
   }
 
   @property public ids: number[] = [];

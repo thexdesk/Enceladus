@@ -19,7 +19,7 @@
     "@jhpratt/assign-defined": "^0.1.0",
     "@jhpratt/decorators": "^0.1.1",
     "@polymer/lit-element": "^0.6.4",
-    "fetchival": "^0.3.3",
+    "esfetch": "^0.1.0",
     "lit-html": "^0.14.0",
     "marked": "^0.5.2",
     "sockette": "^2.0.3"

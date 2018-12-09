@@ -1,24 +1,3 @@
-declare module 'fetchival' {
-  type Fetchival = {
-    get(queryParams?: {}): Promise<any>;
-    post(data?: any): Promise<any>;
-    put(data?: any): Promise<any>;
-    patch(data?: any): Promise<any>;
-    delete(): Promise<any>;
-  };
-
-  export default function fetchival(
-    url: string,
-    opts?: {
-      headers?: {
-        Accept?: string;
-        'Content-Type'?: string;
-      };
-      responseAs?: 'json' | 'text' | 'response';
-    },
-  ): Fetchival;
-}
-
 // @types/marked is out of date and inaccurate
 declare module 'marked' {
   export default function marked(src: string): string;
@@ -36,9 +15,9 @@ type APIData<T = unknown> =
   | (T extends APIThreadData ? never : Create<T> & { action: 'create' })
   | Update<T> & { action: 'update' }
   | Delete<T> & { action: 'delete' };
-type Create<T> = T;
+type Create<T> = T & ID;
 type Update<T> = Partial<T> & ID;
-type Delete<T> = ID;
+type Delete<T> = { [K in keyof T]: never } & ID;
 
 type APIEventData<joins extends boolean = false> = ID & {
   posted: boolean;

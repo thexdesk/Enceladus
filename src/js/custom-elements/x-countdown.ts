@@ -38,7 +38,7 @@ export class Countdown extends LitElement {
       this._interval = window.setInterval(this._update_clock.bind(this), 1_000);
     }
 
-    this._update_clock();
+    this._update_clock(); // tslint:disable-line no-floating-promises
   }
 
   /**
@@ -60,9 +60,9 @@ export class Countdown extends LitElement {
   /**
    * Update the countdown clock.
    */
-  private _update_clock(): void {
+  private _update_clock(): Promise<unknown> {
     if (this._t0 === null) {
-      return;
+      return Promise.resolve();
     }
 
     this._sign =
@@ -76,7 +76,7 @@ export class Countdown extends LitElement {
     this._minutes = Math.floor(diff % 3600 / 60);
     this._seconds = diff % 60;
 
-    this.requestUpdate(); // tslint:disable-line no-floating-promises
+    return this.requestUpdate();
   }
 
   public render(): TemplateResult {
