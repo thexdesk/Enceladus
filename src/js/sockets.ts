@@ -5,9 +5,9 @@ import { assign_defined } from '@jhpratt/assign-defined';
 let ws: Nullable<Sockette> = null;
 export function init_socket(thread_id: number): void {
   ws = new Sockette('ws://localhost:3000', {
-    onopen: onopen.bind({ thread_id }) as () => void,
-    onmessage: onmessage.bind({ thread_id }) as (event: MessageEvent) => void,
-    onreconnect: onopen.bind({ thread_id }) as () => void,
+    onopen: onopen.bind({ thread_id }),
+    onmessage: onmessage.bind({ thread_id }),
+    onreconnect: onopen.bind({ thread_id }),
   });
 }
 

@@ -21,7 +21,7 @@ export class Modal extends LitElement {
     `;
   }
 
-  public async connectedCallback() {
+  public async connectedCallback(): Promise<void> {
     // we want to be sure that the input element is present,
     // so let's await the initial rendering
     await this.updateComplete;

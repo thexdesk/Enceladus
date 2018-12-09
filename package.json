@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "clean": "gulp clean",
-    "build": "npm run typecheck && gulp build",
+    "build": "npm run lint:css && npm run lint:ts && npm run typecheck && gulp build",
     "watch": "gulp watch",
     "lint:ts": "tslint -p . \"src/**/*.ts\"",
     "fmt:ts": "tslint -p . --fix \"src/**/*.ts\"",
