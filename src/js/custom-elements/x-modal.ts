@@ -21,6 +21,13 @@ export class Modal extends LitElement {
     `;
   }
 
+  public async connectedCallback() {
+    // we want to be sure that the input element is present,
+    // so let's await the initial rendering
+    await this.updateComplete;
+    this.shadowRoot!.querySelector('input')!.focus();
+  }
+
   private submit_if_enter(e: KeyboardEvent): Promise<void> | void {
     if (e.key === 'Enter') {
       return this.submit();
