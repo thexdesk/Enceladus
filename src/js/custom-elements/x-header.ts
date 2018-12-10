@@ -2,7 +2,7 @@ import './x-countdown';
 import { LitElement, html } from '@polymer/lit-element';
 import { sealed, property, attribute, customElement } from '../helpers/decorators';
 import { TemplateResult } from 'lit-html';
-import css from '../../css/x-header.pcss';
+import css from '../../css/inlined/x-header.pcss';
 
 @sealed
 @customElement('x-header' as any)

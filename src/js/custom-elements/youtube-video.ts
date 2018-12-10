@@ -1,7 +1,7 @@
 import { LitElement, html } from '@polymer/lit-element';
 import { sealed, property, attribute, customElement } from '../helpers/decorators';
 import { TemplateResult } from 'lit-html';
-import css from '../../css/youtube-video.pcss';
+import css from '../../css/inlined/youtube-video.pcss';
 
 @sealed
 @customElement('youtube-video' as any)

@@ -1,7 +1,7 @@
 import { LitElement, html } from '@polymer/lit-element';
 import { sealed, property, attribute, customElement } from '../helpers/decorators';
 import { TemplateResult } from 'lit-html';
-import css from '../../css/x-links.pcss';
+import css from '../../css/inlined/x-links.pcss';
 
 @sealed
 @customElement('x-links' as any)

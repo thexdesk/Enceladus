@@ -4,7 +4,7 @@ import { sealed, property, attribute, customElement } from '../helpers/decorator
 import { TemplateResult } from 'lit-html';
 import marked from 'marked';
 import { assign_defined } from '@jhpratt/assign-defined';
-import css from '../../css/x-sections.pcss';
+import css from '../../css/inlined/x-sections.pcss';
 
 type Section = Pick<APISectionData<boolean>, 'name' | 'content' | 'events_id'>;
 

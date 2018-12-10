@@ -1,7 +1,7 @@
 import { LitElement, html } from '@polymer/lit-element';
 import { sealed, customElement, attribute } from '../helpers/decorators';
 import { TemplateResult } from 'lit-html';
-import css from '../../css/x-countdown.pcss';
+import css from '../../css/inlined/x-countdown.pcss';
 
 /**
  * Given a number,

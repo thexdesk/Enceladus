@@ -3,7 +3,7 @@ import { unsafeHTML, repeat } from '../helpers/directives';
 import { sealed, property, attribute, customElement } from '../helpers/decorators';
 import { TemplateResult } from 'lit-html';
 import { assign_defined } from '@jhpratt/assign-defined';
-import css from '../../css/x-events.pcss';
+import css from '../../css/inlined/x-events.pcss';
 
 type Event = Pick<APIEventData, 'posted' | 'utc' | 'terminal_count' | 'message'>;
 

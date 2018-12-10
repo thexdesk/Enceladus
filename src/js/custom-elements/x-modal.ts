@@ -2,7 +2,7 @@ import { LitElement, html } from '@polymer/lit-element';
 import { sealed, customElement, attribute } from '../helpers/decorators';
 import { TemplateResult } from 'lit-html';
 import { get_thread_data, initialize } from '../initialize';
-import css from '../../css/x-modal.pcss';
+import css from '../../css/inlined/x-modal.pcss';
 
 @sealed
 @customElement('x-modal' as any)
