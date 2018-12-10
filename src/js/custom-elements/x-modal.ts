@@ -2,6 +2,7 @@ import { LitElement, html } from '@polymer/lit-element';
 import { sealed, customElement, attribute } from '../helpers/decorators';
 import { TemplateResult } from 'lit-html';
 import { get_thread_data, initialize } from '../initialize';
+import css from '../../css/x-modal.pcss';
 
 @sealed
 @customElement('x-modal' as any)
@@ -11,7 +12,7 @@ import { get_thread_data, initialize } from '../initialize';
 export class Modal extends LitElement {
   public render(): TemplateResult {
     return html`
-      <link rel='stylesheet' href='x-modal.bundle.css'>
+      <style>${css}</style>
       <div class='modal'>
         <label>Please enter a thread ID.</label>
         <input @keyup='${this.submit_if_enter.bind(this)}' type='number'>

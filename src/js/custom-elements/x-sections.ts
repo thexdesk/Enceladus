@@ -4,10 +4,9 @@ import { sealed, property, attribute, customElement } from '../helpers/decorator
 import { TemplateResult } from 'lit-html';
 import marked from 'marked';
 import { assign_defined } from '@jhpratt/assign-defined';
+import css from '../../css/x-sections.pcss';
 
-type Section =
-  | Pick<APISectionData, 'name' | 'content' | 'events_id'>
-  | (Pick<APISectionData<true>, 'name' | 'content'> & { events_id: undefined });
+type Section = Pick<APISectionData<boolean>, 'name' | 'content' | 'events_id'>;
 
 @sealed
 @customElement('x-sections' as any)
@@ -15,7 +14,7 @@ type Section =
 export class Sections extends LitElement {
   public render(): TemplateResult {
     return html`
-      <link rel='stylesheet' href='x-sections.bundle.css'>
+      <style>${css}</style>
       <header>LAUNCH INFORMATION</header>
       ${repeat(this.ids, id => html`
         <div>

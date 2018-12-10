@@ -1,5 +1,3 @@
-/* eslint-env node */
-
 module.exports = {
   extends: 'stylelint-config-standard',
   plugins: ['stylelint-use-logical'],

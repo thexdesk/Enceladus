@@ -1,6 +1,7 @@
 import { LitElement, html } from '@polymer/lit-element';
 import { sealed, property, attribute, customElement } from '../helpers/decorators';
 import { TemplateResult } from 'lit-html';
+import css from '../../css/x-links.pcss';
 
 @sealed
 @customElement('x-links' as any)
@@ -8,7 +9,7 @@ import { TemplateResult } from 'lit-html';
 export class Links extends LitElement {
   public render(): TemplateResult {
     return html`
-      <link rel='stylesheet' href='x-links.bundle.css'>
+      <style>${css}</style>
       <a
         class='reddit'
         target='_blank'

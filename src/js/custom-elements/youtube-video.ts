@@ -1,6 +1,7 @@
 import { LitElement, html } from '@polymer/lit-element';
 import { sealed, property, attribute, customElement } from '../helpers/decorators';
 import { TemplateResult } from 'lit-html';
+import css from '../../css/youtube-video.pcss';
 
 @sealed
 @customElement('youtube-video' as any)
@@ -8,7 +9,7 @@ import { TemplateResult } from 'lit-html';
 export class YouTube extends LitElement {
   public render(): TemplateResult {
     return html`
-      <link rel='stylesheet' href='youtube-video.bundle.css'>
+      <style>${css}</style>
       <iframe
         title='YouTube'
         src='${

@@ -1,3 +1,9 @@
+// let us import our CSS files
+declare module '*.pcss' {
+  const css: string;
+  export default css;
+}
+
 // @types/marked is out of date and inaccurate
 declare module 'marked' {
   export default function marked(src: string): string;

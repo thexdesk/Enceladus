@@ -1,4 +1,4 @@
-/* eslint-env node */
+// tslint:disable no-implicit-dependencies no-unsafe-any
 
 // we have to @ts-ignore imports that don't have type declarations available
 
@@ -20,6 +20,9 @@ import { terser } from 'rollup-plugin-terser';
 // @ts-ignore
 import * as typescript from 'rollup-plugin-typescript';
 import * as sw_precache from 'sw-precache';
+
+// @ts-ignore
+import * as rollup_plugin_postcss from 'rollup-plugin-postcss';
 
 const config = {
   css: {
@@ -44,21 +47,24 @@ const config = {
   out_dir: 'dist',
 };
 
-export function css() {
+export function css(): NodeJS.ReadWriteStream {
   return src(`${config.css.src_dir}/*.pcss`)
-    .pipe(postcss())
+    .pipe<NodeJS.ReadWriteStream>((postcss()))
     .pipe(rename({ extname: '.bundle.css' }))
     .pipe(dest(config.out_dir));
 }
 
-export function js() {
+export function js(): NodeJS.ReadWriteStream {
   return src(config.js.src_file)
     .pipe(sourcemaps.init())
-    .pipe(
+    .pipe<NodeJS.ReadWriteStream>(
       rollup(
         {
           plugins: [
             typescript(),
+            rollup_plugin_postcss({
+              inject: false,
+            }),
             node_resolve({
               jsnext: true,
               preferBuiltins: true,
@@ -91,7 +97,7 @@ export function js() {
     .pipe(dest(config.out_dir));
 }
 
-export function sw() {
+export function sw(): Promise<string> {
   return sw_precache.write(`${config.out_dir}/sw.js`, {
     staticFileGlobs: [`${config.out_dir}/**/*.{js,css,html,ttf}`],
     stripPrefix: config.out_dir,
@@ -115,22 +121,23 @@ export function html(): NodeJS.ReadWriteStream {
 }
 
 export function assets(): NodeJS.ReadWriteStream {
-  return src(`${config.assets.src_dir}/**/*`, { since: lastRun(assets) }).pipe(
-    dest(`${config.out_dir}/${config.assets.out_dir}`),
-  );
+  return src(`${config.assets.src_dir}/**/*`, { since: lastRun(assets) })
+    .pipe(dest(`${config.out_dir}/${config.assets.out_dir}`));
 }
 
-export function clean() {
+export function clean(): Promise<string[]> {
   return del('dist');
 }
 
 export const build = series(clean, parallel(html, js, css, assets), sw);
 
-export const watch = series(build, function watch() {
+// tslint:disable-next-line no-shadowed-variable
+export const watch = series(build, function watch(): void {
   gulp_watch(`${config.css.src_dir}/**/*.pcss`, series(css, sw));
   gulp_watch(`${config.html.src_dir}/**/*.html`, series(html, sw));
   gulp_watch(`${config.js.src_dir}/**/*.(j|t)s`, series(js, sw));
   gulp_watch(`${config.assets.src_dir}/**/*`, series(assets, sw));
 });
 
+// tslint:disable-next-line no-default-export
 export default build;

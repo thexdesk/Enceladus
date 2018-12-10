@@ -3,6 +3,7 @@ import { unsafeHTML, repeat } from '../helpers/directives';
 import { sealed, property, attribute, customElement } from '../helpers/decorators';
 import { TemplateResult } from 'lit-html';
 import { assign_defined } from '@jhpratt/assign-defined';
+import css from '../../css/x-events.pcss';
 
 type Event = Pick<APIEventData, 'posted' | 'utc' | 'terminal_count' | 'message'>;
 
@@ -13,7 +14,7 @@ type Event = Pick<APIEventData, 'posted' | 'utc' | 'terminal_count' | 'message'>
 export class Events extends LitElement {
   public render(): TemplateResult {
     return html`
-      <link rel='stylesheet' href='x-events.bundle.css'>
+      <style>${css}</style>
       <header>
         <h1>LIVE UPDATES</h1>
 

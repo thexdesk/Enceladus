@@ -1,6 +1,7 @@
 import { LitElement, html } from '@polymer/lit-element';
 import { sealed, customElement, attribute } from '../helpers/decorators';
 import { TemplateResult } from 'lit-html';
+import css from '../../css/x-countdown.pcss';
 
 /**
  * Given a number,
@@ -24,6 +25,13 @@ export class Countdown extends LitElement {
   private _minutes = 0;
   private _seconds = 0;
   private _interval: Nullable<number> = null;
+
+  public render(): TemplateResult {
+    return html`
+      <style>${css}</style>
+      ${this.display_time}
+    `;
+  }
 
   get t0(): Nullable<number> {
     return this._t0;
@@ -77,13 +85,6 @@ export class Countdown extends LitElement {
     this._seconds = diff % 60;
 
     return this.requestUpdate();
-  }
-
-  public render(): TemplateResult {
-    return html`
-      <link rel='stylesheet' href='x-countdown.bundle.css'>
-      ${this.display_time}
-    `;
   }
 
   public disconnectedCallback(): void {
