@@ -1,8 +1,8 @@
+@import '../definitions/variables.pcss';
+
 :root {
   font-size: 16px;
   font-family: 'Inter-UI', sans-serif;
-
-  --theme-color: lch(60 97 48);
 }
 
 body {
@@ -54,9 +54,15 @@ youtube-video {
   grid-area: youtube;
 }
 
+@svg-load logo url('logo.svg') {
+  stop {
+    stop-color: $theme-color;
+  }
+}
+
 .logo {
   grid-area: logo;
-  background: svg-load('logo.svg') left center / contain no-repeat;
+  background: svg-inline(logo) left center / contain no-repeat;
 }
 
 x-sections {

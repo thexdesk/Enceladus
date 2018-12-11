@@ -16,13 +16,12 @@ import * as commonjs from 'rollup-plugin-commonjs';
 // @ts-ignore
 import * as node_resolve from 'rollup-plugin-node-resolve';
 // @ts-ignore
+import * as rollup_plugin_postcss from 'rollup-plugin-postcss';
+// @ts-ignore
 import { terser } from 'rollup-plugin-terser';
 // @ts-ignore
 import * as typescript from 'rollup-plugin-typescript';
 import * as sw_precache from 'sw-precache';
-
-// @ts-ignore
-import * as rollup_plugin_postcss from 'rollup-plugin-postcss';
 
 const config = {
   css: {
@@ -133,7 +132,7 @@ export const build = series(clean, parallel(html, js, css, assets), sw);
 
 // tslint:disable-next-line no-shadowed-variable
 export const watch = series(build, function watch(): void {
-  gulp_watch(`${config.css.src_dir}/**/*.pcss`, series(css, sw));
+  gulp_watch(`${config.css.src_dir}/**/*.pcss`, series(parallel(js, css), sw));
   gulp_watch(`${config.html.src_dir}/**/*.html`, series(html, sw));
   gulp_watch(`${config.js.src_dir}/**/*.(j|t)s`, series(js, sw));
   gulp_watch(`${config.assets.src_dir}/**/*`, series(assets, sw));

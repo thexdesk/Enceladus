@@ -19,6 +19,15 @@ module.exports = {
     'time-min-milliseconds': 100,
     'value-no-vendor-prefix': true,
 
+    'at-rule-no-unknown': [
+      true,
+      {
+        ignoreAtRules: [
+          'svg-load',
+        ],
+      },
+    ],
+
     'property-no-unknown': [
       true,
       {

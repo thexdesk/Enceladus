@@ -1,3 +1,5 @@
+@import '../definitions/variables.pcss';
+
 /*
  * Browsers that don't support CSS Scrollbars level 1
  * _may_ support ::-webkit-scrollbar syntax.
@@ -11,7 +13,7 @@
 
   ::-webkit-scrollbar-thumb {
     corner-radius: 1px;
-    background-color: var(--theme-color);
+    background-color: $theme-color;
   }
 }
 
@@ -27,7 +29,7 @@
  */
 @supports (scrollbar-color: red) {
   :root {
-    scrollbar-color: var(--theme-color) transparent;
+    scrollbar-color: $theme-color transparent;
     scrollbar-width: 5px;
   }
 }
