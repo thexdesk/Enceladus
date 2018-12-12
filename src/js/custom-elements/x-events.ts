@@ -49,6 +49,8 @@ export class Events extends LitElement {
     this.events[id] = { posted, utc, terminal_count, message };
     this.ids.push(id);
 
+    this.ids.sort(this.compare);
+
     if (update) {
       return this.requestUpdate();
     }
@@ -57,6 +59,9 @@ export class Events extends LitElement {
   // cannot be named `update` due to conflict with LitElement
   public modify({ id, posted, utc, terminal_count, message }: Update<Event>): Promise<unknown> {
     assign_defined(this.events[id], { posted, utc, terminal_count, message });
+    if (utc !== undefined) {
+      this.ids.sort(this.compare);
+    }
     return this.requestUpdate();
   }
 
@@ -64,6 +69,10 @@ export class Events extends LitElement {
     this.ids = this.ids.filter($ => $ !== id);
     delete this.events[id];
     return this.updateComplete;
+  }
+
+  private compare(a: number, b: number): number {
+    return this.events[b].utc - this.events[a].utc;
   }
 
   @property public ids: number[] = [];
