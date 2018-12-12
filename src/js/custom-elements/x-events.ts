@@ -19,7 +19,7 @@ export class Events extends LitElement {
         <h1>LIVE UPDATES</h1>
 
         <div role='row'>
-          <div role='columnheader'>UTC</div>
+          <div role='columnheader'>Time</div>
           <div role='columnheader'>Count</div>
           <div role='columnheader'>Update</div>
         </div>
@@ -27,10 +27,13 @@ export class Events extends LitElement {
 
       ${repeat(this.ids, id => {
         const event = this.events[id];
+        const time = new Date(event.utc * 1_000)
+          .toLocaleTimeString(undefined, { hour: 'numeric', minute: 'numeric' });
+
         return event.posted
         ? html`
           <div role='row'>
-            <div class='tnum' role='cell'>${event.utc}</div>
+            <div class='tnum' role='cell'>${time}</div>
             <div class='tnum' role='cell'>${event.terminal_count}</div>
             <div role='cell'>${unsafeHTML(event.message)}</div>
           </div>

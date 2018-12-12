@@ -15,23 +15,22 @@
   contain: layout style;
 
   display: grid;
-  grid: auto-flow min-content / 3rem 4rem 1fr;
+  grid: auto-flow min-content / repeat(2, max-content) 1fr;
   gap: 0.4rem 1rem;
 }
 
 header {
-  grid-column: 1 / -1;
-
   position: sticky;
   inset-block-start: 0;
   background-color: gray(0);
 
-  /* not used here, pass this through to the header row */
-  grid-template-columns: inherit;
-  gap: inherit;
+  grid-column: 1 / -1;
+  display: contents;
 }
 
 h1 {
+  grid-column: 1 / -1;
+
   font-size: 1.7rem;
   letter-spacing: +0.15ch;
   padding-block-end: 0.3ex;
@@ -60,18 +59,15 @@ h1 {
 }
 
 [role='row'] {
+  display: contents;
   grid-column: 1 / -1;
-
-  display: grid;
-  grid-template-columns: inherit;
-  gap: inherit;
 
   @nest header & {
     font-variation-settings: 'wght' 600;
     padding-block-end: 0.5ex;
   }
 
-  &:not(:first-of-type):last-of-type {
+  @nest header ~ &:last-child > * {
     padding-block-end: 2rem;
   }
 }
