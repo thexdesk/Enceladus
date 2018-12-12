@@ -9,3 +9,4 @@ import './custom-elements/x-modal';
 
 import './initialize';
 import './sockets';
+import './authenticate';
