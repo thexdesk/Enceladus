@@ -5,14 +5,7 @@
  */
 
 :host {
-  /*
-  https://bugzilla.mozilla.org/show_bug.cgi?id=1511757
-
-  temporary changed to `contain: layout style`.
-  when the bug is fixed,
-  this should be reverted to `contain: content`.
-  */
-  contain: layout style;
+  contain: content;
 
   display: grid;
   grid: auto-flow min-content / repeat(2, max-content) 1fr;
@@ -25,7 +18,18 @@ header {
   background-color: gray(0);
 
   grid-column: 1 / -1;
-  display: contents;
+}
+
+[role='columnheader'] {
+  display: inline-block;
+
+  &:nth-of-type(2) {
+    /*
+    we need to approximate the column width,
+    as we're unable to determine the widths of the columns below
+    */
+    margin-inline: 2rem;
+  }
 }
 
 h1 {
@@ -60,9 +64,8 @@ h1 {
 
 [role='row'] {
   display: contents;
-  grid-column: 1 / -1;
 
-  @nest header & {
+  @nest header & > * {
     font-variation-settings: 'wght' 600;
     padding-block-end: 0.5ex;
   }

@@ -49,7 +49,7 @@ export class Events extends LitElement {
     this.events[id] = { posted, utc, terminal_count, message };
     this.ids.push(id);
 
-    this.ids.sort(this.compare);
+    this.ids.sort(this.compare.bind(this));
 
     if (update) {
       return this.requestUpdate();
@@ -60,7 +60,7 @@ export class Events extends LitElement {
   public modify({ id, posted, utc, terminal_count, message }: Update<Event>): Promise<unknown> {
     assign_defined(this.events[id], { posted, utc, terminal_count, message });
     if (utc !== undefined) {
-      this.ids.sort(this.compare);
+      this.ids.sort(this.compare.bind(this));
     }
     return this.requestUpdate();
   }
