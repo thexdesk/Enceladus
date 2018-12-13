@@ -51,7 +51,6 @@
     "postcss-short-size": "^4.0.0",
     "postcss-short-spacing": "^4.0.0",
     "postcss-simple-vars": "^5.0.1",
-    "postcss-svgo": "^4.0.1",
     "postcss-time-machine": "^4.0.0",
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-node-resolve": "^4.0.0",

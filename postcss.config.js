@@ -24,7 +24,6 @@ module.exports = {
         'node_modules/@fortawesome/fontawesome-free/svgs',
       ],
     }),
-    require('postcss-svgo'),
     require('cssnano'),
   ],
 };
