@@ -1,10 +1,11 @@
 import { events_elem, header_elem, links_elem, sections_elem, youtube_elem } from './elements';
 import Sockette from 'sockette';
 import { assign_defined } from '@jhpratt/assign-defined';
+import { ws_url } from './helpers/variable-declarations';
 
 let ws: Nullable<Sockette> = null;
 export function init_socket(thread_id: number): void {
-  ws = new Sockette('ws://localhost:3000', {
+  ws = new Sockette(ws_url, {
     onopen: onopen.bind({ thread_id }),
     onmessage: onmessage.bind({ thread_id }),
     onreconnect: onopen.bind({ thread_id }),

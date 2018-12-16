@@ -8,6 +8,7 @@ import {
 } from './elements';
 import esfetch from 'esfetch';
 import { init_socket } from './sockets';
+import { server_url } from './helpers/variable-declarations';
 
 if (window.isSecureContext) {
   navigator.serviceWorker.register('sw.js'); // tslint:disable-line no-floating-promises
@@ -15,16 +16,16 @@ if (window.isSecureContext) {
 
 export function get_thread_data(id: string | number): Promise<APIThreadData<true>> {
   // tslint:disable-next-line newline-per-chained-call
-  return esfetch(`http://localhost:3000/v1/thread/${id}?with=events`).get();
+  return esfetch(`${server_url}/v1/thread/${id}?with=events`).get();
 }
 
 export async function initialize({
   id,
   launch_name,
-  t0,
-  youtube_id,
-  post_id,
-  sections,
+  t0 = null,
+  youtube_id = null,
+  post_id = null,
+  sections = [],
 }: APIThreadData<true>): Promise<number> {
   const promises: Promise<unknown>[] = [];
 
