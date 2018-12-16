@@ -1,3 +1,5 @@
+import { server_url } from './helpers/variable-declarations';
+
 export let api_jwt = localStorage.getItem('api_jwt');
 export let username = localStorage.getItem('username');
 export let lang = localStorage.getItem('lang');
@@ -20,6 +22,6 @@ if (![params.token, params.username, params.lang].includes(null)) {
   window.history.replaceState(undefined, '', url.href);
 } else if ([api_jwt, username, lang].includes(null)) {
   window.location.assign(
-    `http://localhost:3000/oauth?callback=${encodeURIComponent(window.location.href)}`,
+    `${server_url}/oauth?callback=${encodeURIComponent(window.location.href)}`,
   );
 }

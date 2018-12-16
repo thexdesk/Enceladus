@@ -1,3 +1,5 @@
+@import '../definitions/variables.pcss';
+
 :host {
   position: fixed;
   inset-block-start: 0;
@@ -30,7 +32,32 @@
   border-radius: 0.5rem;
 }
 
-#error {
+input {
+  border: 1px solid lch(0 0 0 / 50%);
+  corner-radius: 0.4rem;
+  padding: 0.5rem;
+  inline-size: 100%;
+  margin-block-start: -0.5rem;
+  transition: border-color 150ms;
+
+  &:focus {
+    box-shadow: 0 1px 0.4rem $theme-color;
+  }
+
+  &:hover:not(:focus) {
+    border-color: lch(0 0 0 / 75%);
+  }
+}
+
+#continuation_error,
+#creation_error {
   color: lch(40 100 30);
   font-family: 'Inter-UI italic', sans-serif;
+}
+
+hr {
+  inline-size: 100%;
+  block-size: 0;
+  border: 0;
+  border-block-end: 1px solid lch(0 0 0 / 50%);
 }
