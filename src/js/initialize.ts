@@ -4,7 +4,7 @@ import {
   links_elem,
   events_elem,
   sections_elem,
-  modal_elem,
+  init_modal_elem,
 } from './elements';
 import esfetch from 'esfetch';
 import { init_socket } from './sockets';
@@ -62,5 +62,5 @@ if (thread_id !== null) {
   get_thread_data(thread_id)
     .then(initialize)
     .then(init_socket)
-    .then(() => modal_elem.remove());
+    .then(() => init_modal_elem.remove());
 }

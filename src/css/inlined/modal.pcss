@@ -12,10 +12,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
-  &[hidden] {
-    display: none;
-  }
 }
 
 .modal {
@@ -32,23 +28,39 @@
   border-radius: 0.5rem;
 }
 
-#continuation_error {
-  color: lch(40 100 30);
-}
-
 input {
   border: 1px solid lch(0 0 0 / 50%);
   corner-radius: 0.4rem;
   padding: 0.5rem;
   inline-size: 100%;
   margin-block-start: -0.5rem;
-  transition: border-color 150ms;
+  transition: border-color 150ms, box-shadow 150ms;
 
   &:focus {
     box-shadow: 0 1px 0.4rem $theme-color;
   }
 
-  &:hover:not(:focus) {
+  &:invalid {
+    box-shadow: 0 1px 0.4rem lch(50 100 30);
+  }
+
+  &:valid:hover:not(:focus) {
     border-color: lch(0 0 0 / 75%);
   }
+}
+
+.error {
+  color: lch(40 100 30);
+  font-family: 'Inter-UI italic', sans-serif;
+}
+
+hr {
+  inline-size: 100%;
+  block-size: 0;
+  border: 0;
+  border-block-end: 1px solid lch(0 0 0 / 50%);
+}
+
+label {
+  text-align: center;
 }

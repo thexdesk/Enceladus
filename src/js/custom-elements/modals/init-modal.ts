@@ -1,15 +1,14 @@
 import { LitElement, html } from '@polymer/lit-element';
-import { sealed, customElement, attribute } from '../helpers/decorators';
+import { sealed, customElement, attribute } from '../../helpers/decorators';
 import { TemplateResult } from 'lit-html';
-import { get_thread_data, initialize } from '../initialize';
-import css from '../../css/inlined/x-modal.pcss';
+import { get_thread_data, initialize } from '../../initialize';
+import css from '../../../css/inlined/modal.pcss';
 
 @sealed
-@customElement('x-modal' as any)
+@customElement('init-modal' as any)
 @attribute('role', 'dialog')
 @attribute('aria-modal', '')
-@attribute('aria-label', 'Please enter a thread ID.')
-export class Modal extends LitElement {
+export class InitModal extends LitElement {
   public render(): TemplateResult {
     return html`
       <style>${css}</style>

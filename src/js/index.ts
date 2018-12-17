@@ -5,7 +5,8 @@ import './custom-elements/x-twitter';
 import './custom-elements/x-sections';
 import './custom-elements/x-events';
 import './custom-elements/x-links';
-import './custom-elements/x-modal';
+
+import './custom-elements/modals/init-modal';
 
 import './initialize';
 import './sockets';
