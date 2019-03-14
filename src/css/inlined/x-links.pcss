@@ -9,14 +9,17 @@
 a {
   /* stylelint-disable rule-empty-line-before, at-rule-empty-line-before */
   display: inline-block;
+
   &:not(:first-of-type) {
     margin-inline-start: 1rem;
   }
 
   transition: opacity 150ms;
+
   @media (prefers-reduced-motion) {
     transition: unset;
   }
+
   &:not(:hover) {
     opacity: 0.3;
   }

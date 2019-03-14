@@ -1,18 +1,20 @@
 import './x-countdown';
-import { LitElement, html } from '@polymer/lit-element';
+import { LitElement, html } from 'lit-element';
 import { sealed, property, attribute, customElement } from '../helpers/decorators';
 import { TemplateResult } from 'lit-html';
 import css from '../../css/inlined/x-header.pcss';
 
 @sealed
-@customElement('x-header' as any)
+@customElement('x-header')
 @attribute('role', 'region')
 export class Header extends LitElement {
   public render(): TemplateResult {
     return html`
-      <style>${css}</style>
-      <div role='header' aria-description='launch name'>${this.launch_name}</div>
-      <x-countdown .t0='${this.t0}'></x-countdown>
+      <style>
+        ${css}
+      </style>
+      <div role="header" aria-description="launch name">${this.launch_name}</div>
+      <x-countdown .t0="${this.t0}"></x-countdown>
     `;
   }
 

@@ -1,4 +1,4 @@
-import { LitElement, html } from '@polymer/lit-element';
+import { LitElement, html } from 'lit-element';
 import { unsafeHTML, repeat } from '../helpers/directives';
 import { sealed, property, attribute, customElement } from '../helpers/decorators';
 import { TemplateResult } from 'lit-html';
@@ -9,19 +9,24 @@ import css from '../../css/inlined/x-sections.pcss';
 type Section = Pick<APISectionData<boolean>, 'name' | 'content' | 'events_id'>;
 
 @sealed
-@customElement('x-sections' as any)
+@customElement('x-sections')
 @attribute('role', 'region')
 export class Sections extends LitElement {
   public render(): TemplateResult {
     return html`
-      <style>${css}</style>
+      <style>
+        ${css}
+      </style>
       <header>LAUNCH INFORMATION</header>
-      ${repeat(this.ids, id => html`
-        <div>
-          <h1>${this.sections[id].name}</h1>
-          ${unsafeHTML(marked(this.sections[id].content))}
-        </div>
-      `)}
+      ${repeat(
+        this.ids,
+        id => html`
+          <div>
+            <h1>${this.sections[id].name}</h1>
+            ${unsafeHTML(marked(this.sections[id].content))}
+          </div>
+        `,
+      )}
     `;
   }
 

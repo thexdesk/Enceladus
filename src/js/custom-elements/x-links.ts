@@ -1,30 +1,32 @@
-import { LitElement, html } from '@polymer/lit-element';
+import { LitElement, html } from 'lit-element';
 import { sealed, property, attribute, customElement } from '../helpers/decorators';
-import { TemplateResult } from 'lit-html';
+import { TemplateResult, nothing } from 'lit-html';
 import css from '../../css/inlined/x-links.pcss';
 
 @sealed
-@customElement('x-links' as any)
+@customElement('x-links')
 @attribute('role', 'navigation')
 export class Links extends LitElement {
   public render(): TemplateResult {
     return html`
-      <style>${css}</style>
+      <style>
+        ${css}
+      </style>
       <a
-        class='reddit'
-        target='_blank'
-        rel='noopener'
-        aria-hidden='${this.reddit_id === null}'
-        aria-description='reddit thread'
-        href='${this.reddit_id === null ? '' : `https://reddit.com/${this.reddit_id}`}'
+        class="reddit"
+        target="_blank"
+        rel="noopener"
+        aria-hidden="${this.reddit_id === null}"
+        aria-description="reddit thread"
+        href="${this.reddit_id === null ? nothing : `https://reddit.com/${this.reddit_id}`}"
       ></a>
 
       <a
-        class='github'
-        target='_blank'
-        rel='noopener'
-        aria-description='source code'
-        href='https://github.com/r-spacex/Enceladus-LTI'
+        class="github"
+        target="_blank"
+        rel="noopener"
+        aria-description="source code"
+        href="https://github.com/r-spacex/Enceladus-LTI"
       ></a>
     `;
   }

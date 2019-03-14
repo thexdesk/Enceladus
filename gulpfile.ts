@@ -21,7 +21,6 @@ import * as rollup_plugin_postcss from 'rollup-plugin-postcss';
 import { terser } from 'rollup-plugin-terser';
 // @ts-ignore
 import * as typescript from 'rollup-plugin-typescript';
-import * as sw_precache from 'sw-precache';
 
 const config = {
   css: {
@@ -48,7 +47,7 @@ const config = {
 
 export function css(): NodeJS.ReadWriteStream {
   return src(`${config.css.src_dir}/*.pcss`)
-    .pipe<NodeJS.ReadWriteStream>((postcss()))
+    .pipe<NodeJS.ReadWriteStream>(postcss())
     .pipe(rename({ extname: '.bundle.css' }))
     .pipe(dest(config.out_dir));
 }
@@ -96,13 +95,6 @@ export function js(): NodeJS.ReadWriteStream {
     .pipe(dest(config.out_dir));
 }
 
-export function sw(): Promise<string> {
-  return sw_precache.write(`${config.out_dir}/sw.js`, {
-    staticFileGlobs: [`${config.out_dir}/**/*.{js,css,html,ttf}`],
-    stripPrefix: config.out_dir,
-  });
-}
-
 export function html(): NodeJS.ReadWriteStream {
   return src(`${config.html.src_dir}/*.html`, { since: lastRun(html) })
     .pipe(
@@ -124,18 +116,18 @@ export function assets(): NodeJS.ReadWriteStream {
     .pipe(dest(`${config.out_dir}/${config.assets.out_dir}`));
 }
 
-export function clean(): Promise<string[]> {
-  return del('dist');
+export function clean(): Promise<unknown> {
+  return del.default('dist');
 }
 
-export const build = series(clean, parallel(html, js, css, assets), sw);
+export const build = series(clean, parallel(html, js, css, assets));
 
 // tslint:disable-next-line no-shadowed-variable
 export const watch = series(build, function watch(): void {
-  gulp_watch(`${config.css.src_dir}/**/*.pcss`, series(parallel(js, css), sw));
-  gulp_watch(`${config.html.src_dir}/**/*.html`, series(html, sw));
-  gulp_watch(`${config.js.src_dir}/**/*.(j|t)s`, series(js, sw));
-  gulp_watch(`${config.assets.src_dir}/**/*`, series(assets, sw));
+  gulp_watch(`${config.css.src_dir}/**/*.pcss`, parallel(js, css));
+  gulp_watch(`${config.html.src_dir}/**/*.html`, html);
+  gulp_watch(`${config.js.src_dir}/**/*.(j|t)s`, js);
+  gulp_watch(`${config.assets.src_dir}/**/*`, assets);
 });
 
 // tslint:disable-next-line no-default-export

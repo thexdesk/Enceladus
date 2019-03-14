@@ -1,7 +1,7 @@
 import { sealed, customElement } from '../helpers/decorators';
 
 @sealed
-@customElement('x-twitter' as any)
+@customElement('x-twitter')
 export class Twitter extends HTMLElement {
   /**
    * Add the Twitter widget underneath a header.

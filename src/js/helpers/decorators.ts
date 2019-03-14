@@ -1,5 +1,5 @@
-import { property as orig_property, Constructor, LitElement } from '@polymer/lit-element';
-export { customElement } from '@polymer/lit-element';
+import { property as orig_property, Constructor, LitElement } from 'lit-element';
+export { customElement } from 'lit-element';
 export { sealed, frozen } from '@jhpratt/decorators';
 
 export const property = orig_property({ attribute: false });

@@ -1,4 +1,4 @@
-import { LitElement, html } from '@polymer/lit-element';
+import { LitElement, html } from 'lit-element';
 import { sealed, customElement, attribute } from '../../helpers/decorators';
 import { TemplateResult } from 'lit-html';
 import { get_thread_data, initialize } from '../../initialize';
@@ -11,13 +11,15 @@ import css from '../../../css/inlined/modal.pcss';
 export class InitModal extends LitElement {
   public render(): TemplateResult {
     return html`
-      <style>${css}</style>
-      <div class='modal'>
+      <style>
+        ${css}
+      </style>
+      <div class="modal">
         <div>Continuing an existing thread?</div>
-        <label for='thread_id'>Enter a thread ID.</label>
-        <input @keyup='${this.submit_continue_if_enter.bind(this)}' id='thread_id' type='number'>
-        <button @click='${this.submit_continue.bind(this)}'>Launch!</button>
-        <div id='continuation_error'></div>
+        <label for="thread_id">Enter a thread ID.</label>
+        <input @keyup="${this.submit_continue_if_enter.bind(this)}" id="thread_id" type="number" />
+        <button @click="${this.submit_continue.bind(this)}">Launch!</button>
+        <div id="continuation_error"></div>
       </div>
     `;
   }
@@ -35,7 +37,7 @@ export class InitModal extends LitElement {
     }
   }
 
-  private get_thread_data(): Promise<APIThreadData<true>> {
+  private async get_thread_data(): Promise<APIThreadData<true>> {
     const id = Number(this.shadowRoot!.querySelector<HTMLInputElement>('#thread_id')!.value);
 
     // reject early if possible to avoid server call
@@ -44,11 +46,12 @@ export class InitModal extends LitElement {
       return Promise.reject();
     }
 
-    return get_thread_data(id)
-      .catch(err => {
-        this.shadowRoot!.getElementById('continuation_error')!.innerHTML = 'Thread not found.';
-        return Promise.reject(err);
-      });
+    try {
+      return get_thread_data(id);
+    } catch (err) {
+      this.shadowRoot!.getElementById('continuation_error')!.innerHTML = 'Thread not found.';
+      return Promise.reject(err);
+    }
   }
 
   private async submit_continue(): Promise<void> {

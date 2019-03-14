@@ -1,4 +1,4 @@
-import { LitElement, html } from '@polymer/lit-element';
+import { LitElement, html } from 'lit-element';
 import { sealed, customElement, attribute } from '../helpers/decorators';
 import { TemplateResult } from 'lit-html';
 import css from '../../css/inlined/x-countdown.pcss';
@@ -15,7 +15,7 @@ function pad(n: number): string {
 }
 
 @sealed
-@customElement('x-countdown' as any)
+@customElement('x-countdown')
 @attribute('role', 'timer')
 @attribute('aria-description', 'countdown clock')
 export class Countdown extends LitElement {
@@ -28,7 +28,9 @@ export class Countdown extends LitElement {
 
   public render(): TemplateResult {
     return html`
-      <style>${css}</style>
+      <style>
+        ${css}
+      </style>
       ${this.display_time}
     `;
   }
@@ -73,15 +75,12 @@ export class Countdown extends LitElement {
       return Promise.resolve();
     }
 
-    this._sign =
-      this._t0 < Date.now() / 1000
-      ? '+'
-      : '-';
+    this._sign = this._t0 < Date.now() / 1000 ? '+' : '-';
 
     const diff = Math.floor(Math.abs(this._t0 - Date.now() / 1000));
 
     this._hours = Math.floor(diff / 3600);
-    this._minutes = Math.floor(diff % 3600 / 60);
+    this._minutes = Math.floor((diff % 3600) / 60);
     this._seconds = diff % 60;
 
     return this.requestUpdate();
