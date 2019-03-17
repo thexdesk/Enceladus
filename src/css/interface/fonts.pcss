@@ -1,15 +1,14 @@
-$inter-ui: 'assets/Inter-UI.var.ttf';
+$inter: 'assets/Inter.var.woff2';
 
 /**
  * Want to make the font _bold_,
- * or add a specific Inter-UI feature?
+ * or add a specific Inter feature?
  *
  * CSS _does not_ replace,
  * but rather adds features and variations.
  *
  * To add bold,
  * use the normal `font-weight` property.
- * Inter-UI's range is from 400 to 900.
  *
  * To add another feature,
  * such as `tnum` (monospace numerals) or `zero` (slashed zero),
@@ -18,15 +17,15 @@ $inter-ui: 'assets/Inter-UI.var.ttf';
  */
 
 @font-face {
-  font-family: 'Inter-UI';
-  src: url($inter-ui);
+  font-family: 'Inter';
+  src: url($inter);
   font-variation-settings: 'wght' 400;
   font-feature-settings: 'salt';
 }
 
 @font-face {
-  font-family: 'Inter-UI italic';
-  src: url($inter-ui);
+  font-family: 'Inter italic';
+  src: url($inter);
   font-variation-settings: 'wght' 400, 'slnt' 10;
   font-feature-settings: 'salt';
 }

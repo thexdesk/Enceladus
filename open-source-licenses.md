@@ -5,7 +5,7 @@ but is useful for others using code in this repository.
 
 [SIL Open Font License v1.1](https://choosealicense.com/licenses/ofl-1.1/)
 
-- [Inter-UI](https://github.com/rsms/inter)
+- [Inter](https://github.com/rsms/inter)
 
 [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/)
 
