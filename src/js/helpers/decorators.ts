@@ -8,12 +8,9 @@ export function attribute(
   _attr: string,
   value: string,
 ): (constructor: Constructor<LitElement>) => any {
-  return (constructor: Constructor<LitElement>) => {
-    // TypeScript doesn't let us return this immediately
-    class Extended extends constructor {
+  return (constructor: Constructor<LitElement>) =>
+    class extends constructor {
       // @ts-ignore Not sure why this is throwing an error, it's absolutely correct.
       @orig_property({ reflect: true }) public [_attr] = value;
-    }
-    return Extended;
-  };
+    };
 }

@@ -13,11 +13,11 @@ export class Header extends LitElement {
       <style>
         ${css}
       </style>
-      <div role="header" aria-description="launch name">${this.launch_name}</div>
-      <x-countdown .t0="${this.t0}"></x-countdown>
+      <div role="header" aria-description="launch name">${this.display_name}</div>
+      <x-countdown .t0="${this.space__t0}"></x-countdown>
     `;
   }
 
-  @property public launch_name = '';
-  @property public t0: Nullable<number> = null;
+  @property public display_name = '';
+  @property public space__t0: Nullable<number> = null;
 }

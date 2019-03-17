@@ -43,31 +43,31 @@ function onmessage(this: { thread_id: number }, event: MessageEvent): void {
   data.action = action;
 
   if (data_type === 'thread') {
-    thread_handler(data as APIData<APIThreadData>);
+    thread_handler(data as APIData<APIThread>);
   } else if (data_type === 'section') {
-    section_handler(data as APIData<APISectionData>);
+    section_handler(data as APIData<APISection>);
   } else if (data_type === 'event') {
-    event_handler(data as APIData<APIEventData>);
+    event_handler(data as APIData<APIEvent>);
   }
 }
 
 function thread_handler({
   action,
-  launch_name,
-  t0,
-  post_id: reddit_id,
-  youtube_id: video_id,
-  sections_id: ids,
-}: APIData<APIThreadData>): void {
+  display_name,
+  space__t0,
+  post_id,
+  youtube_id,
+  sections_id,
+}: APIData<APIThread>): void {
   if (action === 'update') {
-    assign_defined(header_elem, { launch_name, t0 });
-    assign_defined(links_elem, { reddit_id });
-    assign_defined(youtube_elem, { video_id });
-    assign_defined(sections_elem, { ids });
+    assign_defined(header_elem, { display_name, space__t0 });
+    assign_defined(links_elem, { post_id });
+    assign_defined(youtube_elem, { youtube_id });
+    assign_defined(sections_elem, { ids: sections_id });
   }
 }
 
-function section_handler(data: APIData<APISectionData>): Promise<unknown> | void {
+function section_handler(data: APIData<APISection>): Promise<unknown> | void {
   if (data.action === 'delete') {
     return sections_elem.delete(data.id);
   } else if (data.action === 'update') {
@@ -77,7 +77,7 @@ function section_handler(data: APIData<APISectionData>): Promise<unknown> | void
   }
 }
 
-function event_handler(data: APIData<APIEventData>): Promise<unknown> | void {
+function event_handler(data: APIData<APIEvent>): Promise<unknown> | void {
   if (data.action === 'delete') {
     return events_elem.delete(data.id);
   } else if (data.action === 'update') {

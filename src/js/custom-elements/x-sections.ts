@@ -6,7 +6,7 @@ import marked from 'marked';
 import { assign_defined } from '@jhpratt/assign-defined';
 import css from '../../css/inlined/x-sections.pcss';
 
-type Section = Pick<APISectionData<boolean>, 'name' | 'content' | 'events_id'>;
+type Section = Pick<APISection, 'id' | 'name' | 'content'>;
 
 @sealed
 @customElement('x-sections')
@@ -30,11 +30,8 @@ export class Sections extends LitElement {
     `;
   }
 
-  public add(
-    { id, name, content, events_id = [] }: Section & ID,
-    update: boolean = true,
-  ): Promise<unknown> | void {
-    this.sections[id] = { name, content, events_id };
+  public add({ id, name, content }: Section, update: boolean = true): Promise<unknown> | void {
+    this.sections[id] = { name, content };
     this.ids.push(id);
 
     if (update) {
@@ -43,8 +40,8 @@ export class Sections extends LitElement {
   }
 
   // cannot be named `update` due to conflict with LitElement
-  public modify({ id, name, content, events_id }: Partial<Section> & ID): Promise<unknown> {
-    assign_defined(this.sections[id], { id, name, content, events_id });
+  public modify({ id, name, content }: Partial<Section> & { id: number }): Promise<unknown> {
+    assign_defined(this.sections[id], { id, name, content });
     return this.requestUpdate();
   }
 
@@ -55,5 +52,5 @@ export class Sections extends LitElement {
   }
 
   @property public ids: number[] = [];
-  @property public sections: { [key: number]: Section } = {};
+  @property public sections: { [key: number]: Pick<Section, 'name' | 'content'> } = {};
 }

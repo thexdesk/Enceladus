@@ -10,47 +10,41 @@ import esfetch from 'esfetch';
 import { init_socket } from './sockets';
 import { server_url } from './helpers/variable-declarations';
 
-if (window.isSecureContext) {
-  navigator.serviceWorker.register('sw.js'); // tslint:disable-line no-floating-promises
-}
-
-export function get_thread_data(id: string | number): Promise<APIThreadData<true>> {
+export function get_thread_data(id: string | number): Promise<APIFullThread> {
   // tslint:disable-next-line newline-per-chained-call
-  return esfetch(`${server_url}/v1/thread/${id}?with=events`).get();
+  return esfetch(`${server_url}/v1/thread/${id}/full`).get();
 }
 
 export async function initialize({
   id,
-  launch_name,
-  t0 = null,
-  youtube_id = null,
-  post_id = null,
-  sections = [],
-}: APIThreadData<true>): Promise<number> {
+  display_name,
+  space__t0,
+  youtube_id,
+  post_id,
+  sections,
+  events,
+}: APIFullThread): Promise<number> {
   const promises: Promise<unknown>[] = [];
 
   // assign header data
-  header_elem.launch_name = launch_name;
-  header_elem.t0 = t0;
+  header_elem.display_name = display_name;
+  header_elem.space__t0 = space__t0;
 
   // assign YouTube data
-  youtube_elem.video_id = youtube_id;
+  youtube_elem.youtube_id = youtube_id;
 
   // assign links data
-  links_elem.reddit_id = post_id;
+  links_elem.post_id = post_id;
 
   // assign sections data
   sections
-    .filter(({ events: { length }}) => length === 0)
+    .filter(({ is_events_section }) => !is_events_section)
     .forEach(data => sections_elem.add(data, false));
   promises.push(sections_elem.requestUpdate());
 
   // assign events data
-  const events_section = sections.find(({ events: { length }}) => length !== 0);
-  if (events_section !== undefined) {
-    events_section.events.forEach(data => events_elem.add(data, false));
-    promises.push(events_elem.requestUpdate());
-  }
+  events.forEach(data => events_elem.add(data, false));
+  promises.push(events_elem.requestUpdate());
 
   await Promise.all(promises);
   return id;

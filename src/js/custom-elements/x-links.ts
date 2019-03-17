@@ -16,9 +16,9 @@ export class Links extends LitElement {
         class="reddit"
         target="_blank"
         rel="noopener"
-        aria-hidden="${this.reddit_id === null}"
+        aria-hidden="${this.post_id === null}"
         aria-description="reddit thread"
-        href="${this.reddit_id === null ? nothing : `https://reddit.com/${this.reddit_id}`}"
+        href="${this.post_id === null ? nothing : `https://reddit.com/${this.post_id}`}"
       ></a>
 
       <a
@@ -31,5 +31,5 @@ export class Links extends LitElement {
     `;
   }
 
-  @property public reddit_id: Nullable<string> = null;
+  @property public post_id: Nullable<string> = null;
 }

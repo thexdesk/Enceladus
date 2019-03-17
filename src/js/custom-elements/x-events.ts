@@ -5,7 +5,12 @@ import { TemplateResult, nothing } from 'lit-html';
 import { assign_defined } from '@jhpratt/assign-defined';
 import css from '../../css/inlined/x-events.pcss';
 
-type Event = Pick<APIEventData, 'posted' | 'utc' | 'terminal_count' | 'message'>;
+// TODO Generalize the events handler,
+// allowing the UTC column to be in _any_ location.
+// Currently, we're working on the assumption
+// that the data is originating from this interface.
+
+type Event = Pick<APIEvent, 'id' | 'posted' | 'cols'>;
 
 @sealed
 @customElement('x-events')
@@ -28,30 +33,33 @@ export class Events extends LitElement {
       </header>
 
       ${repeat(this.ids, id => {
-        const event = this.events[id];
-        const time = new Date(event.utc * 1_000).toLocaleTimeString(undefined, {
+        const {
+          posted,
+          cols: [utc, terminal_count, message],
+        } = this.events[id];
+
+        if (!posted) {
+          return nothing;
+        }
+
+        const time = new Date((utc as number) * 1_000).toLocaleTimeString(undefined, {
           hour: 'numeric',
           minute: 'numeric',
         });
 
-        return event.posted
-          ? html`
-              <div role="row">
-                <div class="tnum" role="cell">${time}</div>
-                <div class="tnum" role="cell">${event.terminal_count}</div>
-                <div role="cell">${unsafeHTML(event.message)}</div>
-              </div>
-            `
-          : nothing;
+        return html`
+          <div role="row">
+            <div class="tnum" role="cell">${time}</div>
+            <div class="tnum" role="cell">${terminal_count}</div>
+            <div role="cell">${unsafeHTML(message)}</div>
+          </div>
+        `;
       })}
     `;
   }
 
-  public add(
-    { id, posted, utc, terminal_count, message }: Create<Event>,
-    update: boolean = true,
-  ): Promise<unknown> | void {
-    this.events[id] = { posted, utc, terminal_count, message };
+  public add({ id, posted, cols }: Create<Event>, update: boolean = true): Promise<unknown> | void {
+    this.events[id] = { posted, cols };
     this.ids.push(id);
 
     this.ids.sort(this.compare.bind(this));
@@ -62,9 +70,10 @@ export class Events extends LitElement {
   }
 
   // cannot be named `update` due to conflict with LitElement
-  public modify({ id, posted, utc, terminal_count, message }: Update<Event>): Promise<unknown> {
-    assign_defined(this.events[id], { posted, utc, terminal_count, message });
-    if (utc !== undefined) {
+  public modify({ id, posted, cols }: Update<Event>): Promise<unknown> {
+    assign_defined(this.events[id], { posted, cols });
+
+    if (cols !== undefined) {
       this.ids.sort(this.compare.bind(this));
     }
     return this.requestUpdate();
@@ -77,9 +86,9 @@ export class Events extends LitElement {
   }
 
   private compare(a: number, b: number): number {
-    return this.events[b].utc - this.events[a].utc;
+    return (this.events[b].cols[0] as number) - (this.events[a].cols[0] as number);
   }
 
   @property public ids: number[] = [];
-  @property public events: { [key: number]: Event } = {};
+  @property public events: { [key: number]: Pick<Event, 'posted' | 'cols'> } = {};
 }

@@ -14,13 +14,13 @@ export class YouTube extends LitElement {
       </style>
       <iframe
         title="YouTube"
-        src="${this.video_id === null
+        src="${this.youtube_id === null
           ? nothing
-          : `https://youtube.com/embed/${this.video_id}?autoplay=0`}"
-        ?hidden=${this.video_id === null}
+          : `https://youtube.com/embed/${this.youtube_id}?autoplay=0`}"
+        ?hidden=${this.youtube_id === null}
       ></iframe>
     `;
   }
 
-  @property public video_id: Nullable<string> = null;
+  @property public youtube_id: Nullable<string> = null;
 }

@@ -37,7 +37,7 @@ export class InitModal extends LitElement {
     }
   }
 
-  private async get_thread_data(): Promise<APIThreadData<true>> {
+  private async get_thread_data(): Promise<APIFullThread> {
     const id = Number(this.shadowRoot!.querySelector<HTMLInputElement>('#thread_id')!.value);
 
     // reject early if possible to avoid server call
