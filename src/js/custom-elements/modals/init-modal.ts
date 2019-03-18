@@ -5,7 +5,7 @@ import { get_thread_data, initialize } from '../../initialize';
 import css from '../../../css/inlined/modal.pcss';
 
 @sealed
-@customElement('init-modal' as any)
+@customElement('init-modal')
 @attribute('role', 'dialog')
 @attribute('aria-modal', '')
 export class InitModal extends LitElement {
@@ -25,6 +25,8 @@ export class InitModal extends LitElement {
   }
 
   public async connectedCallback(): Promise<void> {
+    super.connectedCallback();
+
     // we want to be sure that the input element is present,
     // so let's await the initial rendering
     await this.updateComplete;

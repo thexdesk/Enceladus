@@ -7,6 +7,9 @@ cache:
     - node_modules
 
 script:
+  - npm run lint:css
+  - npm run lint:ts
+  - npm run typecheck
   - npm run build
 
 notifications:

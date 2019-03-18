@@ -91,5 +91,7 @@ export class Countdown extends LitElement {
       clearInterval(this._interval);
       this._interval = null;
     }
+
+    super.disconnectedCallback();
   }
 }
