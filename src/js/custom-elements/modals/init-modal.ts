@@ -7,7 +7,7 @@ import css from '../../../css/inlined/modal.pcss';
 @sealed
 @customElement('init-modal')
 @attribute('role', 'dialog')
-@attribute('aria-modal', '')
+@attribute('aria-modal')
 export class InitModal extends LitElement {
   public render(): TemplateResult {
     return html`

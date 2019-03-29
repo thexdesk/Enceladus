@@ -6,7 +6,7 @@ export const property = orig_property({ attribute: false });
 
 export function attribute(
   _attr: string,
-  value: string,
+  value: string = '',
 ): (constructor: Constructor<LitElement>) => any {
   return (constructor: Constructor<LitElement>) =>
     class extends constructor {

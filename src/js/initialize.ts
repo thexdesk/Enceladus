@@ -12,7 +12,7 @@ import { server_url } from './helpers/variable-declarations';
 
 export function get_thread_data(id: string | number): Promise<APIFullThread> {
   // tslint:disable-next-line newline-per-chained-call
-  return esfetch(`${server_url}/v1/thread/${id}/full`).get();
+  return esfetch(`${server_url}/v1/thread/${id}/full?features=space,spacex`).get();
 }
 
 export async function initialize({

@@ -1,3 +1,5 @@
+@import './common.pcss';
+
 :host {
   contain: content;
   display: block;
@@ -38,5 +40,17 @@ p {
 
   &:last-of-type {
     margin-block-end: 1rem;
+  }
+}
+
+th {
+  text-align: start;
+  font-weight: inherit;
+}
+
+th,
+td {
+  &:not(:last-child) {
+    padding: logical * * 0.5rem 0.5rem;
   }
 }

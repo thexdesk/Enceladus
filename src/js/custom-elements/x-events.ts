@@ -1,9 +1,10 @@
-import { LitElement, html } from 'lit-element';
-import { unsafeHTML, repeat } from '../helpers/directives';
-import { sealed, property, attribute, customElement } from '../helpers/decorators';
-import { TemplateResult, nothing } from 'lit-html';
 import { assign_defined } from '@jhpratt/assign-defined';
+import { html, LitElement } from 'lit-element';
+import { nothing, TemplateResult } from 'lit-html';
+import marked from 'marked';
 import css from '../../css/inlined/x-events.pcss';
+import { attribute, customElement, property, sealed } from '../helpers/decorators';
+import { repeat, unsafeHTML } from '../helpers/directives';
 
 // TODO Generalize the events handler,
 // allowing the UTC column to be in _any_ location.
@@ -33,28 +34,28 @@ export class Events extends LitElement {
       </header>
 
       ${repeat(this.ids, id => {
-        const {
-          posted,
-          cols: [utc, terminal_count, message],
-        } = this.events[id];
+      const {
+        posted,
+        cols: [utc, terminal_count, message],
+      } = this.events[id];
 
-        if (!posted) {
-          return nothing;
-        }
+      if (!posted) {
+        return nothing;
+      }
 
-        const time = new Date((utc as number) * 1_000).toLocaleTimeString(undefined, {
-          hour: 'numeric',
-          minute: 'numeric',
-        });
+      const time = new Date((utc as number) * 1_000).toLocaleTimeString(undefined, {
+        hour: 'numeric',
+        minute: 'numeric',
+      });
 
-        return html`
+      return html`
           <div role="row">
             <div class="tnum" role="cell">${time}</div>
             <div class="tnum" role="cell">${terminal_count}</div>
-            <div role="cell">${unsafeHTML(message)}</div>
+            <div role="cell">${unsafeHTML(marked(message as string))}</div>
           </div>
         `;
-      })}
+    })}
     `;
   }
 
