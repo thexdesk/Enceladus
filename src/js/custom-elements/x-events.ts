@@ -1,6 +1,6 @@
 import { assign_defined } from '@jhpratt/assign-defined';
 import { html, LitElement } from 'lit-element';
-import { nothing, TemplateResult } from 'lit-html';
+import { nothing } from 'lit-html';
 import marked from 'marked';
 import css from '../../css/inlined/x-events.pcss';
 import { attribute, customElement, property, sealed } from '../helpers/decorators';
@@ -18,7 +18,7 @@ type Event = Pick<APIEvent, 'id' | 'posted' | 'cols'>;
 @attribute('role', 'table region')
 @attribute('aria-live', 'polite')
 export class Events extends LitElement {
-  public render(): TemplateResult {
+  render() {
     return html`
       <style>
         ${css}
@@ -26,40 +26,40 @@ export class Events extends LitElement {
       <header>
         <h1>LIVE UPDATES</h1>
 
-        <div role="row">
-          <div role="columnheader">Time</div>
-          <div role="columnheader">Count</div>
-          <div role="columnheader">Update</div>
+        <div role='row'>
+          <div role='columnheader'>Time</div>
+          <div role='columnheader'>Count</div>
+          <div role='columnheader'>Update</div>
         </div>
       </header>
 
       ${repeat(this.ids, id => {
-      const {
-        posted,
-        cols: [utc, terminal_count, message],
-      } = this.events[id];
+        const {
+          posted,
+          cols: [utc, terminal_count, message],
+        } = this.events[id];
 
-      if (!posted) {
-        return nothing;
-      }
+        if (!posted) {
+          return nothing;
+        }
 
-      const time = new Date((utc as number) * 1_000).toLocaleTimeString(undefined, {
-        hour: 'numeric',
-        minute: 'numeric',
-      });
+        const time = new Date((utc as number) * 1_000).toLocaleTimeString(undefined, {
+          hour: 'numeric',
+          minute: 'numeric',
+        });
 
-      return html`
-          <div role="row">
-            <div class="tnum" role="cell">${time}</div>
-            <div class="tnum" role="cell">${terminal_count}</div>
-            <div role="cell">${unsafeHTML(marked(message as string))}</div>
+        return html`
+          <div role='row'>
+            <div class='tnum' role='cell'>${time}</div>
+            <div class='tnum' role='cell'>${terminal_count}</div>
+            <div role='cell'>${unsafeHTML(marked(message as string))}</div>
           </div>
         `;
-    })}
+      })}
     `;
   }
 
-  public add({ id, posted, cols }: Create<Event>, update: boolean = true): Promise<unknown> | void {
+  add({ id, posted, cols }: Create<Event>, update = true) {
     this.events[id] = { posted, cols };
     this.ids.push(id);
 
@@ -68,10 +68,11 @@ export class Events extends LitElement {
     if (update) {
       return this.requestUpdate();
     }
+    return Promise.resolve();
   }
 
   // cannot be named `update` due to conflict with LitElement
-  public modify({ id, posted, cols }: Update<Event>): Promise<unknown> {
+  modify({ id, posted, cols }: Update<Event>) {
     assign_defined(this.events[id], { posted, cols });
 
     if (cols !== undefined) {
@@ -80,16 +81,17 @@ export class Events extends LitElement {
     return this.requestUpdate();
   }
 
-  public delete(id: number): Promise<unknown> {
+  delete(id: number) {
     this.ids = this.ids.filter($ => $ !== id);
     delete this.events[id];
     return this.updateComplete;
   }
 
-  private compare(a: number, b: number): number {
+  private compare(a: number, b: number) {
+    // TODO change `0` to `utc_col_index`
     return (this.events[b].cols[0] as number) - (this.events[a].cols[0] as number);
   }
 
-  @property public ids: number[] = [];
-  @property public events: { [key: number]: Pick<Event, 'posted' | 'cols'> } = {};
+  @property ids: number[] = [];
+  @property events: { [key: number]: Pick<Event, 'posted' | 'cols'> } = {};
 }

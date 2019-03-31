@@ -4,7 +4,7 @@ import { assign_defined } from '@jhpratt/assign-defined';
 import { ws_url } from './helpers/variable-declarations';
 
 let ws: Nullable<Sockette> = null;
-export function init_socket(thread_id: number): void {
+export function init_socket(thread_id: number) {
   ws = new Sockette(ws_url, {
     onopen: onopen.bind({ thread_id }),
     onmessage: onmessage.bind({ thread_id }),
@@ -12,17 +12,17 @@ export function init_socket(thread_id: number): void {
   });
 }
 
-export function join_rooms(...rooms: string[]): void {
+export function join_rooms(...rooms: string[]) {
   if (ws !== null) {
     ws.json({ join: rooms.join(',') });
   }
 }
 
-function onopen(this: { thread_id: number }): void {
+function onopen(this: { thread_id: number }) {
   join_rooms(`thread_${this.thread_id}`);
 }
 
-function onmessage(this: { thread_id: number }, event: MessageEvent): void {
+function onmessage(this: { thread_id: number }, event: MessageEvent) {
   const {
     room,
     action,
@@ -37,7 +37,7 @@ function onmessage(this: { thread_id: number }, event: MessageEvent): void {
 
   if (room !== `thread_${this.thread_id}`) {
     // we should never reach this state
-    return;
+    return Promise.resolve();
   }
 
   data.action = action;
@@ -45,10 +45,11 @@ function onmessage(this: { thread_id: number }, event: MessageEvent): void {
   if (data_type === 'thread') {
     thread_handler(data as APIData<APIThread>);
   } else if (data_type === 'section') {
-    section_handler(data as APIData<APISection>);
+    return section_handler(data as APIData<APISection>);
   } else if (data_type === 'event') {
-    event_handler(data as APIData<APIEvent>);
+    return event_handler(data as APIData<APIEvent>);
   }
+  return Promise.resolve();
 }
 
 function thread_handler({
@@ -67,22 +68,22 @@ function thread_handler({
   }
 }
 
-function section_handler(data: APIData<APISection>): Promise<unknown> | void {
+function section_handler(data: APIData<APISection>) {
   if (data.action === 'delete') {
     return sections_elem.delete(data.id);
   } else if (data.action === 'update') {
     return sections_elem.modify(data);
-  } else if (data.action === 'create') {
+  } /* data.action === 'create' */ else {
     return sections_elem.add(data);
   }
 }
 
-function event_handler(data: APIData<APIEvent>): Promise<unknown> | void {
+function event_handler(data: APIData<APIEvent>) {
   if (data.action === 'delete') {
     return events_elem.delete(data.id);
   } else if (data.action === 'update') {
     return events_elem.modify(data);
-  } else if (data.action === 'create') {
+  } /* data.action === 'create' */ else {
     return events_elem.add(data);
   }
 }

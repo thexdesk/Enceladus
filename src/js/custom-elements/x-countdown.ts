@@ -1,13 +1,12 @@
 import { LitElement, html } from 'lit-element';
 import { sealed, customElement, attribute } from '../helpers/decorators';
-import { TemplateResult } from 'lit-html';
 import css from '../../css/inlined/x-countdown.pcss';
 
 /**
  * Given a number,
  * return the string containing exactly two digits.
  */
-function pad(n: number): string {
+function pad(n: number) {
   if (n < 10) {
     return `0${n}`;
   }
@@ -26,7 +25,7 @@ export class Countdown extends LitElement {
   private _seconds = 0;
   private _interval: Nullable<number> = null;
 
-  public render(): TemplateResult {
+  render() {
     return html`
       <style>
         ${css}
@@ -35,10 +34,10 @@ export class Countdown extends LitElement {
     `;
   }
 
-  get t0(): Nullable<number> {
+  get t0() {
     return this._t0;
   }
-  set t0(value: Nullable<number>) {
+  set t0(value) {
     this._t0 = value;
 
     if (value === null) {
@@ -54,7 +53,7 @@ export class Countdown extends LitElement {
   /**
    * Time to be displayed on the countdown, if any.
    */
-  get display_time(): string {
+  get display_time() {
     if (this._t0 === null) {
       return '';
     }
@@ -70,7 +69,7 @@ export class Countdown extends LitElement {
   /**
    * Update the countdown clock.
    */
-  private _update_clock(): Promise<unknown> {
+  private _update_clock() {
     if (this._t0 === null) {
       return Promise.resolve();
     }
@@ -86,7 +85,7 @@ export class Countdown extends LitElement {
     return this.requestUpdate();
   }
 
-  public disconnectedCallback(): void {
+  disconnectedCallback(): void {
     if (this._interval !== null) {
       clearInterval(this._interval);
       this._interval = null;

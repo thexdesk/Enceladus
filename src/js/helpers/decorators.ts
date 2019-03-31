@@ -6,11 +6,11 @@ export const property = orig_property({ attribute: false });
 
 export function attribute(
   _attr: string,
-  value: string = '',
+  value = '',
 ): (constructor: Constructor<LitElement>) => any {
   return (constructor: Constructor<LitElement>) =>
     class extends constructor {
       // @ts-ignore Not sure why this is throwing an error, it's absolutely correct.
-      @orig_property({ reflect: true }) public [_attr] = value;
+      @orig_property({ reflect: true }) [_attr] = value;
     };
 }

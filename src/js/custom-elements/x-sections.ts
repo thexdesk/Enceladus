@@ -1,7 +1,6 @@
 import { LitElement, html } from 'lit-element';
 import { unsafeHTML, repeat } from '../helpers/directives';
 import { sealed, property, attribute, customElement } from '../helpers/decorators';
-import { TemplateResult } from 'lit-html';
 import marked from 'marked';
 import { assign_defined } from '@jhpratt/assign-defined';
 import css from '../../css/inlined/x-sections.pcss';
@@ -12,7 +11,7 @@ type Section = Pick<APISection, 'id' | 'name' | 'content'>;
 @customElement('x-sections')
 @attribute('role', 'region')
 export class Sections extends LitElement {
-  public render(): TemplateResult {
+  render() {
     return html`
       <style>
         ${css}
@@ -30,27 +29,28 @@ export class Sections extends LitElement {
     `;
   }
 
-  public add({ id, name, content }: Section, update: boolean = true): Promise<unknown> | void {
+  add({ id, name, content }: Section, update = true) {
     this.sections[id] = { name, content };
     this.ids.push(id);
 
     if (update) {
       return this.requestUpdate();
     }
+    return Promise.resolve();
   }
 
   // cannot be named `update` due to conflict with LitElement
-  public modify({ id, name, content }: Partial<Section> & { id: number }): Promise<unknown> {
+  modify({ id, name, content }: Partial<Section> & { id: number }) {
     assign_defined(this.sections[id], { id, name, content });
     return this.requestUpdate();
   }
 
-  public delete(id: number): Promise<unknown> {
+  delete(id: number) {
     this.ids = this.ids.filter($ => $ !== id);
     delete this.sections[id];
     return this.updateComplete;
   }
 
-  @property public ids: number[] = [];
-  @property public sections: { [key: number]: Pick<Section, 'name' | 'content'> } = {};
+  @property ids: number[] = [];
+  @property sections: { [key: number]: Pick<Section, 'name' | 'content'> } = {};
 }

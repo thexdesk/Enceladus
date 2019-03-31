@@ -11,7 +11,6 @@ import { init_socket } from './sockets';
 import { server_url } from './helpers/variable-declarations';
 
 export function get_thread_data(id: string | number): Promise<APIFullThread> {
-  // tslint:disable-next-line newline-per-chained-call
   return esfetch(`${server_url}/v1/thread/${id}/full?features=space,spacex`).get();
 }
 
@@ -23,7 +22,7 @@ export async function initialize({
   post_id,
   sections,
   events,
-}: APIFullThread): Promise<number> {
+}: APIFullThread) {
   const promises: Promise<unknown>[] = [];
 
   // assign header data
