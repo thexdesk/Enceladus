@@ -22,6 +22,14 @@ export class Links extends LitElement {
       ></a>
 
       <a
+        class='patreon'
+        target='_blank'
+        rel='noopener'
+        aria-description='Patreon'
+        href='https://patreon.com/EnceladusLTI'
+      ></a>
+
+      <a
         class='github'
         target='_blank'
         rel='noopener'
