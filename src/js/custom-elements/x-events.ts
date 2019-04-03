@@ -23,39 +23,41 @@ export class Events extends LitElement {
       <style>
         ${css}
       </style>
-      <header>
-        <h1>LIVE UPDATES</h1>
 
-        <div role='row'>
-          <div role='columnheader'>Time</div>
-          <div role='columnheader'>Count</div>
-          <div role='columnheader'>Update</div>
-        </div>
-      </header>
+      <h1>LIVE UPDATES</h1>
 
-      ${repeat(this.ids, id => {
-        const {
-          posted,
-          cols: [utc, terminal_count, message],
-        } = this.events[id];
+      <table>
+        <tr>
+          <th>Time</th>
+          <th>Count</th>
+          <th>Update</th>
+        </tr>
 
-        if (!posted) {
-          return nothing;
-        }
+        ${repeat(this.ids, id => {
+          const {
+            posted,
+            cols: [utc, terminal_count, message],
+          } = this.events[id];
 
-        const time = new Date((utc as number) * 1_000).toLocaleTimeString(undefined, {
-          hour: 'numeric',
-          minute: 'numeric',
-        });
+          if (!posted) {
+            return nothing;
+          }
 
-        return html`
-          <div role='row'>
-            <div class='tnum' role='cell'>${time}</div>
-            <div class='tnum' role='cell'>${terminal_count}</div>
-            <div role='cell'>${unsafeHTML(marked(message as string))}</div>
-          </div>
-        `;
-      })}
+          const time = new Date((utc as number) * 1_000)
+            .toLocaleTimeString(undefined, {
+              hour: 'numeric',
+              minute: 'numeric',
+            });
+
+          return html`
+            <tr>
+              <td>${time}</td>
+              <td>${terminal_count}</td>
+              <td>${unsafeHTML(marked(message as string))}</td>
+            </tr>
+          `;
+        })}
+      </table>
     `;
   }
 

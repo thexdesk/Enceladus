@@ -7,34 +7,12 @@
 
 :host {
   contain: content;
-
-  display: grid;
-  grid: auto-flow min-content / repeat(2, max-content) 1fr;
-  gap: 0.4rem 1rem;
-}
-
-header {
-  position: sticky;
-  inset-block-start: 0;
-  background-color: gray(0);
-
-  grid-column: 1 / -1;
-}
-
-[role='columnheader'] {
-  display: inline-block;
-
-  &:nth-of-type(2) {
-    /*
-    we need to approximate the column width,
-    as we're unable to determine the widths of the columns below
-    */
-    margin-inline: 2rem;
-  }
 }
 
 h1 {
-  grid-column: 1 / -1;
+  position: sticky;
+  inset-block-start: 0;
+  background-color: gray(0);
 
   font-size: 1.7rem;
   letter-spacing: +0.15ch;
@@ -64,21 +42,22 @@ h1 {
   }
 }
 
-[role='row'] {
-  display: contents;
-
-  @nest header & > * {
-    font-variation-settings: 'wght' 600;
-    padding-block-end: 0.5ex;
-  }
-
-  @nest header ~ &:last-child > * {
-    padding-block-end: 2rem;
-  }
+table {
+  font-feature-settings: 'tnum';
 }
 
-.tnum {
-  font-feature-settings: 'tnum';
+tr:last-child > * {
+  padding-block-end: 2rem;
+}
+
+th {
+  font-variation-settings: 'wght' 600;
+  text-align: start;
+}
+
+th,
+td {
+  padding: logical 0.1rem 0.5rem;
 }
 
 p {
