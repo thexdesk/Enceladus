@@ -23,7 +23,7 @@ export class Twitter extends HTMLElement {
     link.setAttribute('data-dnt', 'true');
     link.setAttribute('data-theme', 'dark');
     link.setAttribute('data-chrome', 'noheader nofooter noborders noscrollbar transparent');
-    link.setAttribute('href', 'https://twitter.com/theZcuber/lists/r-spacex-mission-control');
+    link.setAttribute('href', 'https://twitter.com/EnceladusLTI/lists/enceladus-lti');
 
     this.appendChild(fragment);
 
