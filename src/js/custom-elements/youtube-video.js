@@ -1,6 +1,5 @@
 import { LitElement, html } from 'https://unsafe-production.jspm.io/lit-element@2.1.0';
 import { property, customElement } from '../helpers/decorators.js';
-import { nothing } from '../index.js';
 
 @customElement('youtube-video')
 export class YouTube extends LitElement {

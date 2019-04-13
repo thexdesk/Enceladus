@@ -1,6 +1,5 @@
 import { assign_defined } from 'https://unsafe-production.jspm.io/npm:@jhpratt/assign-defined@0.1.0/index.js';
 import { html, LitElement } from 'https://unsafe-production.jspm.io/lit-element@2.1.0';
-import { nothing } from '../index.js';
 import marked from 'https://unsafe-production.jspm.io/npm:marked@0.6.2';
 import { customElement, property } from '../helpers/decorators.js';
 import { repeat, unsafeHTML } from '../helpers/directives.js';
@@ -32,7 +31,7 @@ export class Events extends LitElement {
           } = this.events[id];
 
           if (!posted) {
-            return nothing;
+            return '';
           }
 
           const time = new Date(utc * 1_000)

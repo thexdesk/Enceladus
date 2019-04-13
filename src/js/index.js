@@ -1,6 +1,3 @@
-// Taken from `lit-html@1.0.0`.
-export const nothing = {};
-
 import './custom-elements/x-countdown.js';
 import './custom-elements/x-header.js';
 import './custom-elements/youtube-video.js';
