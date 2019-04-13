@@ -25,26 +25,26 @@ export async function initialize({
 }) {
   const promises = [];
 
-  // assign sections data
+  // Assign sections data
   sections
     .filter(({ is_events_section }) => !is_events_section)
     .forEach(data => sections_elem.add(data, false));
   sections_elem.requestUpdate() |> promises.push;
 
-  // assign events data
+  // Assign events data
   events.forEach(data => events_elem.add(data, false));
   events_elem.requestUpdate() |> promises.push;
 
-  // assign YouTube data
+  // Assign YouTube data
   youtube_elem().youtube_id = youtube_id;
   youtube_elem().requestUpdate() |> promises.push;
 
-  // assign header data
+  // Assign header data
   header_elem.display_name = display_name;
   header_elem.space__t0 = space__t0;
   header_elem.requestUpdate() |> promises.push;
 
-  // assign links data
+  // Assign links data
   links_elem.post_id = post_id;
   links_elem.requestUpdate() |> promises.push;
 

@@ -24,7 +24,7 @@ export class YouTubeModal extends LitElement {
 
         <div>
           <button @click='${() => this.hidden = true}'>Cancel</button>
-          <button @click='${this.submit.bind(this)}'>Set YouTube</button>
+          <button @click='${this.submit}'>Set YouTube</button>
         </div>
       </div>
     `;

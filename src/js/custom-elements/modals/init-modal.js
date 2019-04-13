@@ -10,8 +10,8 @@ export class InitModal extends LitElement {
       <div class='modal'>
         <div>Continuing an existing thread?</div>
         <label for='thread_id'>Enter a thread ID.</label>
-        <input @keyup='${this._submit_continue_if_enter.bind(this)}' id='thread_id' type='number'>
-        <button @click='${this._submit_continue.bind(this)}'>Launch!</button>
+        <input @keyup='${this._submit_continue_if_enter}' id='thread_id' type='number'>
+        <button @click='${this._submit_continue}'>Launch!</button>
         <div id='continuation_error'></div>
       </div>
     `;

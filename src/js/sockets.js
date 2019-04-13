@@ -33,19 +33,16 @@ function onmessage(event: MessageEvent) {
   } = JSON.parse(event.data);
 
   if (room !== `thread_${this.thread_id}`) {
-    // we should never reach this state
+    // We should never reach this state.
     return;
   }
 
   data.action = action;
 
-  switch (data_type) {
-    case 'thread': thread_handler(data); break;
-    case 'section': section_handler(data); break;
-    case 'event': event_handler(data); break;
-  }
+  [`${data_type}_handler`](data);
 }
 
+// eslint-disable-next-line no-unused-vars
 function thread_handler({
   action,
   display_name,
@@ -54,26 +51,33 @@ function thread_handler({
   youtube_id,
   sections_id,
 }) {
+  // FIXME Use the pipeline operator for readability once babel/babel-eslint#765 is resolved.
   if (action === 'update') {
-    header_elem |> assign_defined(#, { display_name, space__t0 });
-    links_elem |> assign_defined(#, { post_id });
-    youtube_elem() |> assign_defined(#, { youtube_id });
-    sections_elem |> assign_defined(#, { ids: sections_id });
+    assign_defined(header_elem, { display_name, space__t0 });
+    assign_defined(links_elem, { post_id });
+    assign_defined(youtube_elem(), { youtube_id });
+    assign_defined(sections_elem, { ids: sections_id });
   }
 }
 
-function section_handler() {
+// eslint-disable-next-line no-unused-vars
+function section_handler(data) {
+  /* eslint-disable max-statements-per-line */
   switch (data.action) {
     case 'delete': sections_elem.delete(data.id); break;
     case 'update': sections_elem.modify(data); break;
     case 'create': sections_elem.add(data); break;
   }
+  /* eslint-enable max-statements-per-line */
 }
 
+// eslint-disable-next-line no-unused-vars
 function event_handler(data) {
+  /* eslint-disable max-statements-per-line */
   switch (data.action) {
     case 'delete': events_elem.delete(data.id); break;
     case 'update': events_elem.modify(data); break;
     case 'create': events_elem.add(data); break;
   }
+  /* eslint-enable max-statements-per-line */
 }
