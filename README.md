@@ -16,9 +16,15 @@ run the following.
 ```bash
 git clone git@github.com:r-spacex/Enceladus-LTI.git
 cd Enceladus-LTI
-yarn
-yarn watch # or `yarn build` for a one-off build
+npm i
+npm run watch # or `npm run build` for a one-off build
 ```
 
-At this point, you can open the `dist/index.html` file in your browser,
-which will contain the current build status of the LTI.
+At this point, you can open the `localhost:5000` in your browser,
+which will contain the current build of the LTI.
+
+## Host interface
+
+To access the host interface,
+add the queryparam `host` to the end of the URL.
+No value needs to be set.

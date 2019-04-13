@@ -10,8 +10,8 @@ export class InitModal extends LitElement {
       <div class='modal'>
         <div>Continuing an existing thread?</div>
         <label for='thread_id'>Enter a thread ID.</label>
-        <input on-keyup='${this._submit_continue_if_enter.bind(this)}' id='thread_id' type='number'>
-        <button on-click='${this._submit_continue.bind(this)}'>Launch!</button>
+        <input @keyup='${this._submit_continue_if_enter.bind(this)}' id='thread_id' type='number'>
+        <button @click='${this._submit_continue.bind(this)}'>Launch!</button>
         <div id='continuation_error'></div>
       </div>
     `;
@@ -54,7 +54,9 @@ export class InitModal extends LitElement {
 
   async _submit_continue() {
     const id = this._get_thread_data() |> await # |> initialize |> await #;
-    window.history.replaceState(undefined, '', `?thread_id=${id}`);
+    const url = new URL(window.location.href);
+    url.searchParams.set('thread_id', id);
+    window.history.replaceState(undefined, '', url);
     this.remove();
   }
 }
