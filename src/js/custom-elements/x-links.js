@@ -1,24 +1,28 @@
-import { LitElement, html } from 'lit-element';
-import { sealed, property, attribute, customElement } from '../helpers/decorators';
-import { nothing } from 'lit-html';
-import css from '../../css/inlined/x-links.pcss';
+import { LitElement, html } from 'https://unsafe-production.jspm.io/lit-element@2.1.0';
+import { property, customElement } from '../helpers/decorators.js';
+import { nothing } from '../index.js';
 
-@sealed
 @customElement('x-links')
-@attribute('role', 'navigation')
 export class Links extends LitElement {
+  connectedCallback() {
+    this.setAttribute('role', 'navigation');
+    super.connectedCallback();
+  }
+
   render() {
     return html`
-      <style>
-        ${css}
-      </style>
+      <link rel='stylesheet' href='./css/components/x-links.css'>
+
       <a
         class='reddit'
         target='_blank'
         rel='noopener'
         aria-hidden='${this.post_id === null}'
         aria-description='reddit thread'
-        href='${this.post_id === null ? nothing : `https://reddit.com/${this.post_id}`}'
+        href='${do {
+          if (this.post_id === null) '';
+          else `https://reddit.com/${this.post_id}`;
+        }}'
       ></a>
 
       <a
@@ -39,5 +43,5 @@ export class Links extends LitElement {
     `;
   }
 
-  @property post_id: Nullable<string> = null;
+  @property post_id = null;
 }

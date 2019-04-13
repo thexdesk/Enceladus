@@ -1,6 +1,5 @@
-import { sealed, customElement } from '../helpers/decorators';
+import { customElement } from '../helpers/decorators.js';
 
-@sealed
 @customElement('x-twitter')
 export class Twitter extends HTMLElement {
   /**
@@ -19,16 +18,17 @@ export class Twitter extends HTMLElement {
 
     const link = fragment.appendChild(document.createElement('a'));
     link.classList.add('twitter-timeline');
-    link.setAttribute('data-link-color', '#ff5100');
-    link.setAttribute('data-dnt', 'true');
-    link.setAttribute('data-theme', 'dark');
-    link.setAttribute('data-chrome', 'noheader nofooter noborders noscrollbar transparent');
-    link.setAttribute('href', 'https://twitter.com/EnceladusLTI/lists/enceladus-lti');
+
+    Object.entries({
+      'data-link-color': '#ff5100',
+      'data-dnt': 'true',
+      'data-theme': 'dark',
+      'data-chrome': 'noheader nofooter noborders noscrollbar transparent',
+      'href': 'https://twitter.com/EnceladusLTI/lists/enceladus-lti',
+    }).forEach(attr => link.setAttribute(...attr));
 
     this.appendChild(fragment);
 
-    if (!this.hasAttribute('role')) {
-      this.setAttribute('role', 'region');
-    }
+    this.setAttribute('role', 'region');
   }
 }

@@ -1,0 +1,25 @@
+{
+  "plugins": [
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ["@babel/plugin-proposal-class-properties", { "loose": true }], // loose → use "set" semantics over "define"
+    "@babel/plugin-transform-typescript",
+    "@babel/plugin-proposal-export-default-from",
+    "@babel/plugin-proposal-do-expressions",
+    ["@babel/plugin-proposal-pipeline-operator", { "proposal": "smart" }],
+    "@babel/plugin-proposal-numeric-separator",
+    ["template-html-minifier", {
+      "modules": {
+        "lit-element": ["html"],
+        "https://unsafe-production.jspm.io/lit-element@2.1.0": ["html"],
+      },
+      "htmlMinifier": {
+        "collapseWhitespace": true,
+        "decodeEntities": true,
+        "removeComments": true,
+        "removeRedundantAttributes": true,
+        "sortClassName": true,
+      },
+    }],
+    "inline-js-object",
+  ]
+}
