@@ -16,8 +16,7 @@ export function is_host() {
 }
 
 if (is_host()) {
+  import('./authenticate.js');
   import('./custom-elements/modals/youtube-modal.js');
-  import('./initialize-host.js').then(() => {
-    document.querySelector('youtube-modal').hidden = false;
-  });
+  import('./initialize-host.js');
 }

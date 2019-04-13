@@ -57,7 +57,7 @@ function thread_handler({
   if (action === 'update') {
     header_elem |> assign_defined(#, { display_name, space__t0 });
     links_elem |> assign_defined(#, { post_id });
-    youtube_elem |> assign_defined(#, { youtube_id });
+    youtube_elem() |> assign_defined(#, { youtube_id });
     sections_elem |> assign_defined(#, { ids: sections_id });
   }
 }

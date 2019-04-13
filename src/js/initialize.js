@@ -36,8 +36,8 @@ export async function initialize({
   events_elem.requestUpdate() |> promises.push;
 
   // assign YouTube data
-  youtube_elem.youtube_id = youtube_id;
-  youtube_elem.requestUpdate() |> promises.push;
+  youtube_elem().youtube_id = youtube_id;
+  youtube_elem().requestUpdate() |> promises.push;
 
   // assign header data
   header_elem.display_name = display_name;

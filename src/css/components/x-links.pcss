@@ -7,7 +7,7 @@
 }
 
 a {
-  /* stylelint-disable rule-empty-line-before, at-rule-empty-line-before */
+  cursor: pointer;
   display: inline-block;
 
   &:not(:first-of-type) {
@@ -23,7 +23,6 @@ a {
   &:not(:hover) {
     opacity: 0.3;
   }
-  /* stylelint-enable rule-empty-line-before, at-rule-empty-line-before */
 
   block-size: 2rem;
 
@@ -42,4 +41,8 @@ a {
 
 .patreon {
   content: svg-load('brands/patreon.svg', fill: gray(100));
+}
+
+.youtube {
+  content: svg-load('brands/youtube.svg', fill: gray(100));
 }

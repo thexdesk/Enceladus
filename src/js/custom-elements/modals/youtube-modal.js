@@ -49,17 +49,18 @@ export class YouTubeModal extends LitElement {
       return;
     }
 
-    youtube_elem.youtube_id = youtube_regex.exec(link_elem.value)?.[1] ?? null;
+    youtube_elem().youtube_id = youtube_regex.exec(link_elem.value)?.[1] ?? null;
 
     try {
+      const thread_id = new URL(window.location.href).searchParams.get('thread_id');
       await esfetch(
-        `${vars.server_url}/v1/thread/${new URL(window.location.href).searchParams.get('thread_id')}`,
+        `${vars.server_url}/v1/thread/${thread_id}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('api_jwt')}`,
           },
         })
-        .patch({ youtube_id: youtube_elem.youtube_id });
+        .patch({ youtube_id: youtube_elem().youtube_id });
       this.hidden = true;
     } catch (err) {
       console.error(err);
