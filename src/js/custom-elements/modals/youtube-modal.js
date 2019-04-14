@@ -24,7 +24,7 @@ export class YouTubeModal extends LitElement {
 
         <div>
           <button @click='${() => this.hidden = true}'>Cancel</button>
-          <button @click='${this.submit}'>Set YouTube</button>
+          <button @click='${this.submit.bind(this)}'>Set YouTube</button>
         </div>
       </div>
     `;
@@ -45,11 +45,11 @@ export class YouTubeModal extends LitElement {
   async submit(e) {
     const link_elem = this.shadowRoot.querySelector('input');
 
-    if (e?.key !== 'Enter' || !link_elem.validity.valid) {
+    if (e instanceof KeyboardEvent && e.key !== 'Enter' || !link_elem.validity.valid) {
       return;
     }
 
-    youtube_elem().youtube_id = youtube_regex.exec(link_elem.value)?.[1] ?? null;
+    youtube_elem.youtube_id = youtube_regex.exec(link_elem.value)?.[1] ?? null;
 
     try {
       const thread_id = new URL(window.location.href).searchParams.get('thread_id');
@@ -60,7 +60,7 @@ export class YouTubeModal extends LitElement {
             Authorization: `Bearer ${localStorage.getItem('api_jwt')}`,
           },
         })
-        .patch({ youtube_id: youtube_elem().youtube_id });
+        .patch({ youtube_id: youtube_elem.youtube_id });
       this.hidden = true;
     } catch (err) {
       console.error(err);

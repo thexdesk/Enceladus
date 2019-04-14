@@ -8,13 +8,26 @@ const init_modal_elem = document.querySelector('init-modal');
 // We need to lazily get this,
 // as it's appended by a script and not present by default.
 // Doing this avoids a potential race condition.
-let _youtube_modal = null;
-function youtube_modal() {
-  if (_youtube_modal === null) {
-    _youtube_modal = document.querySelector('youtube-modal');
-  }
-  return _youtube_modal;
-}
+let _youtube_modal = Object.create(null);
+const youtube_modal = new Proxy(_youtube_modal, {
+  get(obj, prop) {
+    if (Object.keys(obj).length === 0) {
+      _youtube_modal = document.querySelector('youtube-modal');
+      obj = _youtube_modal; // eslint-disable-line no-param-reassign
+    }
+    return obj?.[prop];
+  },
+  set(obj, prop, value) {
+    if (Object.keys(obj).length === 0) {
+      _youtube_modal = document.querySelector('youtube-modal');
+      obj = _youtube_modal; // eslint-disable-line no-param-reassign
+      if (_youtube_modal === null) {
+        return false;
+      }
+    }
+    return Reflect.set(obj, prop, value);
+  },
+});
 
 export {
   header_elem,

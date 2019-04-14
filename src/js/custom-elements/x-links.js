@@ -8,7 +8,7 @@ const yt_icon = do {
     html`
       <a
         class='youtube'
-        @click='${() => youtube_modal().hidden = false}'
+        @click='${() => youtube_modal.hidden = false}'
       ></a>
     `;
   } else {
