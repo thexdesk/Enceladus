@@ -1,4 +1,6 @@
-import { assign_defined } from 'https://unsafe-production.jspm.io/npm:@jhpratt/assign-defined@0.1.0/index.js';
+import {
+  assign_defined,
+} from 'https://unsafe-production.jspm.io/npm:@jhpratt/assign-defined@0.1.0/index.js';
 import { html, LitElement } from 'https://unsafe-production.jspm.io/lit-element@2.1.0';
 import marked from 'https://unsafe-production.jspm.io/npm:marked@0.6.2';
 import { customElement, property } from '../helpers/decorators.js';
@@ -69,7 +71,7 @@ export class Events extends LitElement {
     }
   }
 
-  // cannot be named `update` due to conflict with LitElement
+  // Cannot be named `update` due to conflict with LitElement.
   modify({ id, posted, cols }) {
     assign_defined(this.events[id], { posted, cols });
 

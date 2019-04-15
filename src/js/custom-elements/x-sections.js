@@ -2,7 +2,9 @@ import { LitElement, html } from 'https://unsafe-production.jspm.io/lit-element@
 import { unsafeHTML, repeat } from '../helpers/directives.js';
 import { property, customElement } from '../helpers/decorators.js';
 import marked from 'https://unsafe-production.jspm.io/npm:marked@0.6.2';
-import { assign_defined } from 'https://unsafe-production.jspm.io/npm:@jhpratt/assign-defined@0.1.0/index.js';
+import {
+  assign_defined,
+} from 'https://unsafe-production.jspm.io/npm:@jhpratt/assign-defined@0.1.0/index.js';
 
 @customElement('x-sections')
 export class Sections extends LitElement {
@@ -37,9 +39,10 @@ export class Sections extends LitElement {
     }
   }
 
-  // cannot be named `update` due to conflict with LitElement
+  // Cannot be named `update` due to conflict with LitElement.
   modify({ id, name, content }) {
-    this.sections[id] |> assign_defined(#, { id, name, content });
+    // FIXME Use the pipeline operator for readability once babel/babel-eslint#765 is resolved.
+    assign_defined(this.sections[id], { id, name, content });
     return this.requestUpdate();
   }
 

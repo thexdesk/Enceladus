@@ -24,7 +24,7 @@ export class Twitter extends HTMLElement {
       'data-dnt': 'true',
       'data-theme': 'dark',
       'data-chrome': 'noheader nofooter noborders noscrollbar transparent',
-      'href': 'https://twitter.com/EnceladusLTI/lists/enceladus-lti',
+      href: 'https://twitter.com/EnceladusLTI/lists/enceladus-lti',
     }).forEach(attr => link.setAttribute(...attr));
 
     this.appendChild(fragment);

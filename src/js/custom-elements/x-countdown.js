@@ -37,6 +37,7 @@ export class Countdown extends LitElement {
   get t0() {
     return this._t0;
   }
+
   set t0(value) {
     this._t0 = value;
 
@@ -64,7 +65,7 @@ export class Countdown extends LitElement {
       } else {
         `T${this._sign}${this._minutes}:${this._seconds |> pad}`;
       }
-    }
+    };
   }
 
   /**
@@ -86,7 +87,7 @@ export class Countdown extends LitElement {
     const diff = this._t0 - Date.now() / 1000 |> Math.abs |> Math.floor;
 
     this._hours = diff / 3600 |> Math.floor;
-    this._minutes = (diff % 3600) / 60 |> Math.floor;
+    this._minutes = diff % 3600 / 60 |> Math.floor;
     this._seconds = diff % 60;
 
     return this.requestUpdate();

@@ -8,8 +8,8 @@
     "clean": "gulp clean",
     "build": "gulp build",
     "watch": "gulp watch",
-    "lint:js": "eslint src/**/*.js",
-    "fix:js": "eslint src/**/*.js --fix",
+    "lint:js": "eslint \"src/**/*.js\"",
+    "fix:js": "eslint \"src/**/*.js\" --fix",
     "lint:css": "stylelint \"src/css/**/*.pcss\"",
     "fmt:css": "stylelint --fix \"src/css/**/*.pcss\"",
     "serve": "http-server dist -p 5000"

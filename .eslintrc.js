@@ -4,6 +4,9 @@ module.exports = {
   root: true,
   parserOptions: {
     ecmaVersion: 2019,
+    ecmaFeatures: {
+      legacyDecorators: true,
+    },
   },
   env: {
     browser: true,
@@ -11,7 +14,7 @@ module.exports = {
   },
   extends: 'eslint:recommended',
   rules: {
-    'no-extra-parens': 'error',
+    'no-extra-parens': ['error', 'all', { returnAssign: false }],
     'no-misleading-character-class': 'error',
     'no-template-curly-in-string': 'error',
     'require-atomic-updates': 'error',
@@ -52,7 +55,7 @@ module.exports = {
     'no-sequences': 'error',
     'no-throw-literal': 'error',
     'no-unmodified-loop-condition': 'error',
-    'babel/no-unused-expressions': 'warn', // Move to error once babel/eslint-plugin-babel#174 is resolved.
+    'babel/no-unused-expressions': 'warn', // See babel/eslint-plugin-babel#174.
     'no-useless-call': 'error',
     'no-useless-catch': 'error',
     'no-useless-concat': 'error',
@@ -90,17 +93,18 @@ module.exports = {
     'func-call-spacing': 'error',
     'func-style': ['error', 'declaration'],
     'implicit-arrow-linebreak': 'error',
-    'indent': ['error', 2, { SwitchCase: 1 }],
+    'indent': ['error', 2, { SwitchCase: 1, ignoredNodes: ['TemplateLiteral *'] }],
     'key-spacing': 'error',
     'keyword-spacing': 'error',
     'linebreak-style': 'error',
-    'lines-between-class-members': 'error',
-    'max-len': ['error', { code: 100 }],
+    'lines-between-class-members': ['error', 'always', { exceptAfterSingleLine: true }],
+    'max-len': ['error', { code: 100, ignoreRegExpLiterals: true }],
     'max-statements-per-line': 'error',
     'new-parens': 'error',
     'newline-per-chained-call': 'error',
     'no-bitwise': 'error',
     'no-array-constructor': 'error',
+    'no-console': ['error', { allow: ['warn', 'error'] }],
     'no-lonely-if': 'error',
     'no-multi-assign': 'error',
     'no-multiple-empty-lines': 'error',
@@ -155,7 +159,7 @@ module.exports = {
     'symbol-description': 'error',
     'template-curly-spacing': 'error',
     'yield-star-spacing': ['error', 'after'],
-    'lit/no-template-bind': 'error',
+    'lit/no-template-bind': 'warn', // See 43081j/eslint-plugin-lit#35.
     'lit/no-useless-template-literals': 'error',
     'lit/no-value-attribute': 'error',
     'lit/attribute-value-entities': 'error',

@@ -4,8 +4,7 @@ import { youtube_elem } from '../../elements.js';
 import esfetch from 'https://unsafe-production.jspm.io/npm:esfetch@0.1.2/index.js';
 /* inline */ import vars from '../../helpers/variable-declarations.json';
 
-const youtube_regex
-  = /(?:(?:https?:\/\/)?(?:www\.)?youtu(?:\.be|be\.com)\/(?:watch\?v=)?)?([a-zA-Z0-9_-]{11})/g;
+const youtube_regex = /(?:(?:https?:\/\/)?(?:www\.)?youtu(?:\.be|be\.com)\/(?:watch\?v=)?)?(?<video_id>[a-zA-Z0-9_-]{11})/gu;
 
 @customElement('youtube-modal')
 export class YouTubeModal extends LitElement {
@@ -18,13 +17,13 @@ export class YouTubeModal extends LitElement {
           <br>Leave empty to unset.
         </label>
         <input
-          @keyup='${this.submit.bind(this)}'
+          @keyup='${this.submit}'
           pattern='${youtube_regex.source}'
           id='youtube_link'>
 
         <div>
-          <button @click='${() => this.hidden = true}'>Cancel</button>
-          <button @click='${this.submit.bind(this)}'>Set YouTube</button>
+          <button @click='${() => (this.hidden = true)}'>Cancel</button>
+          <button @click='${this.submit}'>Set YouTube</button>
         </div>
       </div>
     `;
@@ -49,7 +48,7 @@ export class YouTubeModal extends LitElement {
       return;
     }
 
-    youtube_elem.youtube_id = youtube_regex.exec(link_elem.value)?.[1] ?? null;
+    youtube_elem.youtube_id = youtube_regex.exec(link_elem.value).groups?.youtube_id ?? null;
 
     try {
       const thread_id = new URL(window.location.href).searchParams.get('thread_id');
