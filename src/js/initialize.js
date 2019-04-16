@@ -18,10 +18,10 @@ export async function initialize({
   id,
   display_name,
   space__t0,
-  youtube_id,
+  video_url,
   post_id,
-  sections,
-  events,
+  sections = [],
+  events = [],
 }) {
   const promises = [];
 
@@ -36,7 +36,7 @@ export async function initialize({
   events_elem.requestUpdate() |> promises.push;
 
   // Assign YouTube data
-  youtube_elem.youtube_id = youtube_id;
+  youtube_elem.video_url = video_url;
   youtube_elem.requestUpdate() |> promises.push;
 
   // Assign header data

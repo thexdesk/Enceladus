@@ -10,10 +10,10 @@ export class YouTube extends LitElement {
       <iframe
         title='YouTube'
         src='${do {
-          if (this.youtube_id === null) '';
-          else `https://youtube.com/embed/${this.youtube_id}?autoplay=0`;
+          if (this.video_url === null) '';
+          else `https://youtube.com/embed/${this.video_url}?autoplay=0`;
         }}'
-        ?hidden=${this.youtube_id === null}
+        ?hidden=${this.video_url === null}
       ></iframe>
     `;
   }
@@ -23,5 +23,5 @@ export class YouTube extends LitElement {
     this.setAttribute('role', 'region');
   }
 
-  @property youtube_id = null;
+  @property video_url = null;
 }

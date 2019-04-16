@@ -63,7 +63,7 @@ module.exports = {
     'no-void': 'error',
     'no-warning-comments': 'warn',
     'no-with': 'error',
-    'prefer-named-capture-group': 'error',
+    'prefer-named-capture-group': 'off', // Enable once Firefox lands support.
     'radix': 'error',
     'require-await': 'error',
     'require-unicode-regexp': 'error',
