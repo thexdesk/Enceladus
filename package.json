@@ -29,6 +29,7 @@
     "@fortawesome/fontawesome-free": "^5.8.1",
     "babel-eslint": "^10.0.1",
     "babel-plugin-inline-js-object": "^0.1.1",
+    "babel-plugin-jsx-dom": "^0.1.2",
     "babel-plugin-template-html-minifier": "^2.3.0",
     "babel-plugin-transform-jsx-lit-html": "^0.1.0",
     "cssnano": "^4.1.10",

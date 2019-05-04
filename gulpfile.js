@@ -28,13 +28,14 @@ function css() {
 
 function js() {
   return gulp
-    .src('src/js/**/*.js', { since: gulp.lastRun(js) })
+    .src(['src/js/**/*.js', 'src/js/**/*.jsx'], { since: gulp.lastRun(js) })
     .pipe(sourcemaps.init())
     .pipe(babel())
     .pipe(terser({
       warnings: true,
       module: true,
     }))
+    .pipe(rename({ extname: '.js' }))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('dist/js'));
 }
