@@ -1,5 +1,4 @@
 import { LitElement, html } from 'https://unsafe-production.jspm.io/lit-element@2.1.0';
-import { customElement } from '../../helpers/decorators.js';
 import { get_thread_data, initialize } from '../../initialize.js';
 import esfetch from 'https://unsafe-production.jspm.io/npm:esfetch@0.1.2/index.js';
 import { is_host } from '../../index.js';
@@ -9,7 +8,6 @@ import { is_host } from '../../index.js';
 
 const subreddit_regex = /^(?:\/?r\/)?([a-zA-Z0-9_]{1,20})$/gu;
 
-@customElement('init-modal')
 export class InitModal extends LitElement {
   render() {
     return html`

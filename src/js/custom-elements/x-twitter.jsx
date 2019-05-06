@@ -1,6 +1,3 @@
-import { customElement } from '../helpers/decorators.js';
-
-@customElement('x-twitter')
 export class Twitter extends HTMLElement {
   constructor() {
     this.appendChild(<>

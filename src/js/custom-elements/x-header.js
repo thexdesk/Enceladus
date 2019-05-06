@@ -1,8 +1,7 @@
 import './x-countdown.js';
 import { LitElement, html } from 'https://unsafe-production.jspm.io/lit-element@2.1.0';
-import { property, customElement } from '../helpers/decorators.js';
+import { property } from '../helpers/decorators.js';
 
-@customElement('x-header')
 export class Header extends LitElement {
   render() {
     return html`

@@ -1,5 +1,4 @@
 import { LitElement, html } from 'https://unsafe-production.jspm.io/lit-element@2.1.0';
-import { customElement } from '../helpers/decorators.js';
 
 /**
  * Given a number,
@@ -12,7 +11,6 @@ function pad(n: number) {
   return String(n);
 }
 
-@customElement('x-countdown')
 export class Countdown extends LitElement {
   _t0: number | null = null;
   _sign: '+' | '-' = '-';

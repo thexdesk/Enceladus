@@ -1,13 +1,11 @@
 import { LitElement, html } from 'https://unsafe-production.jspm.io/lit-element@2.1.0';
-import { customElement } from '../../helpers/decorators.js';
 import { youtube_elem } from '../../elements.js';
 import esfetch from 'https://unsafe-production.jspm.io/npm:esfetch@0.1.2/index.js';
 /* inline */ import vars from '../../helpers/variable-declarations.json';
 
 const youtube_regex = /(?:(?:https?:\/\/)?(?:www\.)?youtu(?:\.be|be\.com)\/(?:watch\?v=)?)?([a-zA-Z0-9_-]{11})/gu;
 
-@customElement('youtube-modal')
-export class YouTubeModal extends LitElement {
+export class YoutubeModal extends LitElement {
   render() {
     return html`
       <link rel='stylesheet' href='./css/components/modal.css'>

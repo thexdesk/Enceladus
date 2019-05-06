@@ -1,5 +1,5 @@
 import { LitElement, html } from 'https://unsafe-production.jspm.io/lit-element@2.1.0';
-import { property, customElement } from '../helpers/decorators.js';
+import { property } from '../helpers/decorators.js';
 import { youtube_modal } from '../elements.js';
 import { is_host } from '../index.js';
 
@@ -16,7 +16,6 @@ const yt_icon = do {
   }
 };
 
-@customElement('x-links')
 export class Links extends LitElement {
   connectedCallback() {
     this.setAttribute('role', 'navigation');
