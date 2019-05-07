@@ -2,6 +2,7 @@ import './x-countdown.js';
 import { LitElement, html } from 'https://unsafe-production.jspm.io/lit-element@2.1.0';
 import { property } from '../helpers/decorators.js';
 
+@Attr('role', 'region')
 export class Header extends LitElement {
   render() {
     return html`
@@ -9,11 +10,6 @@ export class Header extends LitElement {
       <div role='header' aria-description='launch name'>${this.display_name}</div>
       <x-countdown .t0='${this.space__t0}'></x-countdown>
     `;
-  }
-
-  connectedCallback() {
-    this.setAttribute('role', 'region');
-    super.connectedCallback();
   }
 
   @property display_name = '';

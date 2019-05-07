@@ -6,7 +6,7 @@ module.exports = function ({ types: t }) {
   return {
     visitor: {
       ClassDeclaration(path, { opts }) {
-        if (!(path.node.superClass && opts && opts.superClasses.includes(path.node.superClass.name))) {
+        if (!(path.node.superClass && opts.superClasses && opts.superClasses.includes(path.node.superClass.name))) {
           return;
         }
 
@@ -15,18 +15,20 @@ module.exports = function ({ types: t }) {
           class_name = `x-${class_name}`;
         }
 
-        path.insertAfter(t.callExpression(
-          t.memberExpression(
+        path.insertAfter(t.expressionStatement(
+          t.callExpression(
             t.memberExpression(
-              t.identifier('window'),
-              t.identifier('customElements')
+              t.memberExpression(
+                t.identifier('window'),
+                t.identifier('customElements')
+              ),
+              t.identifier('define')
             ),
-            t.identifier('define')
-          ),
-          [
-            t.stringLiteral(class_name),
-            path.node.id,
-          ]
+            [
+              t.stringLiteral(class_name),
+              path.node.id,
+            ]
+          )
         ));
       },
     }

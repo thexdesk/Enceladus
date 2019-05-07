@@ -11,6 +11,8 @@ function pad(n: number) {
   return String(n);
 }
 
+@Attr('role', 'timer')
+@Attr('aria-description', 'countdown clock')
 export class Countdown extends LitElement {
   _t0: number | null = null;
   _sign: '+' | '-' = '-';
@@ -18,12 +20,6 @@ export class Countdown extends LitElement {
   _minutes = 0;
   _seconds = 0;
   _interval: number | null = null;
-
-  connectedCallback() {
-    this.setAttribute('role', 'timer');
-    this.setAttribute('aria-description', 'countdown-clock');
-    super.connectedCallback();
-  }
 
   render() {
     return html`

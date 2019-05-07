@@ -6,6 +6,7 @@ import {
   assign_defined,
 } from 'https://unsafe-production.jspm.io/npm:@jhpratt/assign-defined@0.1.0/index.js';
 
+@Attr('role', 'region')
 export class Sections extends LitElement {
   render() {
     return html`
@@ -22,11 +23,6 @@ export class Sections extends LitElement {
         `
       )}
     `;
-  }
-
-  connectedCallback() {
-    this.setAttribute('role', 'region');
-    super.connectedCallback();
   }
 
   add({ id, name, content }, update = true) {

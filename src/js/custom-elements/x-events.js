@@ -11,6 +11,8 @@ import { repeat, unsafeHTML } from '../helpers/directives.js';
 // Currently, we're working on the assumption
 // that the data is originating from this interface.
 
+@Attr('role', 'table region')
+@Attr('aria-live', 'polite')
 export class Events extends LitElement {
   render() {
     return html`
@@ -51,12 +53,6 @@ export class Events extends LitElement {
         })}
       </table>
     `;
-  }
-
-  connectedCallback() {
-    this.setAttribute('role', 'table region');
-    this.setAttribute('aria-live', 'polite');
-    super.connectedCallback();
   }
 
   add({ id, posted, cols }, update = true) {

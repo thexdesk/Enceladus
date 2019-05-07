@@ -4,6 +4,9 @@
     ["./babel-plugins/autoregister-custom-element.js", {
       "superClasses": ["HTMLElement", "LitElement"]
     }],
+    ["./babel-plugins/custom-element-attributes.js", {
+      "superClasses": ["HTMLElement", "LitElement"]
+    }],
     "@babel/plugin-syntax-dynamic-import",
     ["@babel/plugin-proposal-decorators", { "legacy": true }],
     ["@babel/plugin-proposal-class-properties", { "loose": true }], // loose → use "set" semantics over "define"

@@ -8,6 +8,8 @@ import { is_host } from '../../index.js';
 
 const subreddit_regex = /^(?:\/?r\/)?([a-zA-Z0-9_]{1,20})$/gu;
 
+@Attr('role', 'dialog')
+@Attr('aria-modal')
 export class InitModal extends LitElement {
   render() {
     return html`
@@ -42,9 +44,6 @@ export class InitModal extends LitElement {
   }
 
   async connectedCallback() {
-    this.setAttribute('role', 'dialog');
-    this.setAttribute('aria-modal', '');
-
     super.connectedCallback();
 
     // We want to be sure that the input element is present,

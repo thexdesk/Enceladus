@@ -5,6 +5,8 @@ import esfetch from 'https://unsafe-production.jspm.io/npm:esfetch@0.1.2/index.j
 
 const youtube_regex = /(?:(?:https?:\/\/)?(?:www\.)?youtu(?:\.be|be\.com)\/(?:watch\?v=)?)?([a-zA-Z0-9_-]{11})/gu;
 
+@Attr('role', 'dialog')
+@Attr('aria-modal')
 export class YoutubeModal extends LitElement {
   render() {
     return html`
@@ -28,9 +30,6 @@ export class YoutubeModal extends LitElement {
   }
 
   async connectedCallback() {
-    this.setAttribute('role', 'dialog');
-    this.setAttribute('aria-modal', '');
-
     super.connectedCallback();
 
     // We want to be sure that the input element is present,

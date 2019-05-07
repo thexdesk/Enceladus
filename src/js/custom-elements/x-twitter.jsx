@@ -1,5 +1,7 @@
+@Attr('role', 'region')
 export class Twitter extends HTMLElement {
   constructor() {
+    super();
     this.appendChild(<>
       <header>TWITTER</header>
       <a
@@ -11,7 +13,5 @@ export class Twitter extends HTMLElement {
         href="https://twitter.com/EnceladusLTI/lists/enceladus-lti"
       />
     </>);
-
-    this.setAttribute('role', 'region');
   }
 }

@@ -16,12 +16,8 @@ const yt_icon = do {
   }
 };
 
+@Attr('role', 'navigation')
 export class Links extends LitElement {
-  connectedCallback() {
-    this.setAttribute('role', 'navigation');
-    super.connectedCallback();
-  }
-
   render() {
     return html`
       <link rel='stylesheet' href='./css/components/x-links.css'>
