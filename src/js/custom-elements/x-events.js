@@ -76,13 +76,13 @@ export class Events extends LitElement {
     return this.requestUpdate();
   }
 
-  delete(id: number) {
+  delete(id) {
     this.ids = this.ids.filter($ => $ !== id);
     delete this.events[id];
     return this.updateComplete;
   }
 
-  _compare(a: number, b: number) {
+  _compare(a, b) {
     // TODO change `0` to `utc_col_index`
     return this.events[b].cols[0] - this.events[a].cols[0];
   }

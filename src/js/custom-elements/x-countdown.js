@@ -4,7 +4,7 @@ import { LitElement, html } from 'https://unsafe-production.jspm.io/lit-element@
  * Given a number,
  * return the string containing exactly two digits.
  */
-function pad(n: number) {
+function pad(n) {
   if (n < 10) {
     return `0${n}`;
   }
@@ -14,12 +14,12 @@ function pad(n: number) {
 @Attr('role', 'timer')
 @Attr('aria-description', 'countdown clock')
 export class Countdown extends LitElement {
-  _t0: number | null = null;
-  _sign: '+' | '-' = '-';
+  _t0 = null;
+  _sign = '-';
   _hours = 0;
   _minutes = 0;
   _seconds = 0;
-  _interval: number | null = null;
+  _interval = null;
 
   render() {
     return html`

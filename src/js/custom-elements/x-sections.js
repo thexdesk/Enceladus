@@ -41,7 +41,7 @@ export class Sections extends LitElement {
     return this.requestUpdate();
   }
 
-  delete(id: number) {
+  delete(id) {
     this.ids = this.ids.filter($ => $ !== id);
     delete this.sections[id];
     return this.updateComplete;

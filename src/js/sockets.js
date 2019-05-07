@@ -6,7 +6,7 @@ import {
 /* inline */ import vars from './helpers/variable-declarations.json';
 
 let ws = null;
-export function init_socket(thread_id: number) {
+export function init_socket(thread_id) {
   ws = new Sockette(vars.ws_url, {
     onopen: onopen.bind({ thread_id }),
     onmessage: onmessage.bind({ thread_id }),
@@ -14,7 +14,7 @@ export function init_socket(thread_id: number) {
   });
 }
 
-export function join_rooms(...rooms: string[]) {
+export function join_rooms(...rooms) {
   if (ws !== null) {
     ws.json({ join: rooms.join(',') });
   }
@@ -24,7 +24,7 @@ function onopen() {
   join_rooms(`thread_${this.thread_id}`);
 }
 
-function onmessage(event: MessageEvent) {
+function onmessage(event) {
   const {
     room,
     action,

@@ -10,7 +10,7 @@ import esfetch from 'https://unsafe-production.jspm.io/npm:esfetch@0.1.2/index.j
 import { init_socket } from './sockets.js';
 /* inline */ import vars from './helpers/variable-declarations.json';
 
-export function get_thread_data(id: string | number) {
+export function get_thread_data(id) {
   return esfetch(`${vars.server_url}/v1/thread/${id}/full?features=space,spacex`).get();
 }
 

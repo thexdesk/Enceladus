@@ -54,7 +54,7 @@ export class InitModal extends LitElement {
 
   // Continue an existing thread.
 
-  _submit_continue_if_enter(e: KeyboardEvent) {
+  _submit_continue_if_enter(e) {
     if (e.key === 'Enter') {
       return this._submit_continue();
     }
@@ -87,7 +87,7 @@ export class InitModal extends LitElement {
 
   // Create a new thread.
 
-  submit_create_if_enter(e: KeyboardEvent) {
+  submit_create_if_enter(e) {
     if (e.key === 'Enter') {
       return this.submit_create();
     }
