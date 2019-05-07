@@ -1,6 +1,6 @@
 {
   "plugins": [
-    "jsx-dom",
+    "./babel-plugins/jsx-dom",
     ["./babel-plugins/autoregister-custom-element.js", {
       "superClasses": ["HTMLElement", "LitElement"]
     }],
