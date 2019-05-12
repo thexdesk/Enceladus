@@ -48,8 +48,8 @@ module.exports = function ({ types: t }) {
         if (constructor) {
           // We already have a constructor; prepend the attributes.
           attributes.reverse();
-          const body = constructor.get('body');
-          attributes.forEach(attr => body.unshiftContainer('body', attr));
+          const body = constructor.get('body.body').filter(node => node.node.expression.callee.type === 'Super')[0];
+          attributes.forEach(attr => body.insertAfter(attr));
         } else {
           // A constructor doesn't exist, create one and place the attributes in the body.
           const method = t.classMethod(
