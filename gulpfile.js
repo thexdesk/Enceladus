@@ -1,3 +1,5 @@
+/* eslint-env node */
+
 const del = require('del');
 const gulp = require('gulp');
 const html_minifier = require('gulp-htmlmin');
@@ -5,9 +7,8 @@ const postcss = require('gulp-postcss');
 const rename = require('gulp-rename');
 const { spawn } = require('child_process');
 const { mkdirp } = require('fs-extra');
-const babel = require('gulp-babel');
-const terser = require('gulp-terser');
-const sourcemaps = require('gulp-sourcemaps');
+const { rollup } = require('rollup');
+const pug = require('gulp-pug');
 
 gulp.task('default', build);
 gulp.task(assets);
@@ -20,29 +21,26 @@ gulp.task(watch);
 
 function css() {
   return gulp
-    .src('src/css/**/*.pcss', { since: gulp.lastRun(css) })
+    .src('src/css/interface.pcss', { since: gulp.lastRun(css) })
     .pipe(postcss())
     .pipe(rename({ extname: '.css' }))
     .pipe(gulp.dest('dist/css'));
 }
 
-function js() {
-  return gulp
-    .src(['src/js/**/*.js', 'src/js/**/*.jsx'], { since: gulp.lastRun(js) })
-    .pipe(sourcemaps.init())
-    .pipe(babel())
-    .pipe(terser({
-      warnings: true,
-      module: true,
-    }))
-    .pipe(rename({ extname: '.js' }))
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('dist/js'));
+async function js() {
+  const bundle = await rollup(require('./rollup.config.js'));
+
+  await bundle.write({
+    dir: './dist/js',
+    format: 'esm',
+    sourcemap: true,
+  });
 }
 
 function html() {
   return gulp
-    .src('src/html/index.html', { since: gulp.lastRun(html) })
+    .src('src/html/index.pug', { since: gulp.lastRun(html) })
+    .pipe(pug({ doctype: 'html' }))
     .pipe(html_minifier({
       collapseWhitespace: true,
       decodeEntities: true,
@@ -69,8 +67,8 @@ function clean() {
 async function watch() {
   await build();
   gulp.watch('src/css/**/*.pcss', css);
-  gulp.watch('src/html/**/*.html', html);
-  gulp.watch('src/js/**/*.js', js);
+  gulp.watch('src/html/**/*.pug', html);
+  gulp.watch(['src/js/**/*.js', 'src/js/**/*.jsx', 'src/css/**/*.pcss'], js);
   gulp.watch('src/assets/**/*', assets);
 }
 

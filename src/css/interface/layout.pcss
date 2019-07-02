@@ -1,31 +1,26 @@
-@import '../definitions/variables.pcss';
-
 :root {
+  --theme-color: lch(60 100 50);
   font-size: 16px;
   font-family: 'Inter', sans-serif;
-}
-
-[hidden] {
-  display: none;
 }
 
 body {
   overflow: hidden;
   margin: logical 0;
 
-  $gap: 1.5rem;
-  $number-columns: 3;
-  $youtube-ratio: calc(2 / 4);
+  --gap: 1.5rem;
+  --number-columns: 3;
+  --video-ratio: calc(2 / 4);
 
   height: 100vh;
   max-height: 100vh;
-  padding: logical $gap $gap 0;
+  padding: logical var(--gap) var(--gap) 0;
 
   color: gray(100);
   background-color: gray(0);
 
   display: grid;
-  gap: $gap;
+  gap: var(--gap);
 
   /*
    * As soon as the spec is stabilized,
@@ -35,8 +30,8 @@ body {
    */
   grid:
     'logo . links' 4rem
-    'sections youtube twitter' calc(
-      (100vw - $gap * ($number-columns + 1) - 22rem) * 3 / 8
+    'sections video twitter' calc(
+      (100vw - var(--gap) * (var(--number-columns) + 1) - 22rem) * 3 / 8
     )
     'sections updates twitter' auto
     / 1fr 2fr 22rem;
@@ -44,8 +39,8 @@ body {
 
 x-header {
   /*
-   * we want the header to be _actually_ centered,
-   * not centerd within its column
+   * We want the header to be _actually_ centered,
+   * not centerd within its column.
    */
   grid-area: 1 / 1 / 1 / -1;
   display: flex;
@@ -54,13 +49,13 @@ x-header {
   flex-direction: column;
 }
 
-youtube-video {
-  grid-area: youtube;
+x-video {
+  grid-area: video;
 }
 
 @svg-load logo url('logo.svg') {
   stop {
-    stop-color: $theme-color;
+    stop-color: var(--theme-color);
   }
 }
 

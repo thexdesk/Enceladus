@@ -1,22 +1,22 @@
-import './custom-elements/x-countdown.js';
-import './custom-elements/x-header.js';
-import './custom-elements/youtube-video.js';
-import './custom-elements/x-twitter.js';
-import './custom-elements/x-sections.js';
-import './custom-elements/x-events.js';
-import './custom-elements/x-links.js';
+import './polyfills';
 
-import './custom-elements/modals/init-modal.js';
+import './custom-elements/Header';
+import './custom-elements/Video';
+import './custom-elements/Twitter';
+import './custom-elements/Sections';
+import './custom-elements/Events';
+import './custom-elements/Links';
 
-import './initialize.js';
-import './sockets.js';
+import './custom-elements/modals/InitModal';
+
+import './initialize';
+import './sockets';
+import './socket-handler';
 
 export function is_host() {
   return new URL(window.location.href).searchParams.has('host');
 }
 
 if (is_host()) {
-  import('./authenticate.js');
-  import('./custom-elements/modals/youtube-modal.js');
-  import('./initialize-host.js');
+  import('./index-host');
 }

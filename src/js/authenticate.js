@@ -1,4 +1,4 @@
-/* inline */ import vars from './helpers/variable-declarations.json';
+import { server_url } from './variable-declarations';
 
 export const api_jwt = localStorage.getItem('api_jwt');
 export const username = localStorage.getItem('username');
@@ -24,6 +24,6 @@ if (![params.token, params.username, params.user_id, params.lang].includes(null)
   window.history.replaceState(undefined, '', url.href);
 } else if ([api_jwt, username, lang].includes(null)) {
   window.location.assign(
-    `${vars.server_url}/oauth?callback=${window.location.href}`,
+    `${server_url}/oauth?callback=${window.location.href}`,
   );
 }

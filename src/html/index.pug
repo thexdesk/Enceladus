@@ -1,0 +1,37 @@
+-
+    const theme_color = '#ff5100';
+    const title = 'Enceladus LTI';
+    const favicon_sizes = [16, 32];
+
+html(lang='en' dir='ltr')
+    head
+        meta(charset='utf-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1.0')
+
+        each size in favicon_sizes
+            link(
+                rel='icon'
+                type='image/png'
+                sizes=`${size}x${size}`
+                href=`./assets/favicon/favicon-${size}x${size}.png`
+            )
+
+        link(rel='mask-icon' href='./assets/favicon/safari-pinned-tab.svg' color=theme_color)
+        link(rel='shortcut icon' href='./assets/favicon/favicon.ico')
+        meta(name='application-name' content=title)
+        meta(name='theme-color' content=theme_color)
+
+        title #{title}
+
+        link(rel='stylesheet' href='./css/interface.css')
+        script(defer type='module' src='./js/index.js')
+        script(async src='https://platform.twitter.com/widgets.js')
+
+    section.logo(role='img')
+    x-header
+    x-links
+    x-video
+    x-sections
+    x-events
+    x-twitter
+    init-modal

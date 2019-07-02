@@ -1,7 +1,11 @@
+/* eslint-env node */
+
 module.exports = {
   plugins: [
+    // Static imports
     require('postcss-import'),
 
+    // Newer CSS features not widely supported
     require('postcss-preset-env')({
       stage: 2,
       features: {
@@ -11,19 +15,21 @@ module.exports = {
       },
     }),
 
-    require('postcss-simple-vars'),
-    require('postcss-time-machine'),
-    require('postcss-short-border-radius'),
-    require('postcss-short-overflow'),
-    require('postcss-short-size'),
-    require('postcss-short-spacing'),
+    // Simple iterator
+    require('postcss-each'),
+
+    // Compute when possible
     require('postcss-calc'),
+
+    // Inline SVGs
     require('postcss-inline-svg-multipath')({
       paths: [
         'src/assets/svg',
         'node_modules/@fortawesome/fontawesome-free/svgs',
       ],
     }),
+
+    // Minifiaction
     require('cssnano'),
   ],
 };

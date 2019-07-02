@@ -1,5 +1,4 @@
-@import '../definitions/variables.pcss';
-@import './common.pcss';
+@import './link-styles.pcss';
 
 :host {
   position: fixed;
@@ -31,13 +30,13 @@
 
 input {
   border: 1px solid lch(0 0 0 / 50%);
-  corner-radius: 0.4rem;
+  border-radius: 0.4rem;
   padding: 0.5rem;
   inline-size: 100%;
   transition: border-color 150ms, box-shadow 150ms;
 
   &:focus {
-    box-shadow: 0 1px 0.4rem $theme-color;
+    box-shadow: 0 1px 0.4rem var(--theme-color);
   }
 
   &:invalid {

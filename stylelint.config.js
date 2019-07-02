@@ -1,3 +1,5 @@
+/* eslint-env node */
+
 module.exports = {
   extends: 'stylelint-config-standard',
   plugins: ['stylelint-use-logical'],
@@ -23,6 +25,7 @@ module.exports = {
       true,
       {
         ignoreAtRules: [
+          'each',
           'svg-load',
         ],
       },
@@ -32,14 +35,7 @@ module.exports = {
       true,
       {
         ignoreProperties: [
-          'depth',
-          'z-order',
-          'corner-radius',
           'marker-style',
-          'border-top-radius',
-          'border-bottom-radius',
-          'border-left-radius',
-          'border-right-radius',
           'scrollbar-color',
           'scrollbar-width',
         ],

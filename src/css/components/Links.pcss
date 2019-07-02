@@ -26,23 +26,13 @@ a {
 
   block-size: 2rem;
 
-  &[aria-hidden='true'] {
+  &[hidden] {
     display: none;
   }
 }
 
-.github {
-  content: svg-load('brands/github.svg', fill: gray(100));
-}
-
-.reddit {
-  content: svg-load('brands/reddit.svg', fill: gray(100));
-}
-
-.patreon {
-  content: svg-load('brands/patreon.svg', fill: gray(100));
-}
-
-.youtube {
-  content: svg-load('brands/youtube.svg', fill: gray(100));
+@each $icon in github, reddit, patreon, youtube {
+  .$(icon) {
+    content: svg-load('brands/$(icon).svg', fill: gray(100));
+  }
 }

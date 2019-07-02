@@ -1,11 +1,12 @@
 module.exports = {
   parser: 'babel-eslint',
-  plugins: ['babel', 'lit'],
+  plugins: ['babel'],
   root: true,
   parserOptions: {
     ecmaVersion: 2019,
     ecmaFeatures: {
-      legacyDecorators: true,
+      module: true,
+      jsx: true,
     },
   },
   env: {
@@ -159,14 +160,5 @@ module.exports = {
     'symbol-description': 'error',
     'template-curly-spacing': 'error',
     'yield-star-spacing': ['error', 'after'],
-    'lit/no-template-bind': 'warn', // See 43081j/eslint-plugin-lit#35.
-    'lit/no-useless-template-literals': 'error',
-    'lit/no-value-attribute': 'error',
-    'lit/attribute-value-entities': 'error',
-    'lit/binding-positions': 'error',
-    'lit/no-duplicate-template-bindings': 'error',
-    'lit/no-invalid-html': 'error',
-    'lit/no-legacy-template-syntax': 'error',
-    'lit/no-property-change-update': 'error',
   },
 };
