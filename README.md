@@ -14,7 +14,7 @@ To develop locally,
 run the following.
 
 ```bash
-git clone git@github.com:r-spacex/Enceladus-LTI.git
+git clone --recursive git@github.com:r-spacex/Enceladus-LTI.git
 cd Enceladus-LTI
 npm i
 npm run watch # or `npm run build` for a one-off build

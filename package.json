@@ -14,7 +14,8 @@
     "lint:js:fix": "eslint \"src/**/*.js\" \"src/**/*.jsx\" --fix",
     "lint:css": "stylelint \"src/css/**/*.pcss\"",
     "lint:css:fix": "stylelint --fix \"src/css/**/*.pcss\"",
-    "serve": "http-server dist -p 5000"
+    "serve": "http-server dist -p 5000",
+    "postinstall": "cd babel-plugin-custom-element && npm i && npm run build"
   },
   "dependencies": {},
   "devDependencies": {
@@ -31,8 +32,6 @@
     "@babel/plugin-syntax-jsx": "^7.2.0",
     "@fortawesome/fontawesome-free": "^5.9.0",
     "babel-eslint": "^11.0.0-beta.0",
-    "babel-plugin-custom-element": "^0.1.0",
-    "babel-plugin-inline-js-object": "^0.1.1",
     "cssnano": "^4.1.10",
     "del": "^4.1.1",
     "eslint": "^6.0.1",

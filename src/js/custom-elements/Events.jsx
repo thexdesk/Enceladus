@@ -11,9 +11,6 @@ export class Events extends CustomElement {
   // Map of IDs to `Event` objects. All objects must be present on the DOM.
   #events = Object.create(null);
 
-  // Reference to the events section.
-  #events_elem;
-
   static html = <>
     <style>{styles}</style>
 
@@ -26,14 +23,9 @@ export class Events extends CustomElement {
         <th>Update</th>
       </tr>
 
-      <div style='display: contents' id='events' />
+      <div style='display: contents' ref:named='events_elem' />
     </table>
   </>;
-
-  constructor() {
-    super();
-    this.#events_elem = this.shadowRoot.getElementById('events');
-  }
 
   add({ id, posted, cols }){
     const event = Object.assign(new Event(), { posted, cols })

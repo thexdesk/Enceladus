@@ -10,20 +10,12 @@ export class Sections extends CustomElement {
   // Map of IDs to `Section` objects. All objects must be present on the DOM.
   #sections = Object.create(null);
 
-  // Reference to the sections section.
-  #sections_elem;
-
   static html = <>
     <style>{styles}</style>
 
     <header>LAUNCH INFORMATION</header>
-    <div style='display: contents' id='sections' />
+    <div style='display: contents' ref:named='sections_elem' />
   </>;
-
-  constructor() {
-    super();
-    this.#sections_elem = this.shadowRoot.getElementById('sections');
-  }
 
   add({ id, name, content }) {
     this.#sections[id] = Object.assign(new Section(), { name, content });

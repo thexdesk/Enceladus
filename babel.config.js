@@ -8,7 +8,7 @@ module.exports = {
     ['@babel/syntax-decorators', { legacy: true }],
 
     // Does not include syntax plugins.
-    'custom-element',
+    './babel-plugin-custom-element/dist/index.js',
 
     '@babel/syntax-dynamic-import',
     '@babel/proposal-class-properties',

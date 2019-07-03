@@ -30,10 +30,15 @@ module.exports = {
     babel(),
 
     terser({
+      ecma: 2019,
       warnings: true,
       module: true,
       compress: {
-        keep_fargs: true,
+        passes: 2,
+        keep_fargs: true, // We don't call `Function.length`.
+        unsafe: true, // Fine in almost all circumstances.
+        unsafe_arrows: true, // We don't rely on prototypes being present.
+        unsafe_comps: true, // Allow switching the left and right side of comparisons.
       },
     }),
   ],
