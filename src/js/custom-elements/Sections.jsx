@@ -14,7 +14,7 @@ export class Sections extends CustomElement {
     <style>{styles}</style>
 
     <header>LAUNCH INFORMATION</header>
-    <div style='display: contents' ref:named='sections_elem' />
+    <ce:contents ref:named='sections_elem' />
   </>;
 
   add({ id, name, content }) {

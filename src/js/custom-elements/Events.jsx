@@ -23,7 +23,7 @@ export class Events extends CustomElement {
         <th>Update</th>
       </tr>
 
-      <div style='display: contents' ref:named='events_elem' />
+      <ce:contents ref:named='events_elem' />
     </table>
   </>;
 

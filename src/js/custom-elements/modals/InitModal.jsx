@@ -27,7 +27,7 @@ export class InitModal extends CustomElement {
       <button on:click={this.#submit_continue.bind(this)}>Launch!</button>
       <div id='continuation_error' />
 
-      <div style='display: contents' static:if={is_host()}>
+      <ce:contents static:if={is_host()}>
         <hr />
 
         <div>Creating a new thread?</div>
@@ -39,6 +39,7 @@ export class InitModal extends CustomElement {
             id='thread_title'
           />
         </label>
+
         <label>
           Subreddit (optional)
           <input
@@ -46,6 +47,7 @@ export class InitModal extends CustomElement {
             id='subreddit'
           />
         </label>
+
         <label>
           Launch name
           <input
@@ -56,7 +58,7 @@ export class InitModal extends CustomElement {
 
         <button on:click={this.#submit_create.bind(this)}>Create thread</button>
         <div id='creation_error' />
-      </div>
+      </ce:contents>
     </div>
   </>;
 

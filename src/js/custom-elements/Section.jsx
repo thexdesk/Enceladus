@@ -12,6 +12,6 @@ export class Section extends CustomElement {
     <style>{styles}</style>
 
     <h1>{this.name}</h1>
-    <div style='display: contents' prop:innerHTML={this.content |> marked} />
+    <ce:contents prop:innerHTML={this.content |> marked} />
   </>;
 }
