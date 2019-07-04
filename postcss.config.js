@@ -1,6 +1,7 @@
 /* eslint-env node */
 
 module.exports = {
+  parser: 'sugarss',
   plugins: [
     // Static imports
     require('postcss-import'),

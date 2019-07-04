@@ -21,7 +21,7 @@ gulp.task(watch);
 
 function css() {
   return gulp
-    .src('src/css/interface.pcss', { since: gulp.lastRun(css) })
+    .src('src/css/interface.sss', { since: gulp.lastRun(css) })
     .pipe(postcss())
     .pipe(rename({ extname: '.css' }))
     .pipe(gulp.dest('dist/css'));
@@ -66,9 +66,9 @@ function clean() {
 
 async function watch() {
   await build();
-  gulp.watch('src/css/**/*.pcss', css);
+  gulp.watch(['src/css/**/*.pcss', 'src/css/**/*.sss'], css);
   gulp.watch('src/html/**/*.pug', html);
-  gulp.watch(['src/js/**/*.js', 'src/js/**/*.jsx', 'src/css/**/*.pcss'], js);
+  gulp.watch(['src/js/**/*.js', 'src/js/**/*.jsx', 'src/css/**/*.pcss', 'src/css/**/*.sss'], js);
   gulp.watch('src/assets/**/*', assets);
 }
 

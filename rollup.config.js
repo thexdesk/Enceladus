@@ -12,7 +12,7 @@ module.exports = {
 
   plugins: [
     extensions({
-      extensions: ['.js', '.jsx', '.pcss', '.json'],
+      extensions: ['.js', '.jsx', '.pcss', '.sss', '.json'],
       alias: {
         css: path.join(__dirname, 'src/css'),
         js: path.join(__dirname, 'src/js'),

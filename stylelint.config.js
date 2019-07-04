@@ -4,6 +4,19 @@ module.exports = {
   extends: 'stylelint-config-standard',
   plugins: ['stylelint-use-logical'],
   rules: {
+    // Rules to disable for SugarSS syntax.
+    'block-closing-brace-empty-line-before': null,
+    'block-closing-brace-newline-after': null,
+    'block-closing-brace-newline-before': null,
+    'block-closing-brace-space-before': null,
+    'block-opening-brace-newline-after': null,
+    'block-opening-brace-space-after': null,
+    'block-opening-brace-space-before': null,
+    'declaration-block-semicolon-newline-after': null,
+    'declaration-block-semicolon-space-after': null,
+    'declaration-block-semicolon-space-before': null,
+    'declaration-block-trailing-semicolon': null,
+
     'csstools/use-logical': true,
     'at-rule-no-vendor-prefix': true,
     'declaration-empty-line-before': null,

@@ -1,0 +1,67 @@
+@import './link-styles.sss'
+
+/**
+ * TODO rewrite the entire layout parts when subgrid is released
+ */
+
+:host
+  contain: content
+
+h1
+  position: sticky
+  inset-block-start: 0
+  background-color: gray(0)
+
+  font-size: 1.7rem
+  letter-spacing: +0.15ch
+  padding-block-end: 0.3ex
+  margin: 0
+  font-weight: 400
+
+  /* blinking dot */
+  &::after
+    content: ''
+    display: inline-block
+    vertical-align: text
+
+    /* needs to be shifted up slightly to actually center it */
+    position: relative
+    inset-block-start: -3px
+
+    size: 0.5rem
+    border-radius: 50%
+
+    background-color: var(--theme-color)
+    animation: pulse 800ms ease-in-out infinite alternate
+    margin-inline-start: 0.8ch
+
+    @media (prefers-reduced-motion)
+      display: none
+
+table
+  font-feature-settings: 'tnum'
+
+tr:last-child > *
+  padding-block-end: 2rem
+
+th
+  font-variation-settings: 'wght' 600
+  text-align: start
+
+th,
+td
+  padding: logical 0.1rem 0.5rem
+
+p
+  line-height: 1.3
+  margin: 0
+
+  &:not(:first-of-type)
+    margin-block-start: 0.6rem
+
+@keyframes pulse
+  0%
+    opacity: 0
+
+  100%
+    opacity: 1

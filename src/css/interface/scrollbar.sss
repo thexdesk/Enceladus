@@ -4,16 +4,13 @@
  * If they support the standard syntax,
  * use that below.
  */
-@supports not (scrollbar-color: red) {
-  ::-webkit-scrollbar {
-    width: 5px;
-  }
+@supports not (scrollbar-color: red)
+  ::-webkit-scrollbar
+    width: 5px
 
-  ::-webkit-scrollbar-thumb {
-    border-radius: 1px;
-    background-color: var(--theme-color);
-  }
-}
+  ::-webkit-scrollbar-thumb
+    border-radius: 1px
+    background-color: var(--theme-color)
 
 /*
  * Browsers that support the syntax defined in CSS Scrollbars level 1.
@@ -25,9 +22,7 @@
  * In that case, we should fall back to default scrollbars,
  * since we _know_ those will work.
  */
-@supports (scrollbar-color: red) {
-  :root {
-    scrollbar-color: var(--theme-color) transparent;
-    scrollbar-width: 5px;
-  }
-}
+@supports (scrollbar-color: red)
+  :root
+    scrollbar-color: var(--theme-color) transparent
+    scrollbar-width: 5px

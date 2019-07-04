@@ -12,8 +12,8 @@
     "lint:fix": "npm run lint:js:fix & npm run lint:css:fix",
     "lint:js": "eslint \"src/**/*.js\" \"src/**/*.jsx\"",
     "lint:js:fix": "eslint \"src/**/*.js\" \"src/**/*.jsx\" --fix",
-    "lint:css": "stylelint \"src/css/**/*.pcss\"",
-    "lint:css:fix": "stylelint --fix \"src/css/**/*.pcss\"",
+    "lint:css": "stylelint \"src/css/**/*.pcss\" \"src/css/**/*.sss\"",
+    "lint:css:fix": "stylelint --fix \"src/css/**/*.pcss\" \"src/css/**/*.sss\"",
     "serve": "http-server dist -p 5000",
     "postinstall": "cd babel-plugin-custom-element && npm i && npm run build"
   },
@@ -57,6 +57,7 @@
     "rollup-plugin-terser": "^5.0.0",
     "stylelint": "^10.1.0",
     "stylelint-config-standard": "^18.3.0",
-    "stylelint-use-logical": "^1.1.0"
+    "stylelint-use-logical": "^1.1.0",
+    "sugarss": "^2.0.0"
   }
 }
