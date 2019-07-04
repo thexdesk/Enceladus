@@ -19,13 +19,13 @@ export class InitModal extends CustomElement {
         Enter a thread ID.
         <input
           on:keyup={this.#submit_continue_if_enter.bind(this)}
-          id='thread_id'
+          ref:named='thread_id'
           type='number'
         />
       </label>
 
       <button on:click={this.#submit_continue.bind(this)}>Launch!</button>
-      <div id='continuation_error' />
+      <div ref:named='continuation_error' />
 
       <ce:contents static:if={is_host()}>
         <hr />
@@ -36,7 +36,7 @@ export class InitModal extends CustomElement {
           Thread title
           <input
             on:keyup={this.#submit_create_if_enter.bind(this)}
-            id='thread_title'
+            ref:named='thread_title'
           />
         </label>
 
@@ -44,7 +44,7 @@ export class InitModal extends CustomElement {
           Subreddit (optional)
           <input
             on:keyup={this.#submit_create_if_enter.bind(this)}
-            id='subreddit'
+            ref:named='subreddit'
           />
         </label>
 
@@ -52,18 +52,18 @@ export class InitModal extends CustomElement {
           Launch name
           <input
             on:keyup={this.#submit_create_if_enter.bind(this)}
-            id='launch_name'
+            ref:named='launch_name'
           />
         </label>
 
         <button on:click={this.#submit_create.bind(this)}>Create thread</button>
-        <div id='creation_error' />
+        <div ref:named='creation_error' />
       </ce:contents>
     </div>
   </>;
 
   connectedCallback() {
-    this.shadowRoot.querySelector('input').focus();
+    this.#thread_id.focus();
   }
 
   #submit_continue_if_enter(e) {
@@ -87,19 +87,17 @@ export class InitModal extends CustomElement {
   }
 
   #submit_create() {
-    const thread = this.shadowRoot.getElementById('thread_title').value;
-    let subreddit = this.shadowRoot.getElementById('subreddit').value;
-    const display_name = this.shadowRoot.getElementById('launch_name').value;
+    const thread = this.#thread_title.value;
+    let subreddit = this.#subreddit.value;
+    const display_name = this.#launch_name.value;
 
     if ([thread_name, display_name].includes('')) {
-      this.shadowRoot.getElementById('creation_error').innerHTML
-        = 'Thread and display names are required.';
+      this.#creation_error.innerHTML = 'Thread and display names are required.';
       return;
     }
 
     if (!subreddit_regex.test(subreddit)) {
-      this.shadowRoot.getElementById('creation_error').innerHTML
-        = 'Invalid subreddit name';
+      this.#creation_error.innerHTML = 'Invalid subreddit name';
       return;
     }
 
@@ -125,7 +123,7 @@ export class InitModal extends CustomElement {
     })
     .catch(err => {
       console.error(err);
-      this.shadowRoot.getElementById('creation_error').innerHTML = err.message;
+      this.#creation_error.innerHTML = err.message;
       return err;
     });
   }
