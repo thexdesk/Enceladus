@@ -13,9 +13,7 @@ import './initialize';
 import './sockets';
 import './socket-handler';
 
-export function is_host() {
-  return new URL(window.location.href).searchParams.has('host');
-}
+import { is_host } from './helpers';
 
 if (is_host()) {
   import('./index-host');

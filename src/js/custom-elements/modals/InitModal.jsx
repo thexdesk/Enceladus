@@ -1,7 +1,7 @@
 import styles from 'css/components/modal';
 import { get_thread_data, initialize } from 'js/initialize';
 import esfetch from 'esfetch';
-import { is_host } from 'js/index';
+import { is_host } from 'js/helpers';
 import { server_url } from 'js/variable-declarations';
 
 const subreddit_regex = /^(?:\/?r\/)?([a-zA-Z0-9_]{1,20})$/gu;

@@ -52,8 +52,9 @@ export function initialize({
 
 const thread_id = new URL(window.location.href).searchParams.get('thread_id');
 if (thread_id !== null) {
-  get_thread_data(thread_id)
-    .then(initialize)
-    .then(init_socket)
-    .then(() => init_modal_elem.remove());
+  get_thread_data(thread_id).then(thread_data => {
+    const thread_id = initialize(thread_data);
+    init_socket(thread_id);
+    init_modal_elem.remove();
+  });
 }

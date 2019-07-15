@@ -1,6 +1,6 @@
 import styles from 'css/components/Links';
 import { video_modal } from 'js/elements';
-import { is_host } from 'js/index';
+import { is_host } from 'js/helpers';
 
 @Attr('role', 'navigation')
 export class Links extends CustomElement {
