@@ -1,6 +1,6 @@
 import styles from 'css/components/modal';
 import { video_elem } from 'js/elements';
-import esfetch from 'https://unsafe-production.jspm.io/npm:esfetch@0.1.2/index.js';
+import esfetch from 'esfetch';
 import { server_url } from 'js/variable-declarations';
 
 @Attr('role', 'dialog')

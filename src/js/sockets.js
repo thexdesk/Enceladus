@@ -1,5 +1,5 @@
 import EventEmitter from './EventEmitter';
-import Sockette from 'https://unsafe-production.jspm.io/sockette@2.0.5';
+import Sockette from 'sockette';
 import { ws_url } from './variable-declarations';
 
 export const socket_events = new EventEmitter();

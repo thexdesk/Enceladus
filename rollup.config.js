@@ -6,6 +6,7 @@ const json = require('rollup-plugin-json');
 const path = require('path');
 const postcss = require('rollup-plugin-postcss');
 const { terser } = require('rollup-plugin-terser');
+const node_resolve = require('rollup-plugin-node-resolve');
 
 module.exports = {
   input: 'src/js/index.js',
@@ -27,6 +28,8 @@ module.exports = {
 
     postcss({ inject: false }),
 
+    node_resolve(),
+
     babel(),
 
     terser({
@@ -44,8 +47,6 @@ module.exports = {
   ],
 
   external: [
-    'https://unsafe-production.jspm.io/npm:esfetch@0.1.2/index.js',
-    'https://unsafe-production.jspm.io/sockette@2.0.5',
     'https://unsafe-production.jspm.io/npm:marked@0.6.3',
   ],
 };

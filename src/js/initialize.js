@@ -6,7 +6,7 @@ import {
   sections_elem,
   init_modal_elem,
 } from './elements';
-import esfetch from 'https://unsafe-production.jspm.io/npm:esfetch@0.1.2/index.js';
+import esfetch from 'esfetch';
 import { init_socket } from './sockets';
 import { server_url } from './variable-declarations';
 

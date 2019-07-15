@@ -1,6 +1,6 @@
 import styles from 'css/components/modal';
 import { get_thread_data, initialize } from 'js/initialize';
-import esfetch from 'https://unsafe-production.jspm.io/npm:esfetch@0.1.2/index.js';
+import esfetch from 'esfetch';
 import { is_host } from 'js/index';
 import { server_url } from 'js/variable-declarations';
 
