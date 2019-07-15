@@ -1,12 +1,19 @@
 import styles from 'css/components/Events';
 import { Event } from './Event';
-import { mutate } from 'js/rearrange-elements';
+import { mutate as reorder } from 'js/rearrange-elements';
 
 @Attr('role', 'table region')
 @Attr('aria-live', 'polite')
 export class Events extends CustomElement {
   // Sorted array of IDs, to be used as a key for `this.#events`.
   #ids = [];
+
+  // Called by thread socket handler.
+  set ids(value) {
+    const old_elems = this.#ids.map(id => this.#events[id]);
+    this.#ids = value;
+    reorder(this.#events_elem, old_elems, value.map(id => this.#events[id]));
+  }
 
   // Map of IDs to `Event` objects. All objects must be present on the DOM.
   #events = Object.create(null);
@@ -28,25 +35,21 @@ export class Events extends CustomElement {
   </>;
 
   add({ id, posted, cols }){
-    const event = Object.assign(new Event(), { posted, cols })
+    const event = Object.assign(new Event(), { posted, cols });
     this.#events[id] = event;
     this.#ids.push(id);
-    this.#ids.sort(this.#compare.bind(this));
 
     // Update DOM.
     this.#events_elem.appendChild(event);
   }
 
-  // TODO Does this handle event reordering? I believe not currently.
   update({ id, posted, cols }) {
-    if (posted !== undefined) {
-      this.#events[id].posted = posted;
-    }
-
-    if (cols !== undefined) {
-      this.#events[id].cols = cols;
-      this.ids.sort(this.#compare.bind(this));
-    }
+    Object
+      .entries({ posted, cols })
+      .filter(([, value]) => value !== undefined)
+      .forEach(([key, value]) => {
+        this.#events[id][key] = value;
+      });
   }
 
   delete(delete_id) {
@@ -58,14 +61,5 @@ export class Events extends CustomElement {
 
     // Remove from event map.
     delete this.#events[delete_id];
-  }
-
-  #compare(a, b) {
-    // TODO change `0` to `utc_col_index`
-    return this.#events[b].cols[0] - this.#events[a].cols[0];
-  }
-
-  #mutate(old) {
-    mutate(this.#events_elem, old, this.#ids.map(id => this.#events[id]));
   }
 }

@@ -14,6 +14,9 @@ module.exports = {
     es6: true,
   },
   extends: 'eslint:recommended',
+  globals: {
+    'CustomElement': 'readonly',
+  },
   rules: {
     'no-extra-parens': ['error', 'all', { returnAssign: false }],
     'no-misleading-character-class': 'error',

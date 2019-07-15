@@ -10,10 +10,16 @@ import esfetch from 'https://unsafe-production.jspm.io/npm:esfetch@0.1.2/index.j
 import { init_socket } from './sockets';
 import { server_url } from './variable-declarations';
 
+/**
+ * @param {number} id
+ */
 export function get_thread_data(id) {
   return esfetch(`${server_url}/v1/thread/${id}/full?features=space,spacex`).get();
 }
 
+/**
+ * @returns {number}
+ */
 export function initialize({
   id,
   display_name,
