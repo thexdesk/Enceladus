@@ -8,10 +8,10 @@ export class Sections extends CustomElement {
   #ids = [];
 
   // Called by thread socket handler.
+  // Automatically reorders the child elements.
   set ids(value) {
-    const old_elems = this.#ids.map(id => this.#sections[id]);
     this.#ids = value;
-    reorder(this.#sections_elem, old_elems, value.map(id => this.#sections[id]));
+    reorder(this.#sections_elem, value.map(id => this.#sections[id]));
   }
 
   // Map of IDs to `Section` objects. All objects must be present on the DOM.

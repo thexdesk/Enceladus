@@ -9,10 +9,10 @@ export class Events extends CustomElement {
   #ids = [];
 
   // Called by thread socket handler.
+  // Automatically reorders the child elements.
   set ids(value) {
-    const old_elems = this.#ids.map(id => this.#events[id]);
     this.#ids = value;
-    reorder(this.#events_elem, old_elems, value.map(id => this.#events[id]));
+    reorder(this.#events_elem, value.map(id => this.#events[id]));
   }
 
   // Map of IDs to `Event` objects. All objects must be present on the DOM.

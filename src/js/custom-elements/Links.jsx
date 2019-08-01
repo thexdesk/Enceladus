@@ -30,7 +30,7 @@ export class Links extends CustomElement {
       target='_blank'
       rel='noopener'
       aria-description='Patreon'
-      href='https://patreon.com/EnceladusLTI'
+      href='https://patreon.com/EnceladusLive'
     />
 
     <a
@@ -38,7 +38,7 @@ export class Links extends CustomElement {
       target='_blank'
       rel='noopener'
       aria-description='source code'
-      href='https://github.com/r-spacex/Enceladus-LTI'
+      href='https://github.com/r-spacex/Enceladus'
     />
   </>;
 

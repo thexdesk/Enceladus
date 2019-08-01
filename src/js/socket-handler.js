@@ -19,7 +19,13 @@ socket.on('thread:update', data => {
   }
 
   if (data.sections_id !== undefined) {
+    // Reordering is handled internally.
     sections_elem.ids = data.sections_id;
+  }
+
+  if (data.events_id !== undefined) {
+    // Reordering is handled internally.
+    events_elem.ids = data.events_id;
   }
 });
 

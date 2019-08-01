@@ -73,7 +73,7 @@ export class InitModal extends CustomElement {
   }
 
   async #submit_continue() {
-    const id = await initialize(await get_thread_data());
+    const id = await initialize(await get_thread_data(this.#thread_id.value));
     const url = new URL(window.location.href);
     url.searchParams.set('thread_id', id);
     window.history.replaceState(undefined, '', url);

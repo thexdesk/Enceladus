@@ -9,7 +9,7 @@ export class Twitter extends CustomElement {
       data-dnt='true'
       data-theme='dark'
       data-chrome='noheader nofooter noborders noscrollbar transparent'
-      href='https://twitter.com/EnceladusLTI/lists/enceladus-lti'
+      href='https://twitter.com/EnceladusLive/lists/enceladus'
     />
   </>;
 }
